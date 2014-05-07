@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="calc.css">
+  <script src="calc.js"></script>
+</head>
+<body>
+  <div class="header">
+<!--lorem-->
+<p>Neque dolor at sapien. Aenean viverra justo ac sem.</p>
+
+<p>Pellentesque at dolor non lectus sagittis semper. Donec quis mi. Duis eget
+  pede. Phasellus arcu tellus, ultricies class, consequat id, lobortis nec, diam.
+  Suspendisse sed nunc. Pellentesque class magna. Morbi interdum quam at est.
+  Maecenas eleifend mi in urna. Praesent et lectus ac nibh luctus viverra. In
+  vel dolor sed nibh sollicitudin tincclassunt. Ut consequat nisi sit amet nibh.
+  Nunc mi tortor, tristique sit amet, rhoncus porta, malesuada elementum, nisi.
+  Integer vitae enim quis risus aliquet gravclassa. Curabitur vel lorem vel erat
+  dapibus lobortis. Donec dignissim tellus at arcu. Quisque molestie pulvinar
+  sem.</p>
+
+<p>Nulla.</p>
+<!--/lorem--></div>
+
+<div class="container">
+  <div class="calculator">
+    <div class="infoarea" id="info">MR toka + toka</div>
+    <div class="digitarea" id="display"></div>
+    <div class="row">
+      <span class="button AC" onclick=ACPress()>AC</span>
+      <span class="button memory">MR</span>
+      <span class="button memory">M+</span>
+      <span class="button memory">M-</span>
+    </div>
+    <div class="row">
+      <span class="button number" onclick=NumPress(this.innerHTML)>1</span>
+      <span class="button number" onclick=NumPress(this.innerHTML)>2</span>
+      <span class="button number" onclick=NumPress(this.innerHTML)>3</span>
+      <span class="button operator">+</span>
+    </div>
+    <div class="row">
+      <span class="button number" onclick=NumPress(this.innerHTML)>4</span>
+      <span class="button number" onclick=NumPress(this.innerHTML)>5</span>
+      <span class="button number" onclick=NumPress(this.innerHTML)>6</span>
+      <span class="button operator">-</span>
+    </div>
+    <div class="row">
+      <span class="button number" onclick=NumPress(this.innerHTML)>7</span>
+      <span class="button number" onclick=NumPress(this.innerHTML)>8</span>
+      <span class="button number" onclick=NumPress(this.innerHTML)>9</span>
+      <span class="button operator">*</span>
+    </div>
+    <div class="row">
+      <span class="button number" onclick=NumPress(this.innerHTML)>.</span>
+      <span class="button number" onclick=NumPress(this.innerHTML)>0</span>
+      <span class="button operator" onclick=DisplayNumber()>=</span>
+      <span class="button operator">/</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
