@@ -1,0 +1,37 @@
+html {
+    height: 100%;
+    background: white;
+    background: radial-gradient(circle, #fff 20%, #ccc);
+    background-size: cover;
+}
+
+h1 {
+    font-family: Ubuntu, sans-serif;
+}
+
+#resultd {
+    /* border: 1px solid black; */
+    font-family: "Ubuntu Mono", Monaco, monospace;
+    width:80%;
+    min-height: 50px;
+    word-wrap: break-word;
+    box-shadow: 10px 10px 10px 10px rgba(200,200,220,30);
+    background-color:rgba(0,0,0,0);
+}
+.submit {
+    background: white;
+    font-family: Ubuntu, sans-serif;
+    box-shadow: 4px 4px 5px 0px rgba(90,90,120,10);
+    border-radius:3px;
+    padding:2px;
+}
+
+.submit:hover {
+    background: #dddddd;
+    box-shadow: 2px 2px 4px 0px rgba(90,90,120,22);
+}
+
+.submit:active{
+    background: #eeefee;
+    box-shadow: 1px 1px 3px 0px rgba(90,90,120,42);
+}
