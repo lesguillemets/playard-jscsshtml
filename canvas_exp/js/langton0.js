@@ -29,24 +29,31 @@ World.prototype.moveAnts = function(){
   document.getElementById("steps").innerHTML = "STEP : " + this.steps;
   for (i=0;i<this.ants.length;i++){
     var ant = this.ants[i];
-    var vect = ant.drcs[ant.drc];
-    // move
-    ant.x += vect[0];
-    ant.y += vect[1];
-    var x = ant.x;
-    var y = ant.y;
-    // and turn
-    if (this.grid[x][y]){
-      ant.drc = ++ant.drc%4;
-    } else {
-      ant.drc = (ant.drc - 1 + 4)%4;
+    if (ant.isalive){
+      var vect = ant.drcs[ant.drc];
+      // move
+      ant.x += vect[0];
+      ant.y += vect[1];
+      var x = ant.x;
+      var y = ant.y;
+      // die if gone too far
+      if ( x < 0 || x >= this.w ||  y <= 0 || y >= this.h) {
+        ant.isalive = false;
+        continue;
+      }
+      // and turn
+      if (!!this.grid[x][y]){
+        ant.drc = ++ant.drc%4;
+      } else {
+        ant.drc = (ant.drc - 1 + 4)%4;
+      }
+      // then mark the field
+      this.grid[x][y] = !this.grid[x][y]
+      // and show
+      this.cnt.fillStyle = ant.color;
+      this.cnt.fillRect(
+        x*this.dotsize,y*this.dotsize, this.dotsize, this.dotsize);
     }
-    // then mark the field
-    this.grid[x][y] = !this.grid[x][y]
-    // and show
-    this.cnt.fillStyle = ant.color;
-    this.cnt.fillRect(
-      x*this.dotsize,y*this.dotsize, this.dotsize, this.dotsize);
   }
 };
 
@@ -55,6 +62,7 @@ function Ant(x,y,drc,color){
   this.y = y;
   this.drc = drc; // drc: 0 (up) 1 (right) 2 (down) 3 (right)
   this.color = color; // some object that can be set to cnt.fillStyle
+  this.isalive = true;
 }
 
 Ant.prototype.drcs = [[0,1],[1,0],[0,-1],[-1,0]];
