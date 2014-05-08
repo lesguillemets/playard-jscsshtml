@@ -1,0 +1,18 @@
+.simplebutton {
+    display: inline-box;
+    width: 100px;
+    text-align: center;
+    background-color: rgba(200,200,200,0.7);
+    border-radius: 4px;
+    margin-left:10px;
+    user-select: none;
+    -o-user-select:none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+}
+
+.simplebutton:hover {
+    background-color: rgba(150,150,140,0.7);
+}
