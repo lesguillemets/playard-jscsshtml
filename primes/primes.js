@@ -1,4 +1,5 @@
 function findPrimes(){
+  var btime = new Date().getTime();
   var nmax = document.getElementById("upto").value;
   var primes = [];
   var nums = new Array;
@@ -10,7 +11,8 @@ function findPrimes(){
       }
     }
   }
-  document.getElementById("firstn").innerHTML = "The primes upto " + nmax.toString() + " are :";
+  var etime = new Date().getTime();
+  document.getElementById("firstn").innerHTML = "The primes upto " + nmax.toString() + " are : (took " + (etime-btime).toString() + " ms to calc)";
   document.getElementById("resultd").innerHTML = primes.toString();
   return primes;
 }
