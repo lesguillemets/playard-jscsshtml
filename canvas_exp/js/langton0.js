@@ -102,6 +102,7 @@ function mainLoop(myworld) {
 function clearGarden(){
   var garden = document.getElementById("garden");
   garden.width = garden.width;
+  document.getElementById("end").innerHTML = "..."
 }
 
 function startAnt(){
