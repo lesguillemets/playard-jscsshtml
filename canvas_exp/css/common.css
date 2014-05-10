@@ -17,6 +17,7 @@
     background-color: rgba(150,150,140,0.7);
 }
 
-canvas.simple {
+.simple {
     box-shadow: 10px 10px 10px 10px rgba(200,200,220,30);
+    margin-left: 30px;
 }
