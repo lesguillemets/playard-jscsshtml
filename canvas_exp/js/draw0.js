@@ -13,7 +13,6 @@ function init(){
   ctx.strokeStyle = color;
   ctx.lineWidth=radius;
   var onMouseReleased = function(e){
-    console.log("released");
     isPressed = false;
   };
   var onMousePressed = function(e){
@@ -48,10 +47,28 @@ function init(){
     }
     pendingPressed = false;
   };
+  
+  var onTouchOn = function(e){
+    var touchobj = e.changedTouches[0];
+    onMousePressed(touchobj);
+    e.preventDefault();
+  }
+  var onTouchOff = function(e){
+    var touchobj = e.changedTouches[0];
+    onMouseReleased(touchobj);
+    e.preventDefault();
+  }
+  var onTouchMove = function(e){
+    var touchobj = e.changedTouches[0];
+    onMouseMoved(touchobj);
+    e.preventDefault();
+  }
   canv.addEventListener("mousedown", onMousePressed);
   canv.addEventListener("mouseup", onMouseReleased);
   canv.addEventListener("mousemove", onMouseMoved);
-  canv.addEventListener("mouseout", function(){});
+  canv.addEventListener("touchstart", onTouchOn);
+  canv.addEventListener("touchend", onTouchOff);
+  canv.addEventListener("touchmove", onTouchMove);
   
   var turn = true;
   mainLoop = function (){
