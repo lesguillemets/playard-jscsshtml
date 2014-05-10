@@ -15,8 +15,8 @@ function World(world, dotsize){
 World.prototype.createAnts = function(n){
   for (var i=0; i<n; i++){
     var hue = 360*i/n;
-    var color0 = HSVtoCs(hue,0.8,0.8);
-    var color1 = HSVtoCs(hue,0.3,0.8);
+    var color0 = HSVtoCs(hue,0.9,0.9);
+    var color1 = HSVtoCs(hue,0.1,0.9);
     var x = Math.floor(Math.random() * this.w);
     var y = Math.floor(Math.random() * this.h);
     var drc = Math.floor(Math.random() * 4);
