@@ -14,11 +14,9 @@ function World(world, dotsize){
 
 World.prototype.createAnts = function(n){
   for (var i=0; i<n; i++){
-    var cbase = 255*i/n;
-    var color0 = "rgb(100," + cbase.toString() + ","+
-      (255-cbase).toString() + ")";
-    var color1 = "rgb(200," + (Math.max(cbase+50,256)).toString() + ","+
-      (Math.max(305-cbase,256)).toString() + ")";
+    var hue = 360*i/n;
+    var color0 = HSVtoCs(hue,0.8,0.8);
+    var color1 = HSVtoCs(hue,0.3,0.8);
     var x = Math.floor(Math.random() * this.w);
     var y = Math.floor(Math.random() * this.h);
     var drc = Math.floor(Math.random() * 4);
@@ -114,4 +112,24 @@ function startAnt(){
   mainLoop(myworld);
 }
 
+function HSVtoCs(h, s, v) {
+  var r, g, b, i, f, p, q, t;
+  h = h/360;
+  i = Math.floor(h * 6);
+  f = h * 6 - i;
+  p = v * (1 - s);
+  q = v * (1 - f * s);
+  t = v * (1 - (1 - f) * s);
+  switch (i % 6) {
+    case 0: r = v, g = t, b = p; break;
+    case 1: r = q, g = v, b = p; break;
+    case 2: r = p, g = v, b = t; break;
+    case 3: r = p, g = q, b = v; break;
+    case 4: r = t, g = p, b = v; break;
+    case 5: r = v, g = p, b = q; break;
+  }
+  return "rgb(" +
+    [Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255)].toString()
+  + ")";
+}
 //window.onload = init
