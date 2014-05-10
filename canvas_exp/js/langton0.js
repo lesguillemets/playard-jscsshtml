@@ -86,7 +86,6 @@ Ant.prototype.toString = function(){
 
 Ant.prototype.ccolor = "rgb(0,0,0)";
 
-
 function init(){
   myworld = new World(document.getElementById("garden"), 2);
   myworld.createAnts(5);
@@ -95,7 +94,24 @@ function init(){
 
 function mainLoop(myworld) {
   myworld.moveAnts();
-  setTimeout("mainLoop(myworld)",10);
+  if (myworld.ants.some(function(x){return x.isalive;})){
+    setTimeout("mainLoop(myworld)",10);
+  } else {
+    document.getElementById("end").innerHTML = "Stopped."
+  }
 }
 
-window.onload = init
+function clearGarden(){
+  var garden = document.getElementById("garden");
+  garden.width = garden.width;
+}
+
+function startAnt(){
+  clearGarden();
+  var n = parseInt(document.getElementById("nofants").value);
+  myworld = new World(document.getElementById("garden"), 2);
+  myworld.createAnts(n);
+  mainLoop(myworld);
+}
+
+//window.onload = init

@@ -8,9 +8,16 @@
 </head>
 <body>
   <h1> Langton's ant </h1>
+  <div>Number of Ants:
+    <input id="nofants" type="number">
+    <div class="simplebutton" style="display:inline;" onclick="startAnt()">
+      Start
+    </div>
+  </div>
   <div id="steps" class="number">STEP : 0</div>
   <div class="container">
     <canvas id="garden" class="simple" width="500" height="500"></canvas>
   </div>
+  <div id="end"></div>
 </body>
 </html>
