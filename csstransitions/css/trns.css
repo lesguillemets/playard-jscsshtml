@@ -1,0 +1,73 @@
+.square {
+    /* float:left; */
+    width:100px;
+    height:100px;
+    display:inline-block;
+    overflow:hidden;
+    background-color:blue;
+    padding:0px;
+    margin:5px;
+    text-align:center;
+    line-height: 100px;
+}
+
+.row {
+    margin-left:20px;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:0px;
+    /* border:1px solid black; */
+}
+
+.row:nth-child(1) .square {
+    background-color: #e1e10f;
+}
+.row:nth-child(2) .square {
+    background-color: #2eec71;
+}
+.row:nth-child(3) .square {
+    background-color: #11bcbc;
+}
+.row:nth-child(4) .square {
+    background-color: #3399ee;
+}
+.row:nth-child(5) .square {
+    background-color: #8844aa;
+}
+
+pre.square{
+    -webkit-transition: all 1s; /* For Safari 3.1 to 6.0 */
+    transition: all 1s;
+}
+pre#rotate2d:hover{
+    -ms-transform: rotate(330deg); /* IE 9 */
+    -webkit-transform: rotate(330deg); /* Chrome, Safari, Opera */
+    transform: rotate(330deg);
+}
+
+pre#scale2d:hover{
+    opacity:0.7;
+    -ms-transform: scale(2,2); /* IE 9 */
+    -webkit-transform: scale(2,2); /* Chrome, Safari, Opera */
+    transform: scale(2,2);
+}
+
+pre#skew:hover{
+    -ms-transform: skew(30deg,20deg); /* IE 9 */
+    -webkit-transform: skew(30deg,20deg); /* Chrome, Safari, Opera */
+    transform: skew(30deg,20deg);
+}
+
+pre#xrotate3d:hover{
+    -webkit-transform: rotateX(60deg); /* Chrome, Safari, Opera */
+    transform: rotateX(60deg);
+}
+
+pre#yrotate3d:hover{
+    -webkit-transform: rotateY(60deg); /* Chrome, Safari, Opera */
+    transform: rotateY(60deg);
+}
+
+pre#zrotate3d:hover{
+    -webkit-transform: rotateZ(60deg); /* Chrome, Safari, Opera */
+    transform: rotateZ(60deg);
