@@ -58,6 +58,11 @@ pre#skew:hover{
     transform: skew(30deg,20deg);
 }
 
+pre#translate1:active, pre#translate1:hover{
+    -webkit-transform: translate(40px,0px); /* Chrome, Safari, Opera */
+    transform: translate(40px,0px); /* Chrome, Safari, Opera */
+}
+
 pre#xrotate3d:hover{
     -webkit-transform: rotateX(60deg); /* Chrome, Safari, Opera */
     transform: rotateX(60deg);
@@ -71,3 +76,12 @@ pre#yrotate3d:hover{
 pre#zrotate3d:hover{
     -webkit-transform: rotateZ(60deg); /* Chrome, Safari, Opera */
     transform: rotateZ(60deg);
+}
+
+pre#toleft:active{
+    -webkit-transform: rotateY(180deg);
+    -webkit-transform-origin:left center 0;
+    transform: rotateY(180deg);
+    transform-origin:left center 0;
+    opacity:0.8;
+}
