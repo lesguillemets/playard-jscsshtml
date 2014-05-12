@@ -9,6 +9,11 @@
     margin:5px;
     text-align:center;
     line-height: 100px;
+    user-select:none;
+    -o-user-select:none;
+    -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
 }
 
 .row {
@@ -16,6 +21,7 @@
     margin-top:0px;
     margin-bottom:0px;
     padding:0px;
+    perspective: 500;
     /* border:1px solid black; */
 }
 
@@ -79,10 +85,10 @@ pre#zrotate3d:hover{
 }
 
 pre#toleft:active{
-    -webkit-transform: rotateY(180deg);
     -webkit-transform-origin:left center 0;
+    -webkit-transform: rotateY(180deg);
+    transform-origin:left center -0px;
     transform: rotateY(180deg);
-    transform-origin:left center 0;
     opacity:0.8;
 }
 
@@ -95,4 +101,13 @@ pre#grads:hover{
     background: -o-linear-gradient(red, blue); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(red, blue); /* For Firefox 3.6 to 15 */
     background: linear-gradient(red, blue); /* Standard syntax */
+}
+
+pre#flipleft:hover{
+    transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -webkit-transform-origin: 0 100%;
+    -moz-transform: rotate(90deg) translate(-100px,0);
+    -webkit-transform: rotate(90deg) translate(-100px,0);
+    transform: rotate(90deg) translate(-100px,0);
 }
