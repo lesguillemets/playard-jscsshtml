@@ -1,3 +1,6 @@
+var myworld;
+var timer;
+
 function World(world, dotsize){
   this.dotsize = dotsize;
   this.w = world.width/dotsize;
@@ -93,7 +96,7 @@ function init(){
 function mainLoop(myworld) {
   myworld.moveAnts();
   if (myworld.ants.some(function(x){return x.isalive;})){
-    setTimeout("mainLoop(myworld)",10);
+    timer = setTimeout("mainLoop(myworld)",10);
   } else {
     document.getElementById("end").innerHTML = "Stopped."
   }
@@ -103,6 +106,9 @@ function clearGarden(){
   var garden = document.getElementById("garden");
   garden.width = garden.width;
   document.getElementById("end").innerHTML = "..."
+  if (timer){
+    clearTimeout(timer);
+  }
 }
 
 function startAnt(){
