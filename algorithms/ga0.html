@@ -11,15 +11,25 @@
     <canvas id="path"></canvas>
     <canvas id="graph"></canvas>
   </div>
-  <div class="container" id="formcontainer">
-    <form>
-      <div class="formrow"><label for="">c (Cities)</label> : <input type="number" id="c"></div>
-      <div class="formrow"><label for="">n (population size)</label> : <input type="number" id="n"></div>
-      <div class="formrow"><label for="">m (# of pairs to gain children)</label> : <input type="number" id="m"></div>
-      <div class="formrow"><label for="">p (mutation rate) [0-1]</label> : <input type="number" id="p"></div>
-      <div class="formrow"><label for="">g  (# of generations)</label> : <input type="number" id="g"></div>
-      <div class="formrow"><pre class="submit rs" id="subm" onclick="main()">Submit</pre></div>
-    </form>
+  <div class="container">
+    <div id="formcontainer" class="container">
+      <form class="pad">
+        <div class="formrow"><label for="">c (Cities)</label> : <input type="number" id="c"></div>
+        <div class="formrow"><label for="">n (population size)</label> : <input type="number" id="n"></div>
+        <div class="formrow"><label for="">m (# of pairs to gain children)</label> : <input type="number" id="m"></div>
+        <div class="formrow"><label for="">p (mutation rate) [0-1]</label> : <input type="number" id="p"></div>
+        <div class="formrow"><label for="">g  (# of generations)</label> : <input type="number" id="g"></div>
+        <div class="formrow"><pre class="submit rs" id="subm" onclick="main()">Submit</pre></div>
+      </form>
+    </div>
+    <table id="results">
+      <tr>
+        <th>Gen</th>
+        <th>Best</th>
+        <th>Worst</th>
+        <th>Median</th>
+      </tr>
+    </table>
   </div>
 </body>
 </html>

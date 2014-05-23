@@ -1,14 +1,17 @@
 .container {
     clear:both;
     margin:30px;
+    padding-top:30px;
+    padding-bottom:30px;
 }
 
 #formcontainer{
-    width:500px;
+    width:40%;
     background-color: rgba(100,100,100,0.2);
     padding:10px;
     margin-left:20px;
     margin-top:20px;
+    float:left;
 }
 
 .container input {
@@ -50,4 +53,27 @@ canvas#path{
 
 canvas#graph{
     float:right;
+}
+
+th {
+    background-color: rgba(100,144,100,0.5);
+    font-weight:normal;
+}
+
+th,td{
+    width:70px;
+}
+
+table,th,td {
+    border: 1px solid rgba(150,150,255,0.8);
+    /* border: 1px solid red; */
+}
+
+table#results{
+    float:right;
+    width:40%;
+}
+
+#results td{
+    text-align:right;
 }
