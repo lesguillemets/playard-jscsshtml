@@ -58,20 +58,25 @@ Simulator.prototype.generateFirstGen = function(){
 
 // main loop.
 Simulator.prototype.mainLoop = function(){
-  for(this.gen=0; this.gen<this.g; this.gen++){
-    this.makeChildren();
-    this.applyMutations();
-    this.evalIndividuals();
-    this.selectNextGen();
-    if(! this.showFlag--){
-      this.showFlag = showEvery;
-      this.pushtoTable();
-      this.clearPathCanv();
-      this.drawCities();
-      this.drawPath(0);
-    }
+  while(this.gen <= this.g){
+    this.mainStep();
   }
-}
+};
+
+Simulator.prototype.mainStep = function(){
+  this.makeChildren();
+  this.applyMutations();
+  this.evalIndividuals();
+  this.selectNextGen();
+  if(! this.showFlag--){
+    this.showFlag = showEvery;
+    this.pushtoTable();
+    this.clearPathCanv();
+    this.drawCities();
+    this.drawPath(0);
+  }
+  this.gen++;
+};
 
 // methods required for each step.
 
@@ -146,7 +151,7 @@ Simulator.prototype.drawCities = function(){
 Simulator.prototype.drawPath = function(invn){
   // Int (individual's number s.t. this.population[i] is him
   // -> IO()
-  this.ctx.fillStyle = "#00FF99";
+  this.ctx.strokeStyle = "#00FF99";
   var path = this.population[invn].route;
   var city = this.cities[path[0]]
   this.ctx.moveTo(city[0],city[1]);
@@ -216,5 +221,6 @@ function helloChild(papa,mama){
 function main(){
   sim = new Simulator();
   sim.drawCities();
-  sim.mainLoop();
+  setInterval(function(){sim.mainStep();},10);
 }
+
