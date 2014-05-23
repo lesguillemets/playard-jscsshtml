@@ -215,5 +215,6 @@ function helloChild(papa,mama){
 
 function main(){
   sim = new Simulator();
+  sim.drawCities();
   sim.mainLoop();
 }
