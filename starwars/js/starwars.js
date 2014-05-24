@@ -33,7 +33,9 @@ var gridSize = 8;
 *
 * This is tedious, but because of that,
 * we won't (hopefully) have to call setGrid() every time.
-*
+*  --- That's what I thought.
+* I knew it. This works if and only if  lineWidth>=2px,
+*  which is unacceptable for regular display.
 }}}*/
 
 function init(){
@@ -87,19 +89,72 @@ function initialize(){
   for (var x=0; x<width; x++){
     currentGrid[x] = new Array(height);
     for (var y=0; y<height; y++){
-      currentGrid[x][y] = Math.floor(Math.random()*numberOfStates);//0;
+      currentGrid[x][y] = 0;//Math.floor(Math.random()*numberOfStates);
     }
   }
+  currentGrid[50][50] = 1;
+  currentGrid[50][51] = 1;
+  currentGrid[50][52] = 1;
 }
 
 function showGrid(){
-  for(var x=0; x<width; x++){
-    for(var y=0; y<width;y++){
+  for(var x=1; x<width-1; x++){
+    for(var y=1; y<height-1;y++){
       ctx.fillStyle = colors[currentGrid[x][y]];
       ctx.fillRect(x*gridSize+lineWidth/2, y*gridSize+lineWidth/2,
                    gridSize-lineWidth, gridSize-lineWidth);
     }
   }
+}
+
+function updateGridData(){
+  var nextGrid = currentGrid.slice(0);
+  for (var x=1; x<width-1; x++){
+    for (var y=1; y<width-1; y++){
+      // edge reserved.
+      var cell = currentGrid[x][y];
+      if (cell === 0){
+        // if this cell is empty
+        var n = countNeighbours(x,y);
+        if (willSpaun(n)){
+          console.log("Spaun at" + x + "," + y);
+          nextGrid[x][y]++;
+        }
+      }
+      else if (cell === 1){
+        // if this cell is alive and fine
+        var n = countNeighbours(x,y);
+        if (!willSurvive(n)){
+          // ouch!
+          nextGrid[x][y]++;
+        }
+      }
+      else {
+        nextGrid[x][y] = (cell+1)%numberOfStates;
+      }
+    }
+  }
+  currentGrid = nextGrid.slice(0);
+}
+
+function countNeighbours(x,y){
+  var counter = 0;
+  for(var dx=-1; dx<=1; dx++){
+    for(var dy=-1; dy<=1; dy++){
+      if (currentGrid[x+dx][y+dy] === 1){
+        counter ++;
+      }
+    }
+  }
+  if (currentGrid[x][y] === 1){
+    counter --;
+  }
+  return counter;
+}
+
+function step(){
+  updateGridData();
+  showGrid();
 }
 
 // }}}
