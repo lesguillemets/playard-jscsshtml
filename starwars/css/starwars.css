@@ -1,0 +1,45 @@
+.container {
+    clear: both;
+}
+
+canvas {
+    border: 1px solid rgba(100,100,100,0.5);
+}
+
+canvas#world {
+    width: 750px;
+    height: 750px;
+    padding-left:0;
+    padding-right:0;
+    margin-left:2%;
+    margin-right:auto;
+    display: block;
+    float:left;
+}
+
+.button {
+    text-align:center;
+    font-family: "Anonymous Pro", "Ubuntu Mono", "Monaco", monospace;
+    background-color: rgba(100,100,100,0.4);
+    border-radius: 8px;
+    padding:4px;
+}
+
+.button:hover{
+    background-color: rgba(200,200,200,0.4);
+}
+
+.button:active{
+    background-color: rgba(200,255,200,0.4);
+}
+
+#control{
+    display:inline-block;
+    width:20%;
+    float:right;
+    margin-top:20px;
+}
+
+#togglemove{
+    float:left;
+}
