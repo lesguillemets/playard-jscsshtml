@@ -70,10 +70,11 @@ var colors = ["#000000", "#FF0000", "#FF8800", "#FFFF00"];
 var currentGrid;
 var canvas;
 var ctx;
+var canvwidth, canvheight;
 var width, height;
 
 function willSpaun(n){
-  return n === 2;
+  return (n === 2);
 }
 
 function willSurvive(n){
@@ -83,8 +84,10 @@ function willSurvive(n){
 function initialize(){
   canvas = document.getElementById("world");
   ctx = canvas.getContext("2d");
-  width = canvas.width;
-  height = canvas.height;
+  canvWidth = canvas.width;
+  canvHeight = canvas.height;
+  width = Math.floor(canvWidth/gridSize);
+  height = Math.floor(canvHeight/gridSize);
   currentGrid = new Array(width);
   for (var x=0; x<width; x++){
     currentGrid[x] = new Array(height);
@@ -148,6 +151,16 @@ function countNeighbours(x,y){
   }
   if (currentGrid[x][y] === 1){
     counter --;
+  }
+  if(counter === 2){
+    console.log("Counting for" + x + ","+y);
+    for(var dx=-1; dx<=1; dx++){
+      for(var dy=-1; dy<=1; dy++){
+        if (currentGrid[x+dx][y+dy] === 1){
+          console.log("at" + (x+dy)+","+(y+dy))
+        }
+      }
+  }
   }
   return counter;
 }
