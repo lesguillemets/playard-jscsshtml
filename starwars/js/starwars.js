@@ -170,7 +170,7 @@ function toggleStart(){
     document.getElementById("toggleStart").innerHTML = "Start";
   }
   else {
-    timer = window.setInterval(step,50);
+    timer = window.setInterval(step,100);
     running = true;
     document.getElementById("toggleStart").innerHTML = "Stop";
   }
