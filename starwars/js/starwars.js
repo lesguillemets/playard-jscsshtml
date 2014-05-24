@@ -72,6 +72,8 @@ var canvas;
 var ctx;
 var canvwidth, canvheight;
 var width, height;
+var running = false;
+var timer;
 
 function willSpaun(n){
   return (n === 2);
@@ -92,12 +94,12 @@ function initialize(){
   for (var x=0; x<width; x++){
     currentGrid[x] = new Array(height);
     for (var y=0; y<height; y++){
-      currentGrid[x][y] = 0;//Math.floor(Math.random()*numberOfStates);
+      currentGrid[x][y] = Math.floor(Math.random()*numberOfStates);//0;
     }
   }
-  currentGrid[50][50] = 1;
-  currentGrid[50][51] = 1;
-  currentGrid[50][52] = 1;
+//   currentGrid[50][50] = 1;
+//   currentGrid[50][51] = 1;
+//   currentGrid[50][52] = 1;
 }
 
 function showGrid(){
@@ -111,9 +113,10 @@ function showGrid(){
 }
 
 function updateGridData(){
-  var nextGrid = currentGrid.slice(0);
+  var nextGrid = currentGrid.map(
+    function(arr){return arr.slice(0);});
   for (var x=1; x<width-1; x++){
-    for (var y=1; y<width-1; y++){
+    for (var y=1; y<height-1; y++){
       // edge reserved.
       var cell = currentGrid[x][y];
       if (cell === 0){
@@ -152,22 +155,25 @@ function countNeighbours(x,y){
   if (currentGrid[x][y] === 1){
     counter --;
   }
-  if(counter === 2){
-    console.log("Counting for" + x + ","+y);
-    for(var dx=-1; dx<=1; dx++){
-      for(var dy=-1; dy<=1; dy++){
-        if (currentGrid[x+dx][y+dy] === 1){
-          console.log("at" + (x+dy)+","+(y+dy))
-        }
-      }
-  }
-  }
   return counter;
 }
 
 function step(){
   updateGridData();
   showGrid();
+}
+
+function toggleStart(){
+  if(running){
+    window.clearInterval(timer);
+    running = false;
+    document.getElementById("toggleStart").innerHTML = "Start";
+  }
+  else {
+    timer = window.setInterval(step,50);
+    running = true;
+    document.getElementById("toggleStart").innerHTML = "Stop";
+  }
 }
 
 // }}}
