@@ -123,7 +123,7 @@ function updateGridData(){
         // if this cell is empty
         var n = countNeighbours(x,y);
         if (willSpaun(n)){
-          console.log("Spaun at" + x + "," + y);
+        //console.log("Spaun at" + x + "," + y);
           nextGrid[x][y]++;
         }
       }
@@ -174,6 +174,25 @@ function toggleStart(){
     running = true;
     document.getElementById("toggleStart").innerHTML = "Stop";
   }
+}
+
+function setColors(){
+  for(var stateInd=0; stateInd<numberOfStates; stateInd++){
+    var color = document.getElementById("color"+stateInd).value;
+    colors[stateInd] = color;
+  }
+  showGrid();
+}
+
+function reset(){
+  if(running){
+    window.clearInterval(timer);
+    running = false;
+    document.getElementById("toggleStart").innerHTML = "Start";
+  }
+  initialize();
+  setGrid();
+  showGrid();
 }
 
 // }}}

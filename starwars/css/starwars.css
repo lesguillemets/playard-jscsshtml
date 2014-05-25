@@ -37,9 +37,37 @@ canvas#world {
     background-color: rgba(200,255,200,0.4);
 }
 
+.smallbutton{
+    background-color: rgba(200,200,200,0.4);
+    clear:both;
+    float:right;
+    font-family: "Anonymous Pro", "Ubuntu Mono", "Monaco", monospace;
+    padding:4px;
+    padding-left:8px;
+    padding-right:8px;
+    margin-top:3px;
+    margin-bottom:3px;
+    margin-left:auto;
+    margin-right:auto;
+    cursor:pointer;
+}
+.smallbutton:hover{
+    background-color: rgba(200,200,200,0.4);
+    font-weight: bold;
+}
+
+.smallbutton:active{
+    background-color: rgba(255,200,200,0.4);
+}
+
 #control{
     display:inline-block;
     width:15%;
     float:right;
     margin-top:20px;
+}
+
+#config{
+    border: 1px solid rgba(100,100,100,0.5);
+    padding:auto;
 }
