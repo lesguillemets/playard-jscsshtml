@@ -1,5 +1,3 @@
-var lineWidth = 0.5;
-var gridSize = 8;
 /* * One Grid will be drawn like this: {{{
 *
 * /- . is the (x,y) of the Grid.
@@ -38,11 +36,96 @@ var gridSize = 8;
 *  which is unacceptable for regular display.
 }}}*/
 
+// global variables {{{
+var lineWidth = 0.5;
+var gridSize = 8;
+var numberOfStates = 4;
+var colors = ["#000000", "#FF0000", "#FF8800", "#FFFF00"];
+var currentGrid;
+var canvas;
+var ctx;
+var canvwidth, canvheight;
+var width, height;
+var running = false;
+var timer;
+var mouseState = null;
+var mouseLocAsPos;
+var isMousePresed = false;
+//}}}
+
 function init(){
   setGrid();
   initialize();
   showGrid();
+  canvas.addEventListener("mousedown", onMousePressed);
+  canvas.addEventListener("mouseup", onMouseReleased);
+  canvas.addEventListener("mousemove", onMouseMoved);
+  canvas.addEventListener("mouseout", onMouseGetOut);
+  canvas.addEventListener("touchstart", onTouchOn);
+  canvas.addEventListener("touchend", onTouchOff);
+  canvas.addEventListener("touchmove", onTouchMoved);
 }
+
+// handles mouse pressing {{{
+function onMousePressed(e){
+  isMousePresed = true;
+  var mousePos = currentCoords(e);
+  putColor(mousePos);
+}
+
+function onTouchOn(e){
+  var touchobj = e.changedTouches[0];
+  onMousePressed(touchobj);
+  e.preventDefault();
+}
+
+function onMouseReleased(e){
+  isMousePresed = false;
+}
+function onTouchOff(e){
+  var touchobj = e.changedTouches[0];
+  onMouseReleased(touchobj);
+  e.preventDefault();
+}
+
+function onMouseMoved(e){
+  if (isMousePresed){
+    var mousePos = currentCoords(e);
+    var currentMouseLocAsPos = mousePos.map(
+      function(x){return Math.floor(x/gridSize);});
+    if (currentMouseLocAsPos !== mouseLocAsPos){
+      // if the mouse crossed the border
+      mouseLocAsPos = currentMouseLocAsPos;
+      putColor(mousePos);
+    }
+  }
+}
+function onTouchMoved(e){
+  var touchobj = e.changedTouches[0];
+  onMouseMoved(touchobj);
+  e.preventDefault();
+}
+
+function onMouseGetOut(e){
+  isMousePressed = false;
+}
+
+function putColor(mousePos){
+  var posX = Math.floor(mousePos[0] / gridSize);
+  var posY = Math.floor(mousePos[1] / gridSize);
+  if (mouseState !== null){
+    currentGrid[posX][posY] = mouseState;
+  }
+  showGrid();
+}
+
+function currentCoords(e){
+  var rect = e.target.getBoundingClientRect();
+  var mouseX = e.clientX - rect.left;
+  var mouseY = e.clientY - rect.top;
+  return [mouseX,mouseY];
+}
+// }}}
 
 function setGrid(){ // initialises the grid. call only once on load.{{{
   var canv = document.getElementById("world");
@@ -64,17 +147,6 @@ function setGrid(){ // initialises the grid. call only once on load.{{{
 } //}}}
 
 // Main {{{
-
-var numberOfStates = 4;
-var colors = ["#000000", "#FF0000", "#FF8800", "#FFFF00"];
-var currentGrid;
-var canvas;
-var ctx;
-var canvwidth, canvheight;
-var width, height;
-var running = false;
-var timer;
-
 function willSpaun(n){
   return (n === 2);
 }
@@ -180,6 +252,7 @@ function setColors(){
   for(var stateInd=0; stateInd<numberOfStates; stateInd++){
     var color = document.getElementById("color"+stateInd).value;
     colors[stateInd] = color;
+    document.getElementById("state"+stateInd).style.background=color;
   }
   showGrid();
 }
@@ -195,6 +268,40 @@ function reset(){
   showGrid();
 }
 
+function clearGrid(){
+  if(running){
+    window.clearInterval(timer);
+    running = false;
+    document.getElementById("toggleStart").innerHTML = "Start";
+  }
+  for (var x=0; x<width; x++){
+    for (var y=0; y<height; y++){
+      currentGrid[x][y] = 0;
+    }
+  }
+  canvas.width = canvas.width;
+  setGrid();
+  showGrid();
+}
+
+
+function setMouseState(n){
+  n = parseInt(n);
+  if (n != mouseState){
+    if(mouseState !== null){
+      document.getElementById("state"+mouseState).style.borderColor="#FFF";
+      document.getElementById("state"+mouseState).innerHTML = ""
+    }
+    mouseState = n;
+    document.getElementById("state"+n).style.borderColor="#aaf";
+    document.getElementById("state"+n).innerHTML = "✓"
+  }
+  else {
+    document.getElementById("state"+mouseState).style.borderColor="#FFF";
+    document.getElementById("state"+mouseState).innerHTML = ""
+    mouseState = null;
+  }
+}
+
 // }}}
 window.onload=init;
-

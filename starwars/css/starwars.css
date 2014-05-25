@@ -26,6 +26,11 @@ canvas#world {
     margin-top:3px;
     margin-bottom:3px;
     cursor:pointer;
+    user-select: none;
+    -o-user-select:none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
 }
 
 .button:hover{
@@ -70,4 +75,35 @@ canvas#world {
 #config{
     border: 1px solid rgba(100,100,100,0.5);
     padding:auto;
+}
+
+.state{
+    border:3px solid white;
+    width:50px;
+    height:50px;
+    line-height:50px;
+    cursor:default;
+    font-family: "Ubuntu Mono", "Anonymous Pro", "Monofur", monospace;
+    font-size:18px;
+    color: #555599;
+    text-align:center;
+    border-radius: 10px;
+    user-select: none;
+    -o-user-select:none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+#state0 {
+    background-color: #000000;
+}
+#state1 {
+    background-color: #FF0000;
+}
+#state2 {
+    background-color: #FF8800;
+}
+#state3 {
+    background-color: #FFFF00;
 }

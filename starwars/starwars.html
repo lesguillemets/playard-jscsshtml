@@ -9,12 +9,13 @@
 <body>
   <div class="container">
     <div id="control">
-      <div id="switches">
+      <div class="container" id="switches">
         <div id="toggleStart" class="button" onclick="toggleStart()">Start</div>
         <div id="step" class="button" onclick="step()">Step</div>
         <div id="reset" class="button" onclick="reset()">Reset</div>
+        <div id="clear" class="button" onclick="clearGrid()">clear</div>
       </div>
-      <div id="config">
+      <div class="container" id="config">
         <div>Set colours</div>
         <form action="">
           <input class="colors" id="color0" type="color" value="#000000">
@@ -25,6 +26,12 @@
         <div class="smallbutton" id="setcolors" onclick="setColors()">
           Set
         </div>
+      </div>
+      <div class="container" id="mouseSetter">
+        <pre id="state0" class="state" onclick="setMouseState(0)"></pre>
+        <pre id="state1" class="state" onclick="setMouseState(1)"></pre>
+        <pre id="state2" class="state" onclick="setMouseState(2)"></pre>
+        <pre id="state3" class="state" onclick="setMouseState(3)"></pre>
       </div>
     </div>
     <canvas id="world" width="750" height="750"></canvas>
