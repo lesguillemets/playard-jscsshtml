@@ -1,0 +1,7 @@
+#world {
+    border:1px solid black;
+}
+
+#world:focus{
+    border:2px solid black;
+}
