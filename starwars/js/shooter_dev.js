@@ -72,7 +72,7 @@ function init(){
   canvas.addEventListener("touchstart", onTouchOn);
   canvas.addEventListener("touchend", onTouchOff);
   canvas.addEventListener("touchmove", onTouchMoved);
-  myShooter = new Shooter(30,30,3);
+  myShooter = new Shooter(30,30,2);
   myShooter.show();
 }
 
@@ -345,6 +345,32 @@ Shooter.prototype.show = function(){
                gridSize*2,
                gridSize*2);
   ctx.fillStyle = this.color1;
+  switch (this.direction){
+    case 0:
+      ctx.fillRect((this.x)*gridSize,
+                   (this.y+1)*gridSize,
+                   gridSize*2,
+                   gridSize);
+      break;
+    case 1:
+      ctx.fillRect((this.x)*gridSize,
+                   (this.y)*gridSize,
+                   gridSize,
+                   gridSize*2);
+      break;
+    case 2:
+      ctx.fillRect((this.x)*gridSize,
+                   (this.y)*gridSize,
+                   gridSize*2,
+                   gridSize);
+      break;
+    case 3:
+      ctx.fillRect((this.x+1)*gridSize,
+                   (this.y)*gridSize,
+                   gridSize,
+                   gridSize*2);
+      break;
+  }
   ctx.fillStyle = oldFillStyle;
 };
 
