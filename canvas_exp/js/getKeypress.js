@@ -27,6 +27,7 @@ function init(){
 }
 
 function control(e){
+  console.log(e);
   var direction;
   var arrowPressed = true;
   switch (e.key){
