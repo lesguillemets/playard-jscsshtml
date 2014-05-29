@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="./css/shooter_dev.css">
+  <script src="./js/shooter_dev.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div id="control">
+      <div class="container" id="switches">
+        <div id="toggleStart" class="button" onclick="toggleStart()">Start</div>
+        <div id="step" class="button" onclick="step()">Step</div>
+        <div id="reset" class="button" onclick="reset()">Reset</div>
+        <div id="clear" class="button" onclick="clearGrid()">clear</div>
+        <div id="clear" class="button" onclick="shoot()">shoot</div>
+      </div>
+      <div class="container" id="config">
+        <div>Set colours</div>
+        <form action="">
+          <input class="colors" id="color0" type="color" value="#000000">
+          <input class="colors" id="color1" type="color" value="#FF0000">
+          <input class="colors" id="color2" type="color" value="#FF8800">
+          <input class="colors" id="color3" type="color" value="#FFFF00">
+        </form>
+        <div class="smallbutton" id="setcolors" onclick="setColors()">
+          Set
+        </div>
+      </div>
+      <div class="container" id="mouseSetter">
+        <pre id="state0" class="state" onclick="setMouseState(0)"></pre>
+        <pre id="state1" class="state" onclick="setMouseState(1)"></pre>
+        <pre id="state2" class="state" onclick="setMouseState(2)"></pre>
+        <pre id="state3" class="state" onclick="setMouseState(3)"></pre>
+      </div>
+    </div>
+    <canvas id="world" width="750" height="750"></canvas>
+  </div>
+</body>
+</html>

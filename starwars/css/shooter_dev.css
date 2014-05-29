@@ -1,0 +1,109 @@
+.container {
+    clear: both;
+}
+
+canvas {
+    border: 1px solid rgba(100,100,100,0.5);
+}
+
+canvas#world {
+    width: 750px;
+    height: 750px;
+    padding-left:0;
+    padding-right:0;
+    margin-left:2%;
+    margin-right:auto;
+    display: block;
+    float:left;
+}
+
+.button {
+    text-align:center;
+    font-family: "Anonymous Pro", "Ubuntu Mono", "Monaco", monospace;
+    background-color: rgba(100,100,100,0.4);
+    border-radius: 8px;
+    padding:4px;
+    margin-top:3px;
+    margin-bottom:3px;
+    cursor:pointer;
+    user-select: none;
+    -o-user-select:none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+.button:hover{
+    background-color: rgba(200,200,200,0.4);
+    font-weight: bold;
+}
+
+.button:active{
+    background-color: rgba(200,255,200,0.4);
+}
+
+.smallbutton{
+    background-color: rgba(200,200,200,0.4);
+    clear:both;
+    float:right;
+    font-family: "Anonymous Pro", "Ubuntu Mono", "Monaco", monospace;
+    padding:4px;
+    padding-left:8px;
+    padding-right:8px;
+    margin-top:3px;
+    margin-bottom:3px;
+    margin-left:auto;
+    margin-right:auto;
+    cursor:pointer;
+}
+.smallbutton:hover{
+    background-color: rgba(200,200,200,0.4);
+    font-weight: bold;
+}
+
+.smallbutton:active{
+    background-color: rgba(255,200,200,0.4);
+}
+
+#control{
+    display:inline-block;
+    width:15%;
+    float:right;
+    margin-top:20px;
+}
+
+#config{
+    border: 1px solid rgba(100,100,100,0.5);
+    padding:auto;
+}
+
+.state{
+    border:3px solid white;
+    width:50px;
+    height:50px;
+    line-height:50px;
+    cursor:default;
+    font-family: "Ubuntu Mono", "Anonymous Pro", "Monofur", monospace;
+    font-size:18px;
+    color: #555599;
+    text-align:center;
+    border-radius: 10px;
+    user-select: none;
+    -o-user-select:none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+#state0 {
+    background-color: #000000;
+}
+#state1 {
+    background-color: #FF0000;
+}
+#state2 {
+    background-color: #FF8800;
+}
+#state3 {
+    background-color: #FFFF00;
+}
