@@ -143,18 +143,22 @@ function control(e){
   switch (e.key){
     case "Up":
     case "w":
+    case "k":
       myShooter.move(0);
       break;
     case "Right":
     case "d":
+    case "l":
       myShooter.move(1);
       break;
     case "Down":
     case "s":
+    case "j":
       myShooter.move(2);
       break;
     case "Left":
     case "a":
+    case "h":
       myShooter.move(3);
       break;
     case " ":
