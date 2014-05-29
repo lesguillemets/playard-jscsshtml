@@ -140,29 +140,54 @@ function currentCoords(e){
 
 // keyboard event handlers {{{
 function control(e){
-  switch (e.key){
-    case "Up":
-    case "w":
-    case "k":
+  switch (e.charCode){
+    // up (w/k)
+    case 119:
+    case 107:
       myShooter.move(0);
       break;
-    case "Right":
-    case "d":
-    case "l":
+    // right (d/l)
+    case 100:
+    case 108:
       myShooter.move(1);
       break;
-    case "Down":
-    case "s":
-    case "j":
+    // down (s/j)
+    case 115:
+    case 106:
       myShooter.move(2);
       break;
-    case "Left":
-    case "a":
-    case "h":
+    // left (a/h)
+    case 97:
+    case 104:
       myShooter.move(3);
       break;
-    case " ":
+    // Up (W/K)
+    case 87:
+    case 75:
+      myShooter.justMove(0);
+      break;
+    // Right (D/L)
+    case 68:
+    case 76:
+      myShooter.justMove(1);
+      break;
+    // Down (S/J)
+    case 83:
+    case 74:
+      myShooter.justMove(2);
+      break;
+    // Left (A/H)
+    case 65:
+    case 72:
+      myShooter.justMove(3);
+      break;
+    case 32:  // " "
+    case 120: // x
+    case 88:  // X
+    case 112: // p
+    case 80:  // P
       myShooter.shoot();
+      break;
   }
 }
 // }}}
@@ -333,7 +358,6 @@ function clearGrid(){
   showGrid();
 }
 
-
 function setMouseState(n){
   n = parseInt(n);
   if (n != mouseState){
@@ -456,6 +480,13 @@ Shooter.prototype.move = function(direction){
   else {
     this.direction = direction;
   }
+  this.show();
+};
+
+Shooter.prototype.justMove = function(direction){
+  // move without changing direction.
+  this.x += unitVectors[direction][0];
+  this.y += unitVectors[direction][1];
   this.show();
 };
 // }}}
