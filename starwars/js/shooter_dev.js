@@ -141,6 +141,8 @@ function currentCoords(e){
 // keyboard event handlers {{{
 function control(e){
   switch (e.charCode){
+    // Shooter {{{
+    // Movements {{{
     // up (w/k)
     case 119:
     case 107:
@@ -181,6 +183,8 @@ function control(e){
     case 72:
       myShooter.justMove(3);
       break;
+    // }}}
+    // Shooting {{{
     case 32:  // " "
     case 120: // x
     case 88:  // X
@@ -188,6 +192,8 @@ function control(e){
     case 80:  // P
       myShooter.shoot();
       break;
+    // }}}
+    // }}}
   }
 }
 // }}}
@@ -212,6 +218,7 @@ function setGrid(){ // initialises the grid. call only once on load.{{{
 } //}}}
 
 // Main {{{
+// conditions {{{
 function willSpaun(n){
   return (n === 2);
 }
@@ -219,7 +226,9 @@ function willSpaun(n){
 function willSurvive(n){
   return (3<=n && n<=5);
 }
+// }}}
 
+// initialisation {{{
 function initialize(){
   canvas = document.getElementById("world");
   ctx = canvas.getContext("2d");
@@ -235,7 +244,9 @@ function initialize(){
     }
   }
 }
+// }}}
 
+// display {{{
 function showGrid(){
   for(var x=1; x<width-1; x++){
     for(var y=1; y<height-1;y++){
@@ -253,7 +264,9 @@ function showSquareWithColor(x,y,fSt){
                gridSize-lineWidth, gridSize-lineWidth);
   ctx.fillStyle = oldFillStyle;
 }
+// }}}
 
+// cellular automata {{{
 function updateGridData(){
   var nextGrid = currentGrid.map(
     function(arr){return arr.slice(0);});
@@ -308,7 +321,9 @@ function step(){
     myShooter.coolDownTime--;
   }
 }
+// }}}
 
+// setting, controls {{{
 function toggleStart(){
   if(running){
     window.clearInterval(timer);
@@ -375,6 +390,7 @@ function setMouseState(n){
     mouseState = null;
   }
 }
+// }}}
 // }}}
 
 // Shooter {{{
