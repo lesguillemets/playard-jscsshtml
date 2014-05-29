@@ -72,6 +72,7 @@ function init(){
   canvas.addEventListener("touchstart", onTouchOn);
   canvas.addEventListener("touchend", onTouchOff);
   canvas.addEventListener("touchmove", onTouchMoved);
+  canvas.onkeypress = control;
   myShooter = new Shooter(30,30,2);
   myShooter.show();
 }
@@ -134,6 +135,31 @@ function currentCoords(e){
   var mouseX = e.clientX - rect.left;
   var mouseY = e.clientY - rect.top;
   return [mouseX,mouseY];
+}
+// }}}
+
+// keyboard event handlers {{{
+function control(e){
+  switch (e.key){
+    case "Up":
+    case "w":
+      myShooter.move(0);
+      break;
+    case "Right":
+    case "d":
+      myShooter.move(1);
+      break;
+    case "Down":
+    case "s":
+      myShooter.move(2);
+      break;
+    case "Left":
+    case "a":
+      myShooter.move(3);
+      break;
+    case " ":
+      myShooter.shoot();
+  }
 }
 // }}}
 
@@ -419,6 +445,14 @@ function shoot(){
 }
 
 Shooter.prototype.move = function(direction){
+  if (direction === this.direction){
+    this.x += unitVectors[direction][0];
+    this.y += unitVectors[direction][1];
+  }
+  else {
+    this.direction = direction;
+  }
+  this.show();
 };
 // }}}
 window.onload=init;
