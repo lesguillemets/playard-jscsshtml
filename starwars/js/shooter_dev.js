@@ -459,4 +459,10 @@ Shooter.prototype.move = function(direction){
   this.show();
 };
 // }}}
+
+// save {{{
+function exportAlert(){
+  alert(currentGrid);
+}
+// }}}
 window.onload=init;
