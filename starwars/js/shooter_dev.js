@@ -58,6 +58,7 @@ var unitVectors = [
   [0,1], // down
   [-1,0] // left
 ];
+var coolingInterval = 2;
 //}}}
 
 function init(){
@@ -247,6 +248,10 @@ function countNeighbours(x,y){
 function step(){
   updateGridData();
   showGrid();
+  myShooter.show();
+  if (myShooter.coolDownTime !== 0){
+    myShooter.coolDownTime--;
+  }
 }
 
 function toggleStart(){
@@ -344,40 +349,43 @@ Shooter.prototype.show = function(){
 };
 
 Shooter.prototype.shoot = function(){
-  var x = this.x;
-  var y = this.y;
-  switch (this.direction){
-    case 0:
-      for(var dy=0; dy<2; dy++){
-        for(var dx=0; dx<2; dx++){
-          currentGrid[x+dx][y-1-dy] = 2-dy;
+  if (this.coolDownTime <= 0){
+    var x = this.x;
+    var y = this.y;
+    switch (this.direction){
+      case 0:
+        for(var dy=0; dy<2; dy++){
+          for(var dx=0; dx<2; dx++){
+            currentGrid[x+dx][y-1-dy] = 2-dy;
+          }
         }
-      }
-      break;
-    case 1:
-      for(var dy=0; dy<2; dy++){
-        for(var dx=0; dx<2; dx++){
-          currentGrid[x+2+dx][y+dy] = 2-dx;
+        break;
+      case 1:
+        for(var dy=0; dy<2; dy++){
+          for(var dx=0; dx<2; dx++){
+            currentGrid[x+2+dx][y+dy] = 2-dx;
+          }
         }
-      }
-      break;
-    case 2:
-      for(var dy=0; dy<2; dy++){
-        for(var dx=0; dx<2; dx++){
-          currentGrid[x+dx][y+2+dy] = 2-dy;
+        break;
+      case 2:
+        for(var dy=0; dy<2; dy++){
+          for(var dx=0; dx<2; dx++){
+            currentGrid[x+dx][y+2+dy] = 2-dy;
+          }
         }
-      }
-      break;
-    case 3:
-      for(var dy=0; dy<2; dy++){
-        for(var dx=0; dx<2; dx++){
-          currentGrid[x-1-dx][y+dy] = 2-dx;
+        break;
+      case 3:
+        for(var dy=0; dy<2; dy++){
+          for(var dx=0; dx<2; dx++){
+            currentGrid[x-1-dx][y+dy] = 2-dx;
+          }
         }
-      }
-      break;
+        break;
+    }
+    showGrid();
+    this.show();
+    this.coolDownTime = coolingInterval;
   }
-  showGrid();
-  this.show();
 };
 
 function shoot(){
