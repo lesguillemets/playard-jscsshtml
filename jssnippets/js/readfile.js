@@ -1,15 +1,19 @@
 function readFile(fileobj){
   var f = new FileReader();
-  f.onload = function(x){document.getElementById("results").innerHTML += (x.target.result);}
+  f.onload = function(e){
+    document.getElementById("results").innerHTML += (e.target.result);
+  }
   f.readAsText(fileobj);
 }
+// memo : when using e.target.result, we might run into this:
+// http://stackoverflow.com/questions/18898036
 
 function reader(){
   var myFileList = document.getElementById("fileinput").files;
   for (var i=0; i<myFileList.length; i++){
-    var a = myFileList[i];
-    alert("reading " + a.name);
-    readFile(a);
+    var readingFile = myFileList[i];
+    alert("reading " + readingFile.name);
+    readFile(readingFile);
   }
 }
 

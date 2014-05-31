@@ -1,0 +1,32 @@
+.monospaced {
+    font-family:monospace;
+}
+
+.button {
+    text-align:center;
+    font-family: "Anonymous Pro", "Ubuntu Mono", "Monaco", monospace;
+    background-color: rgba(100,100,100,0.4);
+    border-radius: 8px;
+    padding:4px;
+    margin-top:3px;
+    margin-bottom:3px;
+    cursor:pointer;
+    user-select: none;
+    -o-user-select:none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+.button:hover{
+    background-color: rgba(200,200,200,0.4);
+    font-weight: bold;
+}
+
+.button:active{
+    background-color: rgba(200,255,200,0.4);
+}
+
+.small {
+    width:50px;
+}
