@@ -323,22 +323,22 @@ function step(){
 }
 // }}}
 
-// setting, controls {{{
+// settings, controls {{{
 function toggleStart(){
-  if(running){
-    stopLoop();
-  }
-  else {
-    timer = window.setInterval(step,100);
-    running = true;
-    document.getElementById("toggleStart").innerHTML = "Stop";
-  }
+  if(running){ stopLoop(); }
+  else { startLoop(); }
 }
 
 function stopLoop(){
   window.clearInterval(timer);
   running = false;
   document.getElementById("toggleStart").innerHTML = "Start";
+}
+
+function startLoop(){
+  timer = window.setInterval(step,100);
+  running = true;
+  document.getElementById("toggleStart").innerHTML = "Stop";
 }
 
 function setColors(){
