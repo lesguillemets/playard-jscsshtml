@@ -326,15 +326,19 @@ function step(){
 // setting, controls {{{
 function toggleStart(){
   if(running){
-    window.clearInterval(timer);
-    running = false;
-    document.getElementById("toggleStart").innerHTML = "Start";
+    stopLoop();
   }
   else {
     timer = window.setInterval(step,100);
     running = true;
     document.getElementById("toggleStart").innerHTML = "Stop";
   }
+}
+
+function stopLoop(){
+  window.clearInterval(timer);
+  running = false;
+  document.getElementById("toggleStart").innerHTML = "Start";
 }
 
 function setColors(){
@@ -507,9 +511,46 @@ Shooter.prototype.justMove = function(direction){
 };
 // }}}
 
-// save {{{
-function exportAlert(){
-  alert(currentGrid);
+// data management for development {{{
+// export {{{
+function exportToFile(){
+  if(running){ stopLoop(); }
+  var dataString = JSON.stringify(currentGrid);
+  var downloader = document.createElement('a');
+  document.body.appendChild(downloader);
+  // appendchild is required for firefox.
+  // ref. https://support.mozilla.org/en-US/questions/968992
+  downloader.setAttribute(
+    "href",
+    "data:application/json," + encodeURIComponent(dataString));
+    // download attribute : html5 feature, and
+    // seemingly not supported in IE/Safari.
+  downloader.setAttribute("download", "grid.json");
+  downloader.click();
 }
 // }}}
+// import {{{
+function setGridfromJSON(jsonstring){
+  var neogrid = JSON.parse(jsonstring);
+  currentGrid = neogrid;
+  showGrid();
+}
+
+function importFromFile(){
+  if(running){ stopLoop(); }
+  var myFileList = document.getElementById("importFrom").files;
+  if (myFileList.length === 0){
+    alert("Please specify a file, would you?");
+    return;
+  }
+  var myFile = myFileList[0];
+  var f = new FileReader();
+  f.onload = function(e){
+    setGridfromJSON(e.target.result);
+  }
+  f.readAsText(myFile);
+}
+// }}}
+// }}}
+
 window.onload=init;
