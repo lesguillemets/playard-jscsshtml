@@ -376,9 +376,7 @@ function setColors(){
 }
 
 function stepForward(){
-  if(running){
-    stopLoop();
-  }
+  if(running){ stopLoop(); }
   step();
   if(isBorderShown){
     showBorder();
@@ -386,22 +384,14 @@ function stepForward(){
 }
 
 function reset(){
-  if(running){
-    window.clearInterval(timer);
-    running = false;
-    document.getElementById("toggleStart").innerHTML = "Start";
-  }
+  if(running){ stopLoop(); }
   initialize();
   showGrid();
   if(isBorderShown){showBorder();}
 }
 
 function clearGrid(){
-  if(running){
-    window.clearInterval(timer);
-    running = false;
-    document.getElementById("toggleStart").innerHTML = "Start";
-  }
+  if(running){ stopLoop(); }
   for (var x=0; x<width; x++){
     for (var y=0; y<height; y++){
       currentGrid[x][y] = 0;
