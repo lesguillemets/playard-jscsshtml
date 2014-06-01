@@ -51,6 +51,7 @@ var timer;
 var mouseState = null;
 var mouseLocAsPos;
 var isMousePresed = false;
+var showBorders = true;
 //}}}
 
 function init(){

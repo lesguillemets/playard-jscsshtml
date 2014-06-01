@@ -37,7 +37,7 @@
 }}}*/
 
 // global variables {{{
-var lineWidth = 0.5;
+var lineWidth = 1;
 var gridSize = 8;
 var numberOfStates = 4;
 var colors = ["#000000", "#FF0000", "#FF8800", "#FFFF00"];
@@ -47,6 +47,7 @@ var ctx;
 var canvwidth, canvheight;
 var width, height;
 var running = false;
+var isBorderShown = true;
 var timer;
 var mouseState = null;
 var mouseLocAsPos;
@@ -62,9 +63,9 @@ var coolingInterval = 2;
 //}}}
 
 function init(){
-  setGrid();
   initialize();
   showGrid();
+  showBorder();
   canvas.addEventListener("mousedown", onMousePressed);
   canvas.addEventListener("mouseup", onMouseReleased);
   canvas.addEventListener("mousemove", onMouseMoved);
@@ -126,8 +127,8 @@ function putColor(mousePos){
   var posY = Math.floor(mousePos[1] / gridSize);
   if (mouseState !== null){
     currentGrid[posX][posY] = mouseState;
+    showSquareWithColorandGrid(posX,posY,colors[mouseState]);
   }
-  showGrid();
 }
 
 function currentCoords(e){
@@ -198,7 +199,8 @@ function control(e){
 }
 // }}}
 
-function setGrid(){ // initialises the grid. call only once on load.{{{
+function showBorder(){ // {{{
+  // call only when you want grid to be shown.
   var canv = document.getElementById("world");
   var width = canv.width;
   var height = canv.height;
@@ -248,16 +250,23 @@ function initialize(){
 
 // display {{{
 function showGrid(){
+  // when you want to redraw all
   for(var x=1; x<width-1; x++){
     for(var y=1; y<height-1;y++){
       ctx.fillStyle = colors[currentGrid[x][y]];
-      ctx.fillRect(x*gridSize+lineWidth/2, y*gridSize+lineWidth/2,
-                   gridSize-lineWidth, gridSize-lineWidth);
+      ctx.fillRect(x*gridSize, y*gridSize,
+                   gridSize, gridSize);
     }
   }
 }
 
-function showSquareWithColor(x,y,fSt){
+function showCellAt(x,y){
+  ctx.fillStyle = colors[currentGrid[x][y]];
+  ctx.fillRect(x*gridSize, y*gridSize,
+               gridSize, gridSize);
+}
+
+function showSquareWithColorandGrid(x,y,fSt){
   var oldFillStyle = ctx.fillStyle;
   ctx.fillStyle = fSt;
   ctx.fillRect(x*gridSize+lineWidth/2, y*gridSize+lineWidth/2,
@@ -267,12 +276,13 @@ function showSquareWithColor(x,y,fSt){
 // }}}
 
 // cellular automata {{{
-function updateGridData(){
+function updateGrid(){
   var nextGrid = currentGrid.map(
     function(arr){return arr.slice(0);});
   for (var x=1; x<width-1; x++){
     for (var y=1; y<height-1; y++){
       // edge reserved.
+      var changed = false;
       var cell = currentGrid[x][y];
       if (cell === 0){
         // if this cell is empty
@@ -280,6 +290,7 @@ function updateGridData(){
         if (willSpaun(n)){
         //console.log("Spaun at" + x + "," + y);
           nextGrid[x][y]++;
+          changed = true;
         }
       }
       else if (cell === 1){
@@ -288,10 +299,18 @@ function updateGridData(){
         if (!willSurvive(n)){
           // ouch!
           nextGrid[x][y]++;
+          changed = true;
         }
       }
       else {
         nextGrid[x][y] = (cell+1)%numberOfStates;
+        changed = true;
+      }
+      // draw if changed
+      if (changed){
+        ctx.fillStyle = colors[nextGrid[x][y]];
+        ctx.fillRect(x*gridSize, y*gridSize,
+                     gridSize, gridSize);
       }
     }
   }
@@ -314,8 +333,7 @@ function countNeighbours(x,y){
 }
 
 function step(){
-  updateGridData();
-  showGrid();
+  updateGrid();
   myShooter.show();
   if (myShooter.coolDownTime !== 0){
     myShooter.coolDownTime--;
@@ -332,13 +350,19 @@ function toggleStart(){
 function stopLoop(){
   window.clearInterval(timer);
   running = false;
+  isBorderShown = true;
   document.getElementById("toggleStart").innerHTML = "Start";
+  if(isBorderShown){showBorder();}
+  myShooter.show();
 }
 
 function startLoop(){
   timer = window.setInterval(step,100);
   running = true;
+  isBorderShown = false;
   document.getElementById("toggleStart").innerHTML = "Stop";
+  showGrid();
+  myShooter.show();
 }
 
 function setColors(){
@@ -348,6 +372,7 @@ function setColors(){
     document.getElementById("state"+stateInd).style.background=color;
   }
   showGrid();
+  if(isBorderShown){ showBorder(); }
 }
 
 function stepForward(){
@@ -355,6 +380,9 @@ function stepForward(){
     stopLoop();
   }
   step();
+  if(isBorderShown){
+    showBorder();
+  }
 }
 
 function reset(){
@@ -364,8 +392,8 @@ function reset(){
     document.getElementById("toggleStart").innerHTML = "Start";
   }
   initialize();
-  setGrid();
   showGrid();
+  if(isBorderShown){showBorder();}
 }
 
 function clearGrid(){
@@ -380,8 +408,8 @@ function clearGrid(){
     }
   }
   canvas.width = canvas.width;
-  setGrid();
   showGrid();
+  if(isBorderShown){showBorder();}
 }
 
 function setMouseState(n){
@@ -464,6 +492,7 @@ Shooter.prototype.shoot = function(){
         for(var dy=0; dy<2; dy++){
           for(var dx=0; dx<2; dx++){
             currentGrid[x+dx][y-1-dy] = 2-dy;
+            showCellAt(x+dx,y-1-dy);
           }
         }
         break;
@@ -471,6 +500,7 @@ Shooter.prototype.shoot = function(){
         for(var dy=0; dy<2; dy++){
           for(var dx=0; dx<2; dx++){
             currentGrid[x+2+dx][y+dy] = 2-dx;
+            showCellAt(x+2+dx,y+dy);
           }
         }
         break;
@@ -478,6 +508,7 @@ Shooter.prototype.shoot = function(){
         for(var dy=0; dy<2; dy++){
           for(var dx=0; dx<2; dx++){
             currentGrid[x+dx][y+2+dy] = 2-dy;
+            showCellAt(x+dx, y+2+dy);
           }
         }
         break;
@@ -485,11 +516,11 @@ Shooter.prototype.shoot = function(){
         for(var dy=0; dy<2; dy++){
           for(var dx=0; dx<2; dx++){
             currentGrid[x-1-dx][y+dy] = 2-dx;
+            showCellAt(x-1-dx, y+dy);
           }
         }
         break;
     }
-    showGrid();
     this.show();
     this.coolDownTime = coolingInterval;
   }
@@ -500,6 +531,11 @@ function shoot(){
 }
 
 Shooter.prototype.move = function(direction){
+  for(var dx=0; dx<2; dx++){
+    for(var dy=0; dy<2; dy++){
+      showCellAt(this.x+dx, this.y+dy);
+    }
+  }
   if (direction === this.direction){
     this.x += unitVectors[direction][0];
     this.y += unitVectors[direction][1];
@@ -512,6 +548,11 @@ Shooter.prototype.move = function(direction){
 
 Shooter.prototype.justMove = function(direction){
   // move without changing direction.
+  for(var dx=0; dx<2; dx++){
+    for(var dy=0; dy<2; dy++){
+      showCellAt(this.x+dx, this.y+dy);
+    }
+  }
   this.x += unitVectors[direction][0];
   this.y += unitVectors[direction][1];
   this.show();
