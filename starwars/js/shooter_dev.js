@@ -350,6 +350,13 @@ function setColors(){
   showGrid();
 }
 
+function stepForward(){
+  if(running){
+    stopLoop();
+  }
+  step();
+}
+
 function reset(){
   if(running){
     window.clearInterval(timer);
