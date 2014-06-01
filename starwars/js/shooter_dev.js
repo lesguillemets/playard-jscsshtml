@@ -47,6 +47,7 @@ var ctx;
 var canvwidth, canvheight;
 var width, height;
 var running = false;
+var isBorderShown = true;
 var timer;
 var mouseState = null;
 var mouseLocAsPos;
@@ -349,14 +350,16 @@ function toggleStart(){
 function stopLoop(){
   window.clearInterval(timer);
   running = false;
+  isBorderShown = true;
   document.getElementById("toggleStart").innerHTML = "Start";
-  showBorder();
+  if(isBorderShown){showBorder();}
   myShooter.show();
 }
 
 function startLoop(){
   timer = window.setInterval(step,100);
   running = true;
+  isBorderShown = false;
   document.getElementById("toggleStart").innerHTML = "Stop";
   showGrid();
   myShooter.show();
@@ -369,7 +372,7 @@ function setColors(){
     document.getElementById("state"+stateInd).style.background=color;
   }
   showGrid();
-  if(!running){ showBorder(); }
+  if(isBorderShown){ showBorder(); }
 }
 
 function stepForward(){
@@ -377,6 +380,9 @@ function stepForward(){
     stopLoop();
   }
   step();
+  if(isBorderShown){
+    showBorder();
+  }
 }
 
 function reset(){
@@ -387,7 +393,7 @@ function reset(){
   }
   initialize();
   showGrid();
-  showBorder();
+  if(isBorderShown){showBorder();}
 }
 
 function clearGrid(){
@@ -403,7 +409,7 @@ function clearGrid(){
   }
   canvas.width = canvas.width;
   showGrid();
-  showBorder();
+  if(isBorderShown){showBorder();}
 }
 
 function setMouseState(n){
@@ -542,6 +548,11 @@ Shooter.prototype.move = function(direction){
 
 Shooter.prototype.justMove = function(direction){
   // move without changing direction.
+  for(var dx=0; dx<2; dx++){
+    for(var dy=0; dy<2; dy++){
+      showCellAt(this.x+dx, this.y+dy);
+    }
+  }
   this.x += unitVectors[direction][0];
   this.y += unitVectors[direction][1];
   this.show();
