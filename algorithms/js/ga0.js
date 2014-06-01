@@ -1,5 +1,6 @@
 var citysize = 5; // show cities as 5*5 [px*px] square.
 var showEvery = 50;  // show infos every 50 generations.
+var timer;
 
 function Simulator(){
   // essentially:
@@ -76,6 +77,13 @@ Simulator.prototype.mainStep = function(){
     this.drawPath(0);
   }
   this.gen++;
+  if (this.gen >= this.g){
+    clearInterval(timer);
+    this.pushtoTable();
+    this.clearPathCanv();
+    this.drawCities();
+    this.drawPath(0);
+  }
 };
 
 // methods required for each step.
@@ -219,8 +227,8 @@ function helloChild(papa,mama){
 }
 
 function main(){
-  sim = new Simulator();
+  var sim = new Simulator();
   sim.drawCities();
-  setInterval(function(){sim.mainStep();},10);
+  timer = setInterval(function(){sim.mainStep();},10);
 }
 
