@@ -534,11 +534,6 @@ function shoot(){
 }
 
 Shooter.prototype.move = function(direction){
-  for(var dx=0; dx<2; dx++){
-    for(var dy=0; dy<2; dy++){
-      showCellAt(this.x+dx, this.y+dy);
-    }
-  }
   if (direction === this.direction){
     this.x += unitVectors[direction][0];
     this.y += unitVectors[direction][1];
@@ -551,11 +546,6 @@ Shooter.prototype.move = function(direction){
 
 Shooter.prototype.justMove = function(direction){
   // move without changing direction.
-  for(var dx=0; dx<2; dx++){
-    for(var dy=0; dy<2; dy++){
-      showCellAt(this.x+dx, this.y+dy);
-    }
-  }
   this.x += unitVectors[direction][0];
   this.y += unitVectors[direction][1];
   this.show();
