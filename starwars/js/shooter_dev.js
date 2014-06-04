@@ -70,13 +70,13 @@ function init(){
   initialize();
   showGrid();
   showBorder();
-  canvas.addEventListener("mousedown", onMousePressed);
-  canvas.addEventListener("mouseup", onMouseReleased);
-  canvas.addEventListener("mousemove", onMouseMoved);
-  canvas.addEventListener("mouseout", onMouseGetOut);
-  canvas.addEventListener("touchstart", onTouchOn);
-  canvas.addEventListener("touchend", onTouchOff);
-  canvas.addEventListener("touchmove", onTouchMoved);
+  borderCanvas.addEventListener("mousedown", onMousePressed);
+  borderCanvas.addEventListener("mouseup", onMouseReleased);
+  borderCanvas.addEventListener("mousemove", onMouseMoved);
+  borderCanvas.addEventListener("mouseout", onMouseGetOut);
+  borderCanvas.addEventListener("touchstart", onTouchOn);
+  borderCanvas.addEventListener("touchend", onTouchOff);
+  borderCanvas.addEventListener("touchmove", onTouchMoved);
   window.onkeypress = control;
   myShooter = new Shooter(30,30,2);
   myShooter.show();
@@ -131,7 +131,7 @@ function putColor(mousePos){
   var posY = Math.floor(mousePos[1] / gridSize);
   if (mouseState !== null){
     currentGrid[posX][posY] = mouseState;
-    showSquareWithColorandGrid(posX,posY,colors[mouseState]);
+    showCellAt(posX,posY);
   }
 }
 
@@ -253,14 +253,6 @@ function showCellAt(x,y){
   ctx.fillStyle = colors[currentGrid[x][y]];
   ctx.fillRect(x*gridSize, y*gridSize,
                gridSize, gridSize);
-}
-
-function showSquareWithColorandGrid(x,y,fSt){
-  var oldFillStyle = ctx.fillStyle;
-  ctx.fillStyle = fSt;
-  ctx.fillRect(x*gridSize+lineWidth/2, y*gridSize+lineWidth/2,
-               gridSize-lineWidth, gridSize-lineWidth);
-  ctx.fillStyle = oldFillStyle;
 }
 // }}}
 
