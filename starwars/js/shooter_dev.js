@@ -443,7 +443,7 @@ function Shooter(x,y,direction,color){
   this.y = y;
   this.direction = direction; // <- [0,1,2,3]
   this.color0 = "#44FF55";  // front colour
-  this.color1 = "#aaaaaa";  // back colour
+  this.color1 = "#cccccc";  // back colour
   this.coolDownTime = 0
 }
 
