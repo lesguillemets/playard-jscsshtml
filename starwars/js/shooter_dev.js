@@ -404,7 +404,7 @@ function setMouseState(n){
 // }}}
 // }}}
 
-// {{{ border
+// border {{{
 function showBorder(){ // {{{
   // call only when you want grid to be shown.
   borderCtx.lineWidth = lineWidth;
@@ -434,16 +434,12 @@ function toggleBorder(){
     // erase and toggle
     eraseBorder();
   }
-  else { showBorder();}
+  else {showBorder();}
 }
 
 function borderButtonClicked(){
-  if (borderButton.checked){
-    showBorder();
-  }
-  else {
-    eraseBorder();
-  }
+  if (borderButton.checked){showBorder();}
+  else {eraseBorder();}
 }
 // }}}
 
@@ -460,42 +456,42 @@ function Shooter(x,y,direction,color){
 }
 
 Shooter.prototype.show = function(){
-  var oldFillStyle = ctx.fillStyle;
-  ctx.fillStyle = this.color0;
+  // first clear canvas
+  shooterCanvas.width =shooterCanvas.width;
+  shooterCtx.fillStyle = this.color0;
   var forward = unitVectors[this.direction];
   var hisright = unitVectors[(this.direction+1)%4];
-  ctx.fillRect((this.x)*gridSize,
+  shooterCtx.fillRect((this.x)*gridSize,
                (this.y)*gridSize,
                gridSize*2,
                gridSize*2);
-  ctx.fillStyle = this.color1;
+  shooterCtx.fillStyle = this.color1;
   switch (this.direction){
     case 0:
-      ctx.fillRect((this.x)*gridSize,
+      shooterCtx.fillRect((this.x)*gridSize,
                    (this.y+1)*gridSize,
                    gridSize*2,
                    gridSize);
       break;
     case 1:
-      ctx.fillRect((this.x)*gridSize,
+      shooterCtx.fillRect((this.x)*gridSize,
                    (this.y)*gridSize,
                    gridSize,
                    gridSize*2);
       break;
     case 2:
-      ctx.fillRect((this.x)*gridSize,
+      shooterCtx.fillRect((this.x)*gridSize,
                    (this.y)*gridSize,
                    gridSize*2,
                    gridSize);
       break;
     case 3:
-      ctx.fillRect((this.x+1)*gridSize,
+      shooterCtx.fillRect((this.x+1)*gridSize,
                    (this.y)*gridSize,
                    gridSize,
                    gridSize*2);
       break;
   }
-  ctx.fillStyle = oldFillStyle;
 };
 
 Shooter.prototype.shoot = function(){
