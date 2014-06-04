@@ -31,6 +31,9 @@
           Set
         </div>
       </div>
+      <div id="showBorder" class="container">
+        <form action=""><input type="checkbox" id="borderButton" value="show" onchange="borderButtonClicked()">Show border</form>
+      </div>
       <div class="container" id="mouseSetter">
         <pre id="state0" class="state" onclick="setMouseState(0)"></pre>
         <pre id="state1" class="state" onclick="setMouseState(1)"></pre>
@@ -38,7 +41,9 @@
         <pre id="state3" class="state" onclick="setMouseState(3)"></pre>
       </div>
     </div>
-    <canvas id="world" width="750" height="750" tabindex="1"></canvas>
+    <canvas class="mainCanvas" width="750" height="750" z="index:0" id="world"></canvas>
+    <canvas class="mainCanvas" width="750" height="750" z="index:1" id="shooterCanvas"></canvas>
+    <canvas class="mainCanvas" width="750" height="750" z="index:2" tabindex="1" id="borderCanvas"></canvas>
   </div>
 </body>
 </html>

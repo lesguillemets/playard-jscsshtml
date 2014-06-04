@@ -44,10 +44,14 @@ var colors = ["#000000", "#FF0000", "#FF8800", "#FFFF00"];
 var currentGrid;
 var canvas;
 var ctx;
+var shooterCanvas;
+var shooterCtx;
+var borderCanvas;
+var borderCtx;
 var canvwidth, canvheight;
 var width, height;
 var running = false;
-var isBorderShown = true;
+var borderButton;
 var timer;
 var mouseState = null;
 var mouseLocAsPos;
@@ -73,7 +77,7 @@ function init(){
   canvas.addEventListener("touchstart", onTouchOn);
   canvas.addEventListener("touchend", onTouchOff);
   canvas.addEventListener("touchmove", onTouchMoved);
-  canvas.onkeypress = control;
+  window.onkeypress = control;
   myShooter = new Shooter(30,30,2);
   myShooter.show();
 }
@@ -199,26 +203,6 @@ function control(e){
 }
 // }}}
 
-function showBorder(){ // {{{
-  // call only when you want grid to be shown.
-  var canv = document.getElementById("world");
-  var width = canv.width;
-  var height = canv.height;
-  var ctx = canv.getContext("2d");
-  ctx.lineWidth = lineWidth;
-  ctx.strokeStyle = "rgb(170,170,170)";
-  for (var x=0; x<width; x+=gridSize){
-    ctx.moveTo(x,0);
-    ctx.lineTo(x,height);
-  }
-  for (var y=0; y<height; y+=gridSize){
-    ctx.moveTo(0,y);
-    ctx.lineTo(width,y);
-  }
-  ctx.stroke();
-  ctx.lineWidth = 0;
-} //}}}
-
 // Main {{{
 // conditions {{{
 function willSpaun(n){
@@ -234,6 +218,11 @@ function willSurvive(n){
 function initialize(){
   canvas = document.getElementById("world");
   ctx = canvas.getContext("2d");
+  shooterCanvas = document.getElementById("shooterCanvas");
+  shooterCtx = shooterCanvas.getContext("2d");
+  borderCanvas = document.getElementById("borderCanvas");
+  borderCtx = borderCanvas.getContext("2d");
+  borderButton = document.getElementById("borderButton")
   canvWidth = canvas.width;
   canvHeight = canvas.height;
   width = Math.floor(canvWidth/gridSize);
@@ -352,7 +341,6 @@ function stopLoop(){
   running = false;
   isBorderShown = true;
   document.getElementById("toggleStart").innerHTML = "Start";
-  if(isBorderShown){showBorder();}
   myShooter.show();
 }
 
@@ -372,22 +360,17 @@ function setColors(){
     document.getElementById("state"+stateInd).style.background=color;
   }
   showGrid();
-  if(isBorderShown){ showBorder(); }
 }
 
 function stepForward(){
   if(running){ stopLoop(); }
   step();
-  if(isBorderShown){
-    showBorder();
-  }
 }
 
 function reset(){
   if(running){ stopLoop(); }
   initialize();
   showGrid();
-  if(isBorderShown){showBorder();}
 }
 
 function clearGrid(){
@@ -399,7 +382,6 @@ function clearGrid(){
   }
   canvas.width = canvas.width;
   showGrid();
-  if(isBorderShown){showBorder();}
 }
 
 function setMouseState(n){
@@ -420,6 +402,49 @@ function setMouseState(n){
   }
 }
 // }}}
+// }}}
+
+// {{{ border
+function showBorder(){ // {{{
+  // call only when you want grid to be shown.
+  borderCtx.lineWidth = lineWidth;
+  borderCtx.strokeStyle = "rgb(170,170,170)";
+  borderCtx.fillstyle = "rgba(0,0,0,0)";
+  for (var x=0; x<width*gridSize; x+=gridSize){
+    borderCtx.moveTo(x,0);
+    borderCtx.lineTo(x,height*gridSize);
+  }
+  for (var y=0; y<height*gridSize; y+=gridSize){
+    borderCtx.moveTo(0,y);
+    borderCtx.lineTo(width*gridSize,y);
+  }
+  borderCtx.stroke();
+  borderCtx.lineWidth = 0;
+  borderButton.checked = true;
+} //}}}
+
+function eraseBorder(){
+  borderCanvas.width = borderCanvas.width;
+  borderButton.checked = false;
+}
+
+function toggleBorder(){
+  if (borderButton.checked){
+    // currently the border is shown.
+    // erase and toggle
+    eraseBorder();
+  }
+  else { showBorder();}
+}
+
+function borderButtonClicked(){
+  if (borderButton.checked){
+    showBorder();
+  }
+  else {
+    eraseBorder();
+  }
+}
 // }}}
 
 // Shooter {{{
