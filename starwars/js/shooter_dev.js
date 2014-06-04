@@ -44,10 +44,14 @@ var colors = ["#000000", "#FF0000", "#FF8800", "#FFFF00"];
 var currentGrid;
 var canvas;
 var ctx;
+var shooterCanvas;
+var shooterCtx;
+var borderCanvas;
+var borderCtx;
 var canvwidth, canvheight;
 var width, height;
 var running = false;
-var isBorderShown = true;
+var borderButton;
 var timer;
 var mouseState = null;
 var mouseLocAsPos;
@@ -66,14 +70,14 @@ function init(){
   initialize();
   showGrid();
   showBorder();
-  canvas.addEventListener("mousedown", onMousePressed);
-  canvas.addEventListener("mouseup", onMouseReleased);
-  canvas.addEventListener("mousemove", onMouseMoved);
-  canvas.addEventListener("mouseout", onMouseGetOut);
-  canvas.addEventListener("touchstart", onTouchOn);
-  canvas.addEventListener("touchend", onTouchOff);
-  canvas.addEventListener("touchmove", onTouchMoved);
-  canvas.onkeypress = control;
+  borderCanvas.addEventListener("mousedown", onMousePressed);
+  borderCanvas.addEventListener("mouseup", onMouseReleased);
+  borderCanvas.addEventListener("mousemove", onMouseMoved);
+  borderCanvas.addEventListener("mouseout", onMouseGetOut);
+  borderCanvas.addEventListener("touchstart", onTouchOn);
+  borderCanvas.addEventListener("touchend", onTouchOff);
+  borderCanvas.addEventListener("touchmove", onTouchMoved);
+  window.onkeypress = control;
   myShooter = new Shooter(30,30,2);
   myShooter.show();
 }
@@ -127,7 +131,7 @@ function putColor(mousePos){
   var posY = Math.floor(mousePos[1] / gridSize);
   if (mouseState !== null){
     currentGrid[posX][posY] = mouseState;
-    showSquareWithColorandGrid(posX,posY,colors[mouseState]);
+    showCellAt(posX,posY);
   }
 }
 
@@ -199,26 +203,6 @@ function control(e){
 }
 // }}}
 
-function showBorder(){ // {{{
-  // call only when you want grid to be shown.
-  var canv = document.getElementById("world");
-  var width = canv.width;
-  var height = canv.height;
-  var ctx = canv.getContext("2d");
-  ctx.lineWidth = lineWidth;
-  ctx.strokeStyle = "rgb(170,170,170)";
-  for (var x=0; x<width; x+=gridSize){
-    ctx.moveTo(x,0);
-    ctx.lineTo(x,height);
-  }
-  for (var y=0; y<height; y+=gridSize){
-    ctx.moveTo(0,y);
-    ctx.lineTo(width,y);
-  }
-  ctx.stroke();
-  ctx.lineWidth = 0;
-} //}}}
-
 // Main {{{
 // conditions {{{
 function willSpaun(n){
@@ -234,6 +218,11 @@ function willSurvive(n){
 function initialize(){
   canvas = document.getElementById("world");
   ctx = canvas.getContext("2d");
+  shooterCanvas = document.getElementById("shooterCanvas");
+  shooterCtx = shooterCanvas.getContext("2d");
+  borderCanvas = document.getElementById("borderCanvas");
+  borderCtx = borderCanvas.getContext("2d");
+  borderButton = document.getElementById("borderButton")
   canvWidth = canvas.width;
   canvHeight = canvas.height;
   width = Math.floor(canvWidth/gridSize);
@@ -264,14 +253,6 @@ function showCellAt(x,y){
   ctx.fillStyle = colors[currentGrid[x][y]];
   ctx.fillRect(x*gridSize, y*gridSize,
                gridSize, gridSize);
-}
-
-function showSquareWithColorandGrid(x,y,fSt){
-  var oldFillStyle = ctx.fillStyle;
-  ctx.fillStyle = fSt;
-  ctx.fillRect(x*gridSize+lineWidth/2, y*gridSize+lineWidth/2,
-               gridSize-lineWidth, gridSize-lineWidth);
-  ctx.fillStyle = oldFillStyle;
 }
 // }}}
 
@@ -352,7 +333,6 @@ function stopLoop(){
   running = false;
   isBorderShown = true;
   document.getElementById("toggleStart").innerHTML = "Start";
-  if(isBorderShown){showBorder();}
   myShooter.show();
 }
 
@@ -372,22 +352,17 @@ function setColors(){
     document.getElementById("state"+stateInd).style.background=color;
   }
   showGrid();
-  if(isBorderShown){ showBorder(); }
 }
 
 function stepForward(){
   if(running){ stopLoop(); }
   step();
-  if(isBorderShown){
-    showBorder();
-  }
 }
 
 function reset(){
   if(running){ stopLoop(); }
   initialize();
   showGrid();
-  if(isBorderShown){showBorder();}
 }
 
 function clearGrid(){
@@ -399,7 +374,6 @@ function clearGrid(){
   }
   canvas.width = canvas.width;
   showGrid();
-  if(isBorderShown){showBorder();}
 }
 
 function setMouseState(n){
@@ -422,6 +396,45 @@ function setMouseState(n){
 // }}}
 // }}}
 
+// border {{{
+function showBorder(){ // {{{
+  // call only when you want grid to be shown.
+  borderCtx.lineWidth = lineWidth;
+  borderCtx.strokeStyle = "rgb(170,170,170)";
+  borderCtx.fillstyle = "rgba(0,0,0,0)";
+  for (var x=0; x<width*gridSize; x+=gridSize){
+    borderCtx.moveTo(x,0);
+    borderCtx.lineTo(x,height*gridSize);
+  }
+  for (var y=0; y<height*gridSize; y+=gridSize){
+    borderCtx.moveTo(0,y);
+    borderCtx.lineTo(width*gridSize,y);
+  }
+  borderCtx.stroke();
+  borderCtx.lineWidth = 0;
+  borderButton.checked = true;
+} //}}}
+
+function eraseBorder(){
+  borderCanvas.width = borderCanvas.width;
+  borderButton.checked = false;
+}
+
+function toggleBorder(){
+  if (borderButton.checked){
+    // currently the border is shown.
+    // erase and toggle
+    eraseBorder();
+  }
+  else {showBorder();}
+}
+
+function borderButtonClicked(){
+  if (borderButton.checked){showBorder();}
+  else {eraseBorder();}
+}
+// }}}
+
 // Shooter {{{
 function Shooter(x,y,direction,color){
   // Shooters have square bodies, thus currently
@@ -430,47 +443,47 @@ function Shooter(x,y,direction,color){
   this.y = y;
   this.direction = direction; // <- [0,1,2,3]
   this.color0 = "#44FF55";  // front colour
-  this.color1 = "#aaaaaa";  // back colour
+  this.color1 = "#cccccc";  // back colour
   this.coolDownTime = 0
 }
 
 Shooter.prototype.show = function(){
-  var oldFillStyle = ctx.fillStyle;
-  ctx.fillStyle = this.color0;
+  // first clear canvas
+  shooterCanvas.width =shooterCanvas.width;
+  shooterCtx.fillStyle = this.color0;
   var forward = unitVectors[this.direction];
   var hisright = unitVectors[(this.direction+1)%4];
-  ctx.fillRect((this.x)*gridSize,
+  shooterCtx.fillRect((this.x)*gridSize,
                (this.y)*gridSize,
                gridSize*2,
                gridSize*2);
-  ctx.fillStyle = this.color1;
+  shooterCtx.fillStyle = this.color1;
   switch (this.direction){
     case 0:
-      ctx.fillRect((this.x)*gridSize,
+      shooterCtx.fillRect((this.x)*gridSize,
                    (this.y+1)*gridSize,
                    gridSize*2,
                    gridSize);
       break;
     case 1:
-      ctx.fillRect((this.x)*gridSize,
+      shooterCtx.fillRect((this.x)*gridSize,
                    (this.y)*gridSize,
                    gridSize,
                    gridSize*2);
       break;
     case 2:
-      ctx.fillRect((this.x)*gridSize,
+      shooterCtx.fillRect((this.x)*gridSize,
                    (this.y)*gridSize,
                    gridSize*2,
                    gridSize);
       break;
     case 3:
-      ctx.fillRect((this.x+1)*gridSize,
+      shooterCtx.fillRect((this.x+1)*gridSize,
                    (this.y)*gridSize,
                    gridSize,
                    gridSize*2);
       break;
   }
-  ctx.fillStyle = oldFillStyle;
 };
 
 Shooter.prototype.shoot = function(){
@@ -521,11 +534,6 @@ function shoot(){
 }
 
 Shooter.prototype.move = function(direction){
-  for(var dx=0; dx<2; dx++){
-    for(var dy=0; dy<2; dy++){
-      showCellAt(this.x+dx, this.y+dy);
-    }
-  }
   if (direction === this.direction){
     this.x += unitVectors[direction][0];
     this.y += unitVectors[direction][1];
@@ -538,11 +546,6 @@ Shooter.prototype.move = function(direction){
 
 Shooter.prototype.justMove = function(direction){
   // move without changing direction.
-  for(var dx=0; dx<2; dx++){
-    for(var dy=0; dy<2; dy++){
-      showCellAt(this.x+dx, this.y+dy);
-    }
-  }
   this.x += unitVectors[direction][0];
   this.y += unitVectors[direction][1];
   this.show();

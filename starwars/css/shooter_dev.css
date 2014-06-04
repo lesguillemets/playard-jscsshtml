@@ -17,6 +17,18 @@ canvas#world {
     float:left;
 }
 
+.mainCanvas{
+    width: 750px;
+    height: 750px;
+    padding-left:0;
+    padding-right:0;
+    margin-left:2%;
+    margin-right:auto;
+    display: block;
+    float:left;
+    position: absolute;
+}
+
 .button {
     text-align:center;
     font-family: "Anonymous Pro", "Ubuntu Mono", "Monaco", monospace;
