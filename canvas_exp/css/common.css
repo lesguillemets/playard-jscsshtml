@@ -25,3 +25,7 @@
     box-shadow: 10px 10px 10px 10px rgba(200,200,220,30);
     margin: 30px;
 }
+
+.monosp{
+    font-family: monospace;
+}

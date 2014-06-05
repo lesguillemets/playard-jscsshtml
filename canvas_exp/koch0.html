@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Koch</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/fractal0.css">
+  <script src="./js/koch0.js"></script>
+</head>
+<body>
+  <p>
+    The idea and the default values are from <a href="http://www.saiensu.co.jp/?page=book_details&ISBN=ISBN4-7819-0489-0">this book</a>,
+    and the two equations are attributed to 畑正義.
+    <a href="https://sites.google.com/site/cinderellajapan/gao-xiao-shu-xue/fukuso/fractal/zai-gui-tu-xing">This page</a> provides some info.
+  </p>
+  <p>
+    Use firefox (not chrome) to be able to right-click to save to image. I intend to fix this (so that one can save image from chrome too).
+  </p>
+  <canvas id="viewer" width="300" height="300"></canvas>
+  <div class="container">
+    <form action="">
+      <div class="holder">
+        <pre>
+          f0(z) = az + b(z*)
+          f1(z) = c(z-1) + d(z* -1) +1
+        </pre>
+        <div class="monosp">
+          a = <input type="number" id="ar" value="0" step="any"> +
+            <input type="number" id="ai" value="0" step="any">i
+          <br />
+          b = <input type="number" id="br" value="0.5" step="any"> +
+            <input type="number" id="bi" value="0.2887" step="any">i
+          <br />
+          c = <input type="number" id="cr" value="0" step="any"> +
+            <input type="number" id="ci" value="0" step="any">i
+          <br />
+          d = <input type="number" id="dr" value="0.5" step="any"> +
+            <input type="number" id="di" value="-0.2887" step="any">i
+        </div>
+      </div>
+      <div class="holder">
+      view Settings<br />
+        xrange
+        <input type="number" id="xmin" step="any"value="0">
+        <input type="number" id="xmax" step="any"value="1">
+      </div>
+      <div class="holder">
+        yrange
+        <input type="number" id="ymin" step="any"value="0">
+        <input type="number" id="ymax" step="any"value="1">
+      </div>
+      <div class="holder">
+        level <input id="level" type="number" value="12"><br />
+        <p>warning: calculation time ~ 2**n</p>
+      </div>
+      <pre class="simplebutton" onclick="calcKoch()">Set&calc</pre>
+    </form>
+  </div>
+  <div class="container">
+    <form action="">
+      Set canvas size.<br />
+      Width: <input type="number" value="300" id="newWidth">
+      Height: <input type="number" value="300" id="newHeight">
+      <pre class="simplebutton" onclick="setCanvSize()">Change Size</pre>
+    </form>
+  </div>
+</body>
+</html>
