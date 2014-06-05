@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>fractal</title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/fractal0.css">
+  <script src="./js/fractal0.js"></script>
+</head>
+<body>
+  <canvas id="viewer" width="500" height="500"></canvas>
+  <div class="container">
+    <form action="">
+      <div class="holder">
+        z(n+1) = z(n)**2 + A <br />
+        A = <input type="number" id="re" value="-1.24" step="any">+
+        <input type="number" id="im" value="0.075" step="any">i
+      </div>
+      <div class="holder">
+        xrange
+        <input type="number" id="xmin" step="any"value="-0.3">
+        <input type="number" id="xmax" step="any"value="0.3">
+      </div>
+      <div class="holder">
+        yrange
+        <input type="number" id="ymin" step="any"value="-0.3">
+        <input type="number" id="ymax" step="any"value="0.3">
+      </div>
+      <div class="holder">
+        calc <input id="steps" type="number" value="500"> steps
+      </div>
+      <pre class="simplebutton" onclick="calcFrac()">Set&calc</pre>
+    </form>
+  </div>
+  <div class="container">
+    <form action="">
+      Set canvas size. Be careful: doubling the canvas will at least make the calculation 4 times longer.<br />
+      Width: <input type="number" value="500" id="newWidth">
+      Height: <input type="number" value="500" id="newHeight">
+      <pre class="simplebutton" onclick="setCanvSize()">Change Size</pre>
+    </form>
+  </div>
+  Default values are from <a href="http://www.saiensu.co.jp/?page=book_details&ISBN=ISBN4-7819-0489-0">this book</a>, which has many beautiful visualizations of other fractal patterns.
+</body>
+</html>
