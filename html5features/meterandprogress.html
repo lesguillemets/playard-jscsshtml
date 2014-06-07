@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="./css/meter.css">
+  <link rel="stylesheet" href="./css/progress.css">
+</head>
+<body>
+  <div class="container">
+    meter tag
+    <form id="meterForm" action="">
+      <ul>
+        <li><meter value="40" min="0" max="100">Value</meter> Normal</li>
+        <li><meter value="80" min="0" max="100" low="30" high="70">Value</meter> High</li>
+        <li><meter value="15" min="0" max="100" low="30" high="70">Value</meter> Low</li>
+        <li><meter value="40" min="0" max="100" optimum="80"></meter> With optimum</li>
+        <!-- viewable with css -->
+        <li><meter value="80" min="0" max="100" low="30" high="70" optimum="20">Value</meter> Way too high</li>
+      </ul>
+    </form>
+    Tweak with css..
+    <!-- http://css-tricks.com/html5-meter-element/ is a good start. -->
+    <form class="tweakedMeters" id="meterForm1" action="">
+      <ul>
+        <li><meter value="40" min="0" max="100">Value</meter> Normal</li>
+        <li><meter value="80" min="0" max="100" low="30" high="70">Value</meter> High</li>
+        <li><meter value="15" min="0" max="100" low="30" high="70">Value</meter> Low</li>
+        <li><meter value="40" min="0" max="100" optimum="80"></meter> With optimum</li>
+        <!-- viewable with css -->
+        <li><meter value="80" min="0" max="100" low="30" high="70" optimum="20">Value</meter> Way too high</li>
+      </ul>
+    </form>
+  </div>
+  <div class="container">
+    progress
+      <ul>
+        <li> <progress value="60" max="100"></progress> </li>
+        <li>
+          <progress max="100"></progress> intermediate
+        </li>
+        <li>
+          <progress class="reSet" value="70" max="100">reset</progress>
+        </li>
+        <li>
+          <progress class="tweak1" value="40" max="100">tweak1</progress>
+        </li>
+      </ul>
+  </div>
+</body>
+</html>

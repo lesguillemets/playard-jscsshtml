@@ -1,0 +1,12 @@
+.container {
+    margin: 10px;
+    padding:10px;
+    border: 1px black solid;
+    border-radius: 10px;
+}
+
+form.tweakedMeters meter{
+    -moz-appearance: meter;
+    -webkit-appearance:meter;
+    background:none;
+}
