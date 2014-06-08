@@ -4,6 +4,8 @@ var basePattern = [[0,2,1],[2,1,0],[1,0,2]];
 // var basePattern = [[0,1],[1,0]];
 var maxLevel = 3;
 var cubeSize = 5;
+var theta = 0;
+var cameraDistance = 500;
 
 window.onload = main
 
@@ -47,8 +49,10 @@ function init(){
 
 function animate(){
   requestAnimationFrame(animate);
-  camera.position.x += 5;
-  camera.position.y -= 10;
+  camera.position.x = (27*cubeSize/2)+Math.cos(theta*0.7)*cameraDistance*Math.sin(theta);
+  camera.position.y = (27*cubeSize/2)+Math.cos(theta*0.7)*cameraDistance*Math.cos(theta);
+  camera.position.z = (27*cubeSize/2)+Math.sin(theta*0.7)*cameraDistance;;
+  theta += 0.05;
   camera.lookAt(new THREE.Vector3(27*cubeSize/2,27*cubeSize/2,27*cubeSize/2));
   renderer.render(scene,camera);
 }
