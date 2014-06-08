@@ -26,7 +26,7 @@ function init(){
         new THREE.BoxGeometry(cubeSize,cubeSize,cubeSize),
         new THREE.MeshBasicMaterial(
           {color: HSVtoRGBNum(cubes.grid[x][y]/cubes.size,1,1),
-            wireframe:true}
+            wireframe:false}
         )
       );
       cube.position.x = x*cubeSize;
@@ -37,16 +37,16 @@ function init(){
     }
   }
   renderer = new THREE.CanvasRenderer();
+  renderer.setClearColorHex(0x000000, 1);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  
   document.body.appendChild(renderer.domElement);
   alert("done");
 }
 
 function animate(){
   requestAnimationFrame(animate);
-  camera.position.x += 1;
-  camera.position.y -= 2;
+  camera.position.x += 5;
+  camera.position.y -= 10;
   camera.lookAt(new THREE.Vector3(27*cubeSize/2,27*cubeSize/2,27*cubeSize/2));
   renderer.render(scene,camera);
 }
