@@ -1,6 +1,8 @@
 var scene, camera, renderer;
 var material
 var basePattern = [[0,2,1],[2,1,0],[1,0,2]];
+// var basePattern = [[0,1],[1,0]];
+var maxLevel = 3;
 var cubeSize = 5;
 
 window.onload = main
@@ -19,7 +21,7 @@ function init(){
   camera.position.y = 200;
   camera.position.z = 200;
   camera.lookAt(new THREE.Vector3(0,0,0));
-  var cubes = buildiCube(2);
+  var cubes = buildiCube(maxLevel-1);
   for(var x=0; x<cubes.size; x++){
     for(var y=0; y<cubes.size; y++){
       var cube = new THREE.Mesh(
