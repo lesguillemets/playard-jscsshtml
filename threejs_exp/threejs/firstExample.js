@@ -1,7 +1,7 @@
 var scene, camera, renderer;
 var geometry, material, mesh;
 
-window.onload = main
+window.onload = main;
 
 function main(){
   init();
