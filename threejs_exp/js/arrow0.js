@@ -17,6 +17,8 @@ function init(){
   camera.position.x = 500;
   camera.position.y = 500;
   camera.position.z = 500;
+  // This is the trick
+  // camera.up = new THREE.Vector3(0,0,1);
   camera.lookAt(O);
   
   var codir = new THREE.Vector3(1,0,0);
