@@ -126,7 +126,7 @@ function init(){
   var light = new THREE.PointLight(0x0ff070, 10, 1000);
   light.position.set(500, 500, 500);
   scene.add(light);
-  renderer = new THREE.CanvasRenderer();
+  renderer = Detector.webgl? new THREE.WebGLRenderer(): new THREE.CanvasRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.render(scene,camera);
   

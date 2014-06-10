@@ -40,7 +40,8 @@ function init(){
       scene.add(cube);
     }
   }
-  renderer = new THREE.CanvasRenderer();
+  //renderer = new THREE.canvasRenderer();
+  renderer = Detector.webgl? new THREE.WebGLRenderer(): new THREE.CanvasRenderer();
   renderer.setClearColorHex(0x000000, 1);
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
