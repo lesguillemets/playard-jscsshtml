@@ -9,6 +9,7 @@ window.onload = main;
 function main(){
   init();
   animate();
+  window.onkeypress = control;
 }
 
 function init(){
@@ -43,8 +44,8 @@ function animate(){
   for(var i=0; i<particles.geometry.vertices.length; i++){
     var p = particles.geometry.vertices[i];
     p.z -= v;
-    if (p.z < 0){
-      p.z = 500;
+    if (p.z < 0 || p.z > 500){
+      if(p.z<0){p.z = 500;}else{p.z=0};
       p.x = 500*Math.random();
       p.y = 500*Math.random();
     }
@@ -52,6 +53,19 @@ function animate(){
   particles.geometry.verticesNeedUpdate = true;
   renderer.render(scene,camera);
   requestAnimationFrame(animate);
+}
+
+function control(e){
+  switch (e.charCode){
+    case 119:
+    case 107:
+      v += 0.01;
+      break;
+    case 115:
+    case 106:
+      v -= 0.01;
+      break;
+  }
 }
 
 function setCamera(){
