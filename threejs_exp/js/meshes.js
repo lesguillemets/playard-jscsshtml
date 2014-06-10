@@ -5,7 +5,7 @@ var theta=0;
 var xCentre = 0;
 var O = new THREE.Vector3(0,0,0);
 
-window.onload = main
+window.onload = main;
 
 function main(){
   init();
