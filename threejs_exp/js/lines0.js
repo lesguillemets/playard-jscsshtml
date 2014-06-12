@@ -11,7 +11,8 @@ function main(){
 }
 
 function init(){
-  renderer = new THREE.WebGLRenderer();
+  //renderer = new THREE.WebGLRenderer();
+  renderer = Detector.webgl? new THREE.WebGLRenderer(): new THREE.CanvasRenderer();
   renderer.setSize(window.innerWidth,window.innerHeight);
   document.body.appendChild(renderer.domElement);
   
