@@ -7,7 +7,7 @@ var transformations = [
       [-0.15, 0.28 , 0.26 , 0.24, 0, 0.44],
       [0    , 0    , 0    , 0.16, 0, 0  ]
 ];
-var numberofDots = 100000;
+var numberofDots = 300000;
 var color = "rgb(0,255,89)";
 var canvas;
 
