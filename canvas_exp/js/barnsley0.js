@@ -13,8 +13,15 @@ var canvas;
 var probs = [0.85, 0.07, 0.07, 0.01];
 
 function init(){
+  for (var i=0; i<transformations.length; i++){
+    for (var j=0; j<transformations[i].length; j++){
+      var v = document.getElementById("var"+ i + j);
+      v.value = transformations[i][j];
+    }
+  }
   canvas = document.getElementById("fern")
   barnsley = new Barnsley(transformations, probs, [0,0], canvas, color);
+  document.getElementById("setrecalc").onclick = setRecalc;
   run();
 }
 
@@ -43,6 +50,9 @@ function Barnsley(transformations, probs, startPoint, canvas, color){
 }
 
 Barnsley.prototype.draw = function(n){
+  // for n=100000, takes about 30 ms to calc.
+  // takes additional 60 ms to render.
+  // using off-screen renderer does not change the time.
   this.ctx.clearRect(0,0,this.width,this.height);
   for (var i=0; i<n; i++){
     var transf = this.selectRandomTransformation();
@@ -63,4 +73,14 @@ Barnsley.prototype.selectRandomTransformation = function(){
       return this.transformations[i];
     }
   }
+}
+
+function setRecalc(){
+  for (var i=0; i<transformations.length; i++){
+    for (var j=0; j<transformations[i].length; j++){
+      barnsley.transformations[i][j] =
+        parseFloat(document.getElementById('var' + i + j).value);
+    }
+  }
+  barnsley.draw(100000);
 }

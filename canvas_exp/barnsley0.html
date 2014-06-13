@@ -4,9 +4,52 @@
   <meta charset="UTF-8">
   <title></title>
   <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/barnsley0.css">
   <script src="./js/barnsley0.js"></script>
 </head>
 <body>
   <canvas class="simple" id="fern" width="600" height="800"></canvas>
+  <div class="control">
+    v(n) = (a b \\ c d)v(n-1) + (e f)
+    <form action="">
+      <div class="container">
+        p=0.85
+        <input id="var00" class="variable" type="number" step="any">
+        <input id="var01" class="variable" type="number" step="any">
+        <input id="var02" class="variable" type="number" step="any">
+        <input id="var03" class="variable" type="number" step="any">
+        <input id="var04" class="variable" type="number" step="any">
+        <input id="var05" class="variable" type="number" step="any">
+      </div>
+      <div class="container">
+        p=0.07
+        <input id="var10" class="variable" type="number" step="any">
+        <input id="var11" class="variable" type="number" step="any">
+        <input id="var12" class="variable" type="number" step="any">
+        <input id="var13" class="variable" type="number" step="any">
+        <input id="var14" class="variable" type="number" step="any">
+        <input id="var15" class="variable" type="number" step="any">
+      </div>
+      <div class="container">
+        p=0.07
+        <input id="var20" class="variable" type="number" step="any">
+        <input id="var21" class="variable" type="number" step="any">
+        <input id="var22" class="variable" type="number" step="any">
+        <input id="var23" class="variable" type="number" step="any">
+        <input id="var24" class="variable" type="number" step="any">
+        <input id="var25" class="variable" type="number" step="any">
+      </div>
+      <div class="container">
+        p=0.01
+        <input id="var30" class="variable" type="number" step="any">
+        <input id="var31" class="variable" type="number" step="any">
+        <input id="var32" class="variable" type="number" step="any">
+        <input id="var33" class="variable" type="number" step="any">
+        <input id="var34" class="variable" type="number" step="any">
+        <input id="var35" class="variable" type="number" step="any">
+      </div>
+      <pre id="setrecalc" class="simplebutton">set & recalc</pre>
+    </form>
+  </div>
 </body>
 </html>
