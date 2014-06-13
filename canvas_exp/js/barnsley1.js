@@ -55,6 +55,7 @@ Barnsley.prototype.draw = function(n){
   // for n=100000, takes about 30 ms to calc.
   // takes additional 60 ms to render.
   // using off-screen renderer does not change the time.
+  this.points = new Array();
   this.ctx.clearRect(0,0,this.width,this.height);
   for (var i=0; i<n; i++){
     var transf = this.selectRandomTransformation();
