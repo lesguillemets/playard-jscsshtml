@@ -33,7 +33,7 @@ function init(){
   i++;
   
   // MeshDepthMaterial
-  material = new THREE.MeshDepthMaterial()
+  material = new THREE.MeshDepthMaterial();
   mesh = new THREE.Mesh(geometry, material);
   mesh.position.x += 150*i;
   meshes.push(mesh);

@@ -60,8 +60,10 @@ function setLights(){
   scene.add(light);
   
   var light = new THREE.DirectionalLight(0x555511,2);
+  light.position.x = -20;
+  light.position.y = -20;
   light.position.z = 20;
-  light.lookAt(40,40,0);
+  light.lookAt(new THREE.Vector3(0,-10,0));
   light.castShadow = true;
   scene.add(light);
 }
