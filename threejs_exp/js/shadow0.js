@@ -5,6 +5,7 @@ var roomFloor;
 var bottom;
 var O = new THREE.Vector3(0,0,0);
 var floorSize = 200;
+var boxes = [];
 
 window.onload = main
 
@@ -18,9 +19,9 @@ function init(){
   camera = new THREE.PerspectiveCamera(
     45, window.innerWidth/window.innerHeight, 1, 10000
   );
-  camera.position.x = 120;
+  camera.position.x = 220;
   camera.position.y = 0;
-  camera.position.z = 40;
+  camera.position.z = 80;
   camera.up = new THREE.Vector3(0,0,1);
   camera.lookAt(new THREE.Vector3(0,0,10));
   
@@ -61,22 +62,40 @@ function setLights(){
   var light = new THREE.AmbientLight(0x404040);
   // soft white light
   scene.add(light);
-  var light = new THREE.DirectionalLight(0x555511,4);
+  var light = new THREE.DirectionalLight(0x555511,2);
   light.position.x = -20;
   light.position.y = -20;
   light.position.z = 70;
-//   light.lookAt(new THREE.Vector3(0,-10,0));
   light.castShadow = true;
+  light.shadowDarkness = 1.0;
+  scene.add(light);
+  var light = new THREE.DirectionalLight(0x55ff11,1);
+  light.position.x = 20;
+  light.position.y = 20;
+  light.position.z = 120;
+  light.castShadow = true;
+  light.shadowDarkness = 0.8;
+  light.lookAt(new THREE.Vector3(0,0,0));
   scene.add(light);
 }
 
 function setWorld(){
   var mat = new THREE.MeshLambertMaterial();
-  var boxG = new THREE.BoxGeometry(20,20,20);
-  var box = new THREE.Mesh(boxG,mat);
-  box.position.z = 20;
-  box.castShadow = true;
-  scene.add(box);
+  var boxG = new THREE.BoxGeometry(3,3,3);
+  var box;
+  for (var i=0; i<20; i++){
+    for (var j=0; j<20; j++){
+      box = new THREE.Mesh(boxG,mat);
+      box.position.x = 10*i - 100;
+      box.position.y = 10*j - 100;
+      box.position.z = 30;
+      box.castShadow = true;
+      boxes.push(box);
+    }
+  }
+  for(var i=0; i<boxes.length; i++){
+    scene.add(boxes[i]);
+  }
 }
 
 function animate(){
