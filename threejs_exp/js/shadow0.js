@@ -67,14 +67,19 @@ function setLights(){
   light.position.y = -20;
   light.position.z = 70;
   light.castShadow = true;
-  light.shadowDarkness = 1.0;
+  light.shadowDarkness = 0.8;
+  light.shadowMapWidth = 4096;
+  light.shadowMapHeight = 4096;
   scene.add(light);
   var light = new THREE.DirectionalLight(0x55ff11,1);
   light.position.x = 20;
   light.position.y = 20;
   light.position.z = 120;
   light.castShadow = true;
-  light.shadowDarkness = 0.8;
+  light.shadowDarkness = 0.3;
+  light.shadowMapWidth = 4096;
+  light.shadowMapHeight = 4096;
+  light.shadowCameraVisible = true;
   light.lookAt(new THREE.Vector3(0,0,0));
   scene.add(light);
 }
