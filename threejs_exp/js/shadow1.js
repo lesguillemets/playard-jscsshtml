@@ -6,10 +6,10 @@ var dlight, slight;
 var bottom;
 var O = new THREE.Vector3(0,0,0);
 var floorSize = 100;
-var boxes = [];
 var theta = 0;
 var alpha = 30;
 var da = 0.2;
+var objects = []
 
 window.onload = main
 
@@ -103,22 +103,37 @@ function setWorld(){
   var box;
   box = new THREE.Mesh(boxG,mat);
   box.position.z = 4.5;
-  box.castShadow = true;
-  boxes.push(box);
-  for(var i=0; i<boxes.length; i++){
-    scene.add(boxes[i]);
+  box.rotation.z = 0.4;
+  objects.push(box);
+  
+  var sphereG = new THREE.SphereGeometry(5,32,32);
+  var sph = new THREE.Mesh(sphereG, mat);
+  sph.position.set(0,7,3);
+  objects.push(sph);
+  
+  var icosG = new THREE.IcosahedronGeometry(3);
+  var ico = new THREE.Mesh(icosG, mat);
+  ico.position.set(9,-7,2);
+  objects.push(ico);
+  
+  var cylG = new THREE.CylinderGeometry(2,2,4,32,32);
+  var cyl = new THREE.Mesh(cylG, mat);
+  cyl.position.set(8,9,2);
+  objects.push(cyl);
+  
+  for(var i=0; i<objects.length; i++){
+    objects[i].castShadow = true;
+    objects[i].receiveShadow = true;
+    scene.add(objects[i]);
   }
 }
 
 function animate(){
-  // requestAnimationFrame(animate);
-  // camera.position.x = alpha*Math.cos(theta);
-  // camera.position.y = alpha*Math.sin(theta);
-  // camera.position.z = alpha;
-  // camera.lookAt(O);
-  // theta += 0.01;
-  // alpha += da;
-  // if (theta>100){theta -= 20*Math.PI;}
-  // if (alpha>200){da = -da;}
-  // renderer.render(scene,camera);
+  requestAnimationFrame(animate);
+  for(var i=0; i<objects.length; i++){
+    objects[i].rotation.z = theta;
+  }
+  theta += 0.1;
+  if (theta>100){theta -= 20*Math.PI;}
+  renderer.render(scene,camera);
 }
