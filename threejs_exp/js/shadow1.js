@@ -77,16 +77,15 @@ function setLights(){ //{{{
   dlight.shadowCameraBottom = -100;
   scene.add(dlight);
   
-  slight = new THREE.SpotLight(0xccccff,10);
-  slight.position.set(-50,50,30);
-  slight.target.position.set(0,0,0);
+  // referred to : http://d.hatena.ne.jp/technohippy/20120726
+  slight = new THREE.SpotLight(0xccccff,0.1);
+  slight.position.set(-20,20,80);
+  slight.target = objects[3];
   slight.castShadow = true;
   slight.shadowMapWidth = 1024;
   slight.shadowMapHeight = 1024;
   slight.shadowCameraVisible = true;
-  slight.shadowCameraNear = 0;
-  slight.shadowCameraFar = 1000;
-  slight.shadowCameraFov = 40;
+  slight.angle = Math.PI/9;
   
   scene.add(slight);
 } //}}}
