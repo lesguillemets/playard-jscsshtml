@@ -1,14 +1,10 @@
 var scene, camera, renderer;
-var geometry, material;
-var walls = new Array();
 var roomFloor;
 var dlight, slight;
 var bottom;
 var O = new THREE.Vector3(0,0,0);
 var floorSize = 100;
 var theta = 0;
-var alpha = 30;
-var da = 0.2;
 var objects = []
 
 window.onload = main
@@ -18,7 +14,7 @@ function main(){
   animate();
 }
 
-function init(){
+function init(){ // {{{
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(
     65, window.innerWidth/window.innerHeight, 1, 10000
@@ -39,9 +35,9 @@ function init(){
   renderer.render(scene,camera);
   
   document.body.appendChild(renderer.domElement);
-}
+} //}}}
 
-function setFloor(){
+function setFloor(){ //{{{
   var floorMat = new THREE.MeshLambertMaterial(
     {color: 0xcccccc});
   var floorGeo = new THREE.PlaneGeometry(floorSize,floorSize);
@@ -60,9 +56,9 @@ function setFloor(){
   bottom = new THREE.Mesh(bottomGeo,bottomMat);
   bottom.position.z = -1;
   scene.add(bottom);
-}
+} //}}}
 
-function setLights(){
+function setLights(){ //{{{
   dlight = new THREE.DirectionalLight(0xbbbb88,1.5);
   dlight.position.x = -30;
   dlight.position.y = -30;
@@ -70,8 +66,8 @@ function setLights(){
   dlight.target.position.set(0,0,0);
   dlight.castShadow = true;
   dlight.shadowDarkness = 0.8;
-  dlight.shadowMapWidth = 1024;
-  dlight.shadowMapHeight = 1024;
+  dlight.shadowMapWidth = 2048;
+  dlight.shadowMapHeight = 2048;
   dlight.shadowCameraVisible = true;
   dlight.shadowCameraNear = 0;
   dlight.shadowCameraFar = 100;
@@ -93,9 +89,9 @@ function setLights(){
   slight.shadowCameraFov = 40;
   
   scene.add(slight);
-}
+} //}}}
 
-function setWorld(){
+function setWorld(){ //{{{
   var mat = new THREE.MeshLambertMaterial();
   mat.color.set(0x33aaee);
   mat.emissive.set(0x222277);
@@ -126,9 +122,9 @@ function setWorld(){
     objects[i].receiveShadow = true;
     scene.add(objects[i]);
   }
-}
+} //}}}
 
-function animate(){
+function animate(){ //{{{
   requestAnimationFrame(animate);
   for(var i=0; i<objects.length; i++){
     objects[i].rotation.z = theta;
@@ -136,4 +132,4 @@ function animate(){
   theta += 0.05;
   if (theta>100){theta -= 20*Math.PI;}
   renderer.render(scene,camera);
-}
+} //}}}
