@@ -94,6 +94,12 @@ function setWorld(){ //{{{
   var mat = new THREE.MeshLambertMaterial();
   mat.color.set(0x33aaee);
   mat.emissive.set(0x222277);
+  var shimat = new THREE.MeshPhongMaterial();
+  shimat.color.set(0x33efaa);
+  shimat.specular.set(0x22aa88);
+  shimat.emissive.set(0x93f1ed);
+  shimat.ambient.set(0x33ffaa);
+  
   var boxG = new THREE.BoxGeometry(3,3,9);
   var box;
   box = new THREE.Mesh(boxG,mat);
@@ -107,7 +113,7 @@ function setWorld(){ //{{{
   objects.push(sph);
   
   var icosG = new THREE.IcosahedronGeometry(3);
-  var ico = new THREE.Mesh(icosG, mat);
+  var ico = new THREE.Mesh(icosG, shimat);
   ico.position.set(9,-7,2);
   objects.push(ico);
   
