@@ -133,7 +133,7 @@ function animate(){
   for(var i=0; i<objects.length; i++){
     objects[i].rotation.z = theta;
   }
-  theta += 0.1;
+  theta += 0.05;
   if (theta>100){theta -= 20*Math.PI;}
   renderer.render(scene,camera);
 }
