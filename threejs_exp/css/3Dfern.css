@@ -1,0 +1,22 @@
+#display {
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+table#values {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table#values tr,th,td{
+    border: 1px solid black;
+    overflow: hidden;
+}
+
+table#values th,td{
+    width: 60px;
+}
+
+table input.var {
+    width: 60px;
+}
