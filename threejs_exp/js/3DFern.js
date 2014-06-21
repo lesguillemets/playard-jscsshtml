@@ -5,11 +5,13 @@ var height = 600;
 var O = new THREE.Vector3(0,0,0);
 var keyboardHandler;
 var oneStepDistance = 0.1;
-var oneStepRad = 0.01;
+var oneStepRad = 0.005;
+var oneStepFovRatio = 1.005;
 var cubeSize = 0.1;
 var ratio = 10;
 var times = 100000;
 var fern;
+var destroy = false;
 
 window.onload = main;
 
@@ -194,6 +196,14 @@ function feedKeyFunction(n){ //{{{
     case 65: // a : look up
       camera.rotation.z += oneStepRad;
       break;
+    case 90: // z : zoom in
+      camera.fov /= oneStepFovRatio;
+      camera.updateProjectionMatrix();
+      break;
+    case 88: // x : zoom out
+      camera.fov *= oneStepFovRatio;
+      camera.updateProjectionMatrix();
+      break;
     case 48: // 0 : look at the Origin
       camera.lookAt(O);
   }
@@ -245,10 +255,24 @@ function setInitialVars(){
   }
 }
 
-function animate(){
-  keyboardHandler.process();
-  renderer.render(scene,camera);
-  requestAnimationFrame(animate);
+function resetWorld(){
+  destroy = true;
+  scene = null;
+  fern = null;
+  scene = new THREE.Scene();
+  setCamera();
+  setLights();
+  setFloor();
+  fern = new Fern();
+  fern.createFern(times);
+  destroy = false;
+  animate();
 }
 
-
+function animate(){
+  if(!destroy){
+    keyboardHandler.process();
+    renderer.render(scene,camera);
+    requestAnimationFrame(animate);
+  }
+}
