@@ -54,7 +54,8 @@ function systemInit(){ //{{{
   window.onkeyup = function(e){keyboardHandler.keyUp(e)};
 } //}}}
 
-function Fern() {
+// Fern {{{
+function Fern() { // {{{
   this.valuesSet = false;
   this.pos = new THREE.Vector3(0.3,0.8,1);
   this.material = new THREE.ParticleBasicMaterial(
@@ -67,8 +68,9 @@ function Fern() {
   this.transformations = new Array();
   // m => THREE.Matrix3 , v => THREE.Vector3 -> [[m,v]]
 }
+//}}}
 
-Fern.prototype.createFern = function(n){
+Fern.prototype.createFern = function(n){ //{{{
   if (!this.valuesSet){
     this.setValues();
   }
@@ -78,8 +80,9 @@ Fern.prototype.createFern = function(n){
   }
   this.showMyself();
 }
+// }}}
 
-Fern.prototype.setValues = function(){
+Fern.prototype.setValues = function(){ // {{{
   this.transformations = new Array();
   for(var fn=0; fn<4; fn++){
     this.transformations.push(new Array());
@@ -104,25 +107,29 @@ Fern.prototype.setValues = function(){
     this.probs[i] = this.probs[i-1]+probs[i];
   }
 };
+// }}}
 
-Fern.prototype.showMyself = function(){
+Fern.prototype.showMyself = function(){ // {{{
   var particles = new THREE.ParticleSystem(this.dots, this.material);
   scene.add(particles);
 }
+// }}}
 
-Fern.prototype.plotDotHere = function(){
+Fern.prototype.plotDotHere = function(){ //{{{
   var p = this.pos.clone();
   p.multiplyScalar(ratio);
   this.dots.vertices.push(p);
 };
+// }}}
 
-Fern.prototype.moveNext = function(){
+Fern.prototype.moveNext = function(){ // {{{
   var t = this.chooseTrans();
   this.pos.applyMatrix3(t[0]);
   this.pos.add(t[1]);
 };
+// }}}
 
-Fern.prototype.chooseTrans = function(){
+Fern.prototype.chooseTrans = function(){ //{{{
   // :: () -> trans
   var r = Math.random();
   for (var i=0; i<this.probs.length; i++){
@@ -131,6 +138,8 @@ Fern.prototype.chooseTrans = function(){
     }
   }
 };
+// }}}
+// }}}
 
 // World initialisors {{{
 
