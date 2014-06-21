@@ -17,6 +17,7 @@ function main(){ //{{{
 }//}}}
 
 function init(){//{{{
+  alert("Use WASD to look around, \n arrow keys or hjkl to move.");
   worldInit();
   systemInit();
 } //}}}
@@ -52,15 +53,19 @@ function worldInit(){ //{{{
 function feedKeyFunction(n){ //{{{
   switch (n){
     case 37: // Left : move Left
+    case 72: // h : vi keybind
       camera.translateX(-oneStepDistance);
       break;
     case 38: // Up : move Forward
+    case 75: // k : vi keybind
       camera.translateZ(-oneStepDistance);
       break;
     case 39: // Right : move Right
+    case 76: // l : vi keybind
       camera.translateX(oneStepDistance);
       break;
     case 40: // Down : move Backword
+    case 74: // j : vi keybind
       camera.translateZ(oneStepDistance);
       break;
     case 87: // w : look Up
