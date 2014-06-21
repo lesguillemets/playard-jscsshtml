@@ -30,6 +30,7 @@ function init(){
   setLights();
   
   renderer = Detector.webgl? new THREE.WebGLRenderer(): new THREE.CanvasRenderer();
+  //renderer = Detector.webgl? new THREE.WebGLRenderer({preserveDrawingBuffer: true}): new THREE.CanvasRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.shadowMapEnabled = true;
   renderer.render(scene,camera);
