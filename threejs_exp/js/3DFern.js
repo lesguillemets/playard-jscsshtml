@@ -260,7 +260,7 @@ function resetWorld(){
   scene = null;
   fern = null;
   scene = new THREE.Scene();
-  setCamera();
+  // setCamera();
   setLights();
   setFloor();
   fern = new Fern();
