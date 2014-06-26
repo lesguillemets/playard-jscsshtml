@@ -144,20 +144,22 @@ function setFloor(){ // {{{
 } //}}}
 
 function setLights(){ //{{{
+  var light = new THREE.AmbientLight(0xffffff);
+  scene.add(light);
 } // }}}
 
 function setWorld(){ //{{{
   var boxG = new THREE.BoxGeometry(3,3,3);
   var box;
-  for (var x=0; x<32; x++){
-    for (var y=0; y<32; y++){
-      for(var z=0; z<32; z++){
+  for (var x=0; x<16; x++){
+    for (var y=0; y<16; y++){
+      for(var z=0; z<16; z++){
         var mat = new THREE.MeshBasicMaterial(
-          {color:x*8+y*8*256+z*8*256*256});
+          {color:x*16+y*16*256+z*16*256*256});
         box = new THREE.Mesh(boxG,mat);
-        box.position.x = 10*x - 160;
-        box.position.y = 10*y - 160;
-        box.position.z = 10*z - 160;
+        box.position.x = 10*x - 80;
+        box.position.y = 10*y - 80;
+        box.position.z = 10*z;
         boxes.push(box);
       }
     }
