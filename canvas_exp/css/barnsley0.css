@@ -5,3 +5,8 @@ div.control{
 .variable {
     width:70px;
 }
+
+ul.vars li {
+    list-style-type: none;
+    margin:20px;
+}

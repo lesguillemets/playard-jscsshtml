@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/barnsley0.css">
+  <script src="./js/lyapunov0.js"></script>
+</head>
+<body>
+  <a href="http://en.wikipedia.org/wiki/Lyapunov_fractal">Lyapunov fractal</a>
+  <div class="container">
+    <canvas class="simple" id="canv" width="500" height="500"></canvas>
+    <div class="control">
+      <ul class="vars">
+        <li>string :<input id="lyapString" type="text" value="AB"></li>
+        <li>xmin : <input id="xmin" type="number" step="any" value="2.0"></li>
+        <li>xmax : <input id="xmax" type="number" step="any" value="4.0"></li>
+        <li>ymin : <input id="ymin" type="number" step="any" value="2.0"></li>
+        <li>ymax : <input id="ymax" type="number" step="any" value="4.0"></li>
+        <li>N : <input id="N" type="number" step="1" value="500"></li>
+        <li>size : <input id="size" type="number" step="1" value="500"></li>
+        <li>threshold : <input id="threshold" type="number" step="any" value="100"></li>
+        <li><div class="simplebutton" id="calcButton">calc</div></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
