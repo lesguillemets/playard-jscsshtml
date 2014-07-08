@@ -23,13 +23,26 @@ function decodeFromNato(str){
 }
 
 function init(){
-  document.getElementById("button").onclick = main;
+  document.getElementById("encodeButton").onclick = encode;
+  document.getElementById("decodeButton").onclick = decode;
+  document.getElementById("clearButton").onclick = clear;
 }
 
-function main(){
+function encode(){
   var inText = document.getElementById("inText").value;
   var result = encodeToNato(inText);
   document.getElementById("outText").value += result;
+}
+
+function decode(){
+  var inText = document.getElementById("outText").value;
+  var result = decodeFromNato(inText);
+  document.getElementById("inText").value += result;
+}
+
+function clear(){
+  document.getElementById("outText").value = "";
+  document.getElementById("inText").value = "";
 }
 
 window.onload = init;
