@@ -63,4 +63,4 @@ Physics(function(world){
   // start the ticker
   Physics.util.ticker.start();
 
-});}();
+});};
