@@ -30,7 +30,7 @@ function main(){
       var graphFunc = d3.svg.line()
         .x(function(d) { return d.rainfall; })
         .y(function(d) {
-          console.log(tempConverter(d.temperature));
+          //console.log(tempConverter(d.temperature));
           return tempConverter(d.temperature);
         }).interpolate("linear-closed");
       
