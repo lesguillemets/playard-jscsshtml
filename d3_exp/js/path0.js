@@ -21,7 +21,7 @@ function main(){
   var walkFunc = d3.svg.line()
     .x(function(d) { return 12*d[0]; })
     .y(function(d) { return 12*d[1]; })
-    .interpolate('linear');
+    .interpolate('cardinal');
   
   var svgCont = d3.select("body").append("svg")
       .attr("width", width)
@@ -30,6 +30,6 @@ function main(){
   
   svgCont.append("path")
     .attr("d", walkFunc(data))
-    .attr("stroke", "blue")
-    .attr("fill", "none");
+    .style("stroke", "blue")
+    .style("fill", "none");
 }
