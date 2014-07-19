@@ -83,14 +83,14 @@ function main(){
         .enter().append('circle')
         .attr('cx', function(d){ return d.rainLoc;})
         .attr('cy', function(d){ return d.tempLoc; })
-        .attr('r',4)
+        .attr('r',3)
         .attr('title', function(d,i){
           var yearStr = (year === 'mean' ? '平年' : year + '年');
           var label = cityname + ", " + yearStr + " " + (i+1) + '月\n';
           label += d.rainfall + " mm, " + d.temperature + " ℃";
           return label;
         })
-        .style('fill', 'grey');
+        .style('fill', 'rgba(30,30,30,0.5)');
       }
     );
   } //}}}
@@ -98,10 +98,10 @@ function main(){
   //drawHyther("高知", 2013, 'hsl(180,80%,50%)');
   //drawHyther("釧路", 2013, 'hsl(90,80%,50%)');
   //drawHyther("新潟", 2013, 'hsl(270,80%,50%)');
-  drawHyther("旭川", "mean", 'blue');
-  drawHyther("札幌", "mean", 'red');
-  drawHyther("熊谷", "mean", 'green');
-  drawHyther("熊谷",2013, 'green');
+  drawHyther("旭川", "mean", 'hsla(0,80%,50%,0.8)');
+  drawHyther("札幌", "mean", 'hsla(40,80%,50%,0.8)');
+  drawHyther("熊谷", "mean", 'hsla(80,80%,50%,0.8)');
+  drawHyther("熊谷",2013, 'hsla(210,80%,50%,0.8)');
   
   function drawAxis(){ // {{{
     var xAxis = d3.svg.axis()
