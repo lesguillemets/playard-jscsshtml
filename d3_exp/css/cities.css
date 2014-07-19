@@ -3,13 +3,18 @@ ul {
 }
 
 ul.citylist{
+    border: 1px solid grey;
+    border-radius:10px;
+    margin:0px;
+    padding:5px;
     padding-top:10px;
+    padding-bottom:10px;
     width:30%;
     /* height:80vh; */
     position: absolute;
     top: 10%;
     bottom: 10%;
-    right:0%;
+    right:5%;
     overflow:auto;
 }
 
