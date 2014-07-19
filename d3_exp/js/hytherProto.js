@@ -45,20 +45,22 @@ function main(){
     d3.csv(
       dataFileName, type,
       function(error,data){
-        var city= chart.append("g").attr('id',dataFileName);
+        var city = chart.append("g").attr('id', cityname + ':' + year);
         var graphFunc = d3.svg.line()
         .x(function(d) { return d.rainLoc; })
         .y(function(d) { return d.tempLoc; })
         .interpolate("linear-closed");
         
         city.append("path")
-        .attr("d", graphFunc(data))
+        .attr('d', graphFunc(data))
+        .attr('id', "path " + cityname + ':' + year)
         .style("stroke", color)
         .style("stroke-width", 1.5)
         .style("fill", 'none');
         
         // FIXME Z0.0 degrees rendered as 20 degrees
-        var month = city.append("g").attr('id', "monthText");
+        var month = city.append("g")
+          .attr('id', "text " + cityname + ':' + year);
         month.selectAll('text').data(data)
         .enter().append('text')
         .attr('x', function(d){ return d.rainLoc;})
@@ -74,7 +76,8 @@ function main(){
         .text(function(d,i){ return i+1;});
         
         // TODO : points should ALWAYS be on the top.
-        var points = city.append("g").attr('id', "dataPoints");
+        var points = city.append("g")
+                      .attr('id', "dot "+cityname + ':' + year);
         points.selectAll('circle').data(data)
         .enter().append('circle')
         .attr('cx', function(d){ return d.rainLoc;})
