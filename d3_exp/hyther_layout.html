@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="./css/cities.css">
+</head>
+<body>
+ <svg width='500' height='500'></svg>
+<ul class="citylist" id="citylist">
+  <ul class="districts">
+    <li class="district" id="北海道地方">北海道
+      <ul class="prefs">
+        <li class="pref" id="北海道">北海道
+          <ul class="cities" id="cities_in_北海道">
+            <li class="city">
+              <input type="checkbox" name="city" value="札幌">札幌</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="函館">函館</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="熊石">熊石</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="室蘭">室蘭</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="日高">日高</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="中川">中川</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="旭川">旭川</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="美唄">美唄</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="稚内">稚内</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="網走">網走</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="広尾">広尾</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="帯広">帯広</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="根室">根室</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="羅臼">羅臼</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="釧路">釧路</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="羽幌">羽幌</input>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="district" id="東北地方">東北
+      <ul class="prefs">
+        <li class="pref" id="青森">青森
+          <ul class="cities" id="cities_in_青森">
+            <li class="city">
+              <input type="checkbox" name="city" value="青森">青森</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="八戸">八戸</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="大間">大間</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="深浦">深浦</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="岩手">岩手
+          <ul class="cities" id="cities_in_岩手">
+            <li class="city">
+              <input type="checkbox" name="city" value="盛岡">盛岡</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="宮古">宮古</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="大船渡">大船渡</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="宮城">宮城
+          <ul class="cities" id="cities_in_宮城">
+            <li class="city">
+              <input type="checkbox" name="city" value="仙台">仙台</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="築館">築館</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="秋田">秋田
+          <ul class="cities" id="cities_in_秋田">
+            <li class="city">
+              <input type="checkbox" name="city" value="秋田">秋田</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="角館">角館</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="山形">山形
+          <ul class="cities" id="cities_in_山形">
+            <li class="city">
+              <input type="checkbox" name="city" value="山形">山形</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="酒田">酒田</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="福島">福島
+          <ul class="cities" id="cities_in_福島">
+            <li class="city">
+              <input type="checkbox" name="city" value="福島">福島</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="只見">只見</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="白河">白河</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="小名浜">小名浜</input>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="district" id="関東地方">関東地方
+      <ul class="prefs">
+        <li class="pref" id="茨城">茨城
+          <ul class="cities" id="cities_in_茨城">
+            <li class="city">
+              <input type="checkbox" name="city" value="水戸">水戸</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="つくば(館野)">つくば(館野)</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="栃木">栃木
+          <ul class="cities" id="cities_in_栃木">
+            <li class="city">
+              <input type="checkbox" name="city" value="宇都宮">宇都宮</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="土呂部">土呂部</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="群馬">群馬
+          <ul class="cities" id="cities_in_群馬">
+            <li class="city">
+              <input type="checkbox" name="city" value="前橋">前橋</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="田代">田代</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="藤原">藤原</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="埼玉">埼玉
+          <ul class="cities" id="cities_in_埼玉">
+            <li class="city">
+              <input type="checkbox" name="city" value="さいたま">さいたま</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="熊谷">熊谷</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="千葉">千葉
+          <ul class="cities" id="cities_in_千葉">
+            <li class="city">
+              <input type="checkbox" name="city" value="千葉">千葉</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="銚子">銚子</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="勝浦">勝浦</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="東京">東京
+          <ul class="cities" id="cities_in_東京">
+            <li class="city">
+              <input type="checkbox" name="city" value="東京">東京</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="小河内">小河内</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="父島">父島</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="神奈川">神奈川
+          <ul class="cities" id="cities_in_神奈川">
+            <li class="city">
+              <input type="checkbox" name="city" value="横浜">横浜</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="小田原">小田原</input>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="district" id="中部地方">中部地方
+      <ul class="prefs">
+        <li class="pref" id="新潟">新潟
+          <ul class="cities" id="cities_in_新潟">
+            <li class="city">
+              <input type="checkbox" name="city" value="新潟">新潟</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="相川">相川</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="高田">高田</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="富山">富山
+          <ul class="cities" id="cities_in_富山">
+            <li class="city">
+              <input type="checkbox" name="city" value="富山">富山</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="南砺高宮">南砺高宮</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="石川">石川
+          <ul class="cities" id="cities_in_石川">
+            <li class="city">
+              <input type="checkbox" name="city" value="金沢">金沢</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="輪島">輪島</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="福井">福井
+          <ul class="cities" id="cities_in_福井">
+            <li class="city">
+              <input type="checkbox" name="city" value="福井">福井</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="敦賀">敦賀</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="小浜">小浜</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="山梨">山梨
+          <ul class="cities" id="cities_in_山梨">
+            <li class="city">
+              <input type="checkbox" name="city" value="甲府">甲府</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="南部">南部</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="長野">長野
+          <ul class="cities" id="cities_in_長野">
+            <li class="city">
+              <input type="checkbox" name="city" value="長野">長野</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="松本">松本</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="飯田">飯田</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="岐阜">岐阜
+          <ul class="cities" id="cities_in_岐阜">
+            <li class="city">
+              <input type="checkbox" name="city" value="岐阜">岐阜</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="八幡">八幡</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="神岡">神岡</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="静岡">静岡
+          <ul class="cities" id="cities_in_静岡">
+            <li class="city">
+              <input type="checkbox" name="city" value="静岡">静岡</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="浜松">浜松</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="三島">三島</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="愛知">愛知
+          <ul class="cities" id="cities_in_愛知">
+            <li class="city">
+              <input type="checkbox" name="city" value="名古屋">名古屋</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="伊良湖">伊良湖</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="三重">三重
+          <ul class="cities" id="cities_in_三重">
+            <li class="city">
+              <input type="checkbox" name="city" value="津">津</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="尾鷲">尾鷲</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="上野">上野</input>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="district" id="近畿地方">近畿地方
+      <ul class="prefs">
+        <li class="pref" id="滋賀">滋賀
+          <ul class="cities" id="cities_in_滋賀">
+            <li class="city">
+              <input type="checkbox" name="city" value="大津">大津</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="彦根">彦根</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="京都">京都
+          <ul class="cities" id="cities_in_京都">
+            <li class="city">
+              <input type="checkbox" name="city" value="京都">京都</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="舞鶴">舞鶴</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="大阪">大阪
+          <ul class="cities" id="cities_in_大阪">
+            <li class="city">
+              <input type="checkbox" name="city" value="大阪">大阪</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="熊取">熊取</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="兵庫">兵庫
+          <ul class="cities" id="cities_in_兵庫">
+            <li class="city">
+              <input type="checkbox" name="city" value="神戸">神戸</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="豊岡">豊岡</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="洲本">洲本</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="奈良">奈良
+          <ul class="cities" id="cities_in_奈良">
+            <li class="city">
+              <input type="checkbox" name="city" value="奈良">奈良</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="五條">五條</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="和歌山">和歌山
+          <ul class="cities" id="cities_in_和歌山">
+            <li class="city">
+              <input type="checkbox" name="city" value="和歌山">和歌山</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="潮岬">潮岬</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="龍神">龍神</input>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="district" id="中国地方">中国地方
+      <ul class="prefs">
+        <li class="pref" id="鳥取">鳥取
+          <ul class="cities" id="cities_in_鳥取">
+            <li class="city">
+              <input type="checkbox" name="city" value="鳥取">鳥取</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="米子">米子</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="島根">島根
+          <ul class="cities" id="cities_in_島根">
+            <li class="city">
+              <input type="checkbox" name="city" value="松江">松江</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="浜田">浜田</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="岡山">岡山
+          <ul class="cities" id="cities_in_岡山">
+            <li class="city">
+              <input type="checkbox" name="city" value="岡山">岡山</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="津山">津山</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="広島">広島
+          <ul class="cities" id="cities_in_広島">
+            <li class="city">
+              <input type="checkbox" name="city" value="広島">広島</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="福山">福山</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="高野">高野</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="山口">山口
+          <ul class="cities" id="cities_in_山口">
+            <li class="city">
+              <input type="checkbox" name="city" value="山口">山口</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="下関">下関</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="萩">萩</input>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="district" id="四国地方">四国地方
+      <ul class="prefs">
+        <li class="pref" id="徳島">徳島
+          <ul class="cities" id="cities_in_徳島">
+            <li class="city">
+              <input type="checkbox" name="city" value="徳島">徳島</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="京上">京上</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="香川">香川
+          <ul class="cities" id="cities_in_香川">
+            <li class="city">
+              <input type="checkbox" name="city" value="高松">高松</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="財田">財田</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="愛媛">愛媛
+          <ul class="cities" id="cities_in_愛媛">
+            <li class="city">
+              <input type="checkbox" name="city" value="松山">松山</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="宇和島">宇和島</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="高知">高知
+          <ul class="cities" id="cities_in_高知">
+            <li class="city">
+              <input type="checkbox" name="city" value="高知">高知</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="清水">清水</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="室戸岬">室戸岬</input>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="district" id="九州地方">九州
+      <ul class="prefs">
+        <li class="pref" id="福岡">福岡
+          <ul class="cities" id="cities_in_福岡">
+            <li class="city">
+              <input type="checkbox" name="city" value="福岡">福岡</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="黒木">黒木</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="佐賀">佐賀
+          <ul class="cities" id="cities_in_佐賀">
+            <li class="city">
+              <input type="checkbox" name="city" value="佐賀">佐賀</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="伊万里">伊万里</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="長崎">長崎
+          <ul class="cities" id="cities_in_長崎">
+            <li class="city">
+              <input type="checkbox" name="city" value="長崎">長崎</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="福江">福江</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="熊本">熊本
+          <ul class="cities" id="cities_in_熊本">
+            <li class="city">
+              <input type="checkbox" name="city" value="熊本">熊本</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="人吉">人吉</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="大分">大分
+          <ul class="cities" id="cities_in_大分">
+            <li class="city">
+              <input type="checkbox" name="city" value="大分">大分</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="日田">日田</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="宮崎">宮崎
+          <ul class="cities" id="cities_in_宮崎">
+            <li class="city">
+              <input type="checkbox" name="city" value="宮崎">宮崎</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="西米良">西米良</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="延岡">延岡</input>
+            </li>
+          </ul>
+        </li>
+        <li class="pref" id="鹿児島">鹿児島
+          <ul class="cities" id="cities_in_鹿児島">
+            <li class="city">
+              <input type="checkbox" name="city" value="鹿児島">鹿児島</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="屋久島">屋久島</input>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="district" id="沖縄地方">沖縄
+      <ul class="prefs">
+        <li class="pref" id="沖縄">沖縄
+          <ul class="cities" id="cities_in_沖縄">
+            <li class="city">
+              <input type="checkbox" name="city" value="那覇">那覇</input>
+            </li>
+            <li class="city">
+              <input type="checkbox" name="city" value="与那国島">与那国島</input>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</ul>
+</body>
+</html>

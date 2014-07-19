@@ -1,0 +1,24 @@
+ul {
+    list-style-type:none;
+}
+
+ul.citylist{
+    padding-top:10px;
+    width:30%;
+    /* height:80vh; */
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    right:0%;
+    overflow:auto;
+}
+
+li.city{
+    display: inline-block;
+}
+
+svg {
+    margin:20px;
+    margin-top:5%;
+    box-shadow: 10px 10px 10px 10px rgba(200,200,220,30);
+}
