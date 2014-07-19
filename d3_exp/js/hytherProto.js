@@ -106,21 +106,30 @@ function main(){
   function drawAxis(){ // {{{
     var xAxis = d3.svg.axis()
       .scale(rainConverter)
-      .tickSize(1).tickSubdivide(true);
+      .tickSize(-height);
+      //.tickSubdivide(true);
     
-    chart.append("g")
+    var x = chart.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + (ymargin+height) + ")")
     .call(xAxis);
     
+    x.selectAll('line')
+      .style("stroke", 'rgba(100,100,100,0.3)')
+      .style("stroke-width", 0.5);
+    
     var yAxis = d3.svg.axis()
-      .scale(tempConverter).tickSize(1).tickSubdivide(true)
+      .scale(tempConverter).tickSize(-width)
       .orient('left');
     
-    chart.append("g")
+    var y = chart.append("g")
     .attr("class", "y axis")
     .attr("transform", "translate(" + xmargin + ",0)")
     .call(yAxis);
+    
+    y.selectAll('line')
+      .style("stroke", 'rgba(100,100,100,0.3)')
+      .style("stroke-width", 0.5);
   } //}}}
   drawAxis();
 }
