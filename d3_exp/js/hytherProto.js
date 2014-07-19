@@ -16,12 +16,12 @@ function main(){
   var xmargin=50;
   var ymargin=50;
   var expectedMinTemp = -10;
-  var expectedMaxTemp = 40;
+  var expectedMaxTemp = 35;
   var expectedMinRainfall = 0;
   var expectedMaxRainfall = 500;
   
   var tempConverter // temperature -> coordinate
-    = d3.scale.linear().range([height+ymargin,0])
+    = d3.scale.linear().range([height+ymargin,ymargin])
                        .domain([
                          expectedMinTemp,
                          expectedMaxTemp
@@ -73,6 +73,7 @@ function main(){
           label += d.rainfall + " mm, " + d.temperature + " ℃";
           return label;
         })
+        .style('font-size','10px')
         .text(function(d,i){ return i+1;});
         
         // TODO : points should ALWAYS be on the top.
@@ -99,5 +100,27 @@ function main(){
   //drawHyther("新潟", 2013, 'hsl(270,80%,50%)');
   drawHyther("旭川", "mean", 'blue');
   drawHyther("札幌", "mean", 'red');
-  drawHyther("釧路", "mean", 'green');
+  drawHyther("熊谷", "mean", 'green');
+  drawHyther("熊谷",2013, 'green');
+  
+  function drawAxis(){ // {{{
+    var xAxis = d3.svg.axis()
+      .scale(rainConverter)
+      .tickSize(1).tickSubdivide(true);
+    
+    chart.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + (ymargin+height) + ")")
+    .call(xAxis);
+    
+    var yAxis = d3.svg.axis()
+      .scale(tempConverter).tickSize(1).tickSubdivide(true)
+      .orient('left');
+    
+    chart.append("g")
+    .attr("class", "y axis")
+    .attr("transform", "translate(" + xmargin + ",0)")
+    .call(yAxis);
+  } //}}}
+  drawAxis();
 }
