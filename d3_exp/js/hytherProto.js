@@ -20,13 +20,13 @@ function main(){
   var expectedMinRainfall = 0;
   var expectedMaxRainfall = 500;
   
-  var tempConverter
+  var tempConverter // temperature -> coordinate
     = d3.scale.linear().range([height+ymargin,0])
                        .domain([
                          expectedMinTemp,
                          expectedMaxTemp
                        ]);
-  var rainConverter
+  var rainConverter // rainfall -> coordinate
     = d3.scale.linear().range([xmargin, xmargin+width])
                        .domain([
                          expectedMinRainfall,
