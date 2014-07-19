@@ -90,8 +90,11 @@ function main(){
       }
     );
   } //}}}
-  drawHyther("京都", 2013,'hsl(0,80%,50%)');
-  drawHyther("高知", 2013, 'hsl(180,80%,50%)');
-  drawHyther("釧路", 2013, 'hsl(90,80%,50%)');
-  drawHyther("新潟", 2013, 'hsl(270,80%,50%)');
+  //drawHyther("京都", 2013,'hsl(0,80%,50%)');
+  //drawHyther("高知", 2013, 'hsl(180,80%,50%)');
+  //drawHyther("釧路", 2013, 'hsl(90,80%,50%)');
+  //drawHyther("新潟", 2013, 'hsl(270,80%,50%)');
+  drawHyther("旭川", "mean", 'blue');
+  drawHyther("札幌", "mean", 'red');
+  drawHyther("釧路", "mean", 'green');
 }
