@@ -1,6 +1,6 @@
 window.onload = setup;
 
-
+var world = {};
 function setupGraph(){
   // basic setup {{{
   var width=500;
@@ -30,6 +30,7 @@ function setupGraph(){
       .attr("width", width+2*xmargin)
       .attr("height",height+2*ymargin)
       .attr("class", 'chart')
+      .attr('id', "chart")
       .style("overflow", "visible");
   // }}}
   
@@ -38,7 +39,9 @@ function setupGraph(){
     d3.csv(
       dataFileName, type,
       function(error,data){
-        var city = chart.append("g").attr('id',"graph " +  cityname + ':' + year);
+        var city = chart.append("g")
+          .attr('id',"graph " +  cityname + ':' + year)
+          .attr('class', "cityGraph");
         var graphFunc = d3.svg.line()
         .x(function(d) { return d.rainLoc; })
         .y(function(d) { return d.tempLoc; })
@@ -120,6 +123,7 @@ function setupGraph(){
 }
 
 function setup(){
+  document.getElementById("reset").onclick = resetAll;
   // setup prefs (hide){{{
   var prefs = document.getElementsByClassName("pref");
   for (var i=0; i<prefs.length; i++){
@@ -147,7 +151,7 @@ function setup(){
   // }}}
   
   var drawHyther = setupGraph();
-  var colorpicker = new ColorPicker();
+  world.colorpicker = new ColorPicker();
   // setup cities (click to draw){{{
   function handleGraph(e){
     var cityname = e.target.value;
@@ -169,7 +173,7 @@ function setup(){
       }
       else {
         e.target.hasDrawn = true;
-        drawHyther(cityname,"mean", colorpicker.pick());
+        drawHyther(cityname,"mean", world.colorpicker.pick());
       }
     }
   }
@@ -212,4 +216,28 @@ ColorPicker.prototype.pick = function(){
     this.lightIndex = (this.lightIndex+1)%(this.lights.length);
   }
   return color;
+}
+
+ColorPicker.prototype.reset = function(){
+  this.hueIndex = 0;
+  this.hues = [0, 120, 240, 40, 160, 280, 80, 320, 200];
+  this.lights = [50,25];
+  this.lightIndex = 0;
+};
+
+function resetAll(){
+  // reset city checkboxes
+  var cities = document.getElementsByName("city");
+  for (var i=0; i<cities.length; i++){
+    var city = cities[i];
+    city.hasDrawn = false;
+    city.checked = false;
+  }
+  world.colorpicker.reset();
+  // reset svg
+  var svg = document.getElementById('chart');
+  var graphs = document.getElementsByClassName('cityGraph');
+  while(graphs.length != 0){
+    svg.removeChild(graphs[0]);
+  }
 }
