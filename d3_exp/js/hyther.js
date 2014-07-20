@@ -147,7 +147,10 @@ function setup(){
   // }}}
   
   var drawHyther = setupGraph();
-  var hue = 0;
+  var hueIndex = 0;
+  var hues = [0, 120, 240, 40, 160, 280, 80, 320, 200];
+  var lights = [100,50];
+  var lightIndex = 0;
   // setup cities (click to draw){{{
   function handleGraph(e){
     var cityname = e.target.value;
@@ -169,8 +172,13 @@ function setup(){
       }
       else {
         e.target.hasDrawn = true;
-        drawHyther(cityname,"mean", 'hsla(' + hue + ',80%,50%,0.8)');
-        hue += 40;
+        drawHyther(cityname,"mean",
+           'hsla(' + hues[hueIndex] + ',' + lights[lightIndex] + '%,50%,0.8)');
+        hueIndex++;
+        if (hueIndex === hues.length){
+          hueIndex = 0;
+          lightIndex = (lightIndex+1)%(lights.length);
+        }
       }
     }
   }
@@ -183,11 +191,8 @@ function setup(){
       return;
     };
   }
-  
   // }}}
-  
 }
-
 
 function formType(tempConv, rainConv){
   return function(d){
