@@ -147,10 +147,7 @@ function setup(){
   // }}}
   
   var drawHyther = setupGraph();
-  var hueIndex = 0;
-  var hues = [0, 120, 240, 40, 160, 280, 80, 320, 200];
-  var lights = [100,50];
-  var lightIndex = 0;
+  var colorpicker = new ColorPicker();
   // setup cities (click to draw){{{
   function handleGraph(e){
     var cityname = e.target.value;
@@ -172,13 +169,7 @@ function setup(){
       }
       else {
         e.target.hasDrawn = true;
-        drawHyther(cityname,"mean",
-           'hsla(' + hues[hueIndex] + ',' + lights[lightIndex] + '%,50%,0.8)');
-        hueIndex++;
-        if (hueIndex === hues.length){
-          hueIndex = 0;
-          lightIndex = (lightIndex+1)%(lights.length);
-        }
+        drawHyther(cityname,"mean", colorpicker.pick());
       }
     }
   }
@@ -202,4 +193,23 @@ function formType(tempConv, rainConv){
     d.rainLoc = Math.floor(rainConv(d.rainfall)*1000)/1000;
     return d;
   }
+}
+
+function ColorPicker(){
+  this.hueIndex = 0;
+  this.hues = [0, 120, 240, 40, 160, 280, 80, 320, 200];
+  this.lights = [50,25];
+  this.lightIndex = 0;
+}
+
+ColorPicker.prototype.pick = function(){
+  var color =
+    "hsla(" + this.hues[this.hueIndex] +
+    ',90%,' + this.lights[this.lightIndex] + "%,0.8)";
+  this.hueIndex++;
+  if (this.hueIndex === this.hues.length){
+    this.hueIndex = 0;
+    this.lightIndex = (this.lightIndex+1)%(this.lights.length);
+  }
+  return color;
 }
