@@ -45,7 +45,7 @@ function main(){
     d3.csv(
       dataFileName, type,
       function(error,data){
-        var city = chart.append("g").attr('id', cityname + ':' + year);
+        var city = chart.append("g").attr('id',"graph " +  cityname + ':' + year);
         var graphFunc = d3.svg.line()
         .x(function(d) { return d.rainLoc; })
         .y(function(d) { return d.tempLoc; })

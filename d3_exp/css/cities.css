@@ -2,13 +2,9 @@ ul {
     list-style-type:none;
 }
 
-ul.citylist{
+div.control{
     border: 1px solid grey;
     border-radius:10px;
-    margin:0px;
-    padding:5px;
-    padding-top:10px;
-    padding-bottom:10px;
     width:30%;
     /* height:80vh; */
     position: absolute;
@@ -16,6 +12,33 @@ ul.citylist{
     bottom: 10%;
     right:5%;
     overflow:auto;
+}
+
+ul.citylist{
+    margin:0px;
+    padding:0px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+li.district{
+    margin-left:-10px;
+    margin-top:4px;
+    margin-bottom:4px;
+}
+
+ul.prefs{
+    list-style-type:initial;
+    border-left: 6px solid rgba(50,50,50,0.2);
+    margin-left:20px;
+    padding-bottom:10px;
+    padding-left:5px
+}
+
+ul.cities{
+    margin-left:0.6em;
+    padding-left:0em;
+    border-left: 2px solid rgba(200,200,200,0.4);
 }
 
 li.city{
