@@ -133,6 +133,8 @@ function setupGraph(){ // {{{
 
 function setup(){ //{{{
   document.getElementById("reset").onclick = resetAll;
+  var yr = document.getElementById("year").value;
+  world.year = yr === "平年" ? 'mean' : yr.slice(0,4);
   document.getElementById("year").onchange = changeYear;
   // setup prefs (hide){{{
   var prefs = document.getElementsByClassName("pref");
@@ -271,7 +273,7 @@ function changeYear(e){ //{{{
 }
 // }}}
 
-function clearGraph(){
+function clearGraph(){ //{{{
   var svg = document.getElementById('chart');
   var graphs = document.getElementsByClassName('cityGraph');
   var colors = {};
@@ -284,4 +286,6 @@ function clearGraph(){
   console.log(colors);
   return colors;
 }
+// }}}
+
 // }}}
