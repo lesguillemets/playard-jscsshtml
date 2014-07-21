@@ -1,7 +1,10 @@
 window.onload = setup;
 
-var world = {};
-function setupGraph(){
+var world = {
+  year: "mean"
+};
+
+function setupGraph(){ // {{{
   // basic setup {{{
   var width=500;
   var height=500;
@@ -34,14 +37,19 @@ function setupGraph(){
       .style("overflow", "visible");
   // }}}
   
-  function drawHyther(cityname, year, color){ // {{{
+  function drawHyther(cityname, year, color, hidden){ // {{{
     var dataFileName = "./data/hyther/" + cityname + '/' + year + '.csv';
     d3.csv(
       dataFileName, type,
       function(error,data){
         var city = chart.append("g")
           .attr('id',"graph " +  cityname + ':' + year)
-          .attr('class', "cityGraph");
+          .attr('class', "cityGraph")
+          .attr('city', cityname)
+          .attr('year', year);
+        if (hidden){
+          city.style("display", "none");
+        }
         var graphFunc = d3.svg.line()
         .x(function(d) { return d.rainLoc; })
         .y(function(d) { return d.tempLoc; })
@@ -50,6 +58,7 @@ function setupGraph(){
         city.append("path")
         .attr('d', graphFunc(data))
         .attr('id', "path " + cityname + ':' + year)
+        .attr('class', 'hytherLine')
         .style("stroke", color)
         .style("stroke-width", 1.5)
         .style("fill", 'none');
@@ -120,10 +129,11 @@ function setupGraph(){
   } //}}}
   drawAxis();
   return drawHyther;
-}
+} //}}}
 
-function setup(){
+function setup(){ //{{{
   document.getElementById("reset").onclick = resetAll;
+  document.getElementById("year").onchange = changeYear;
   // setup prefs (hide){{{
   var prefs = document.getElementsByClassName("pref");
   for (var i=0; i<prefs.length; i++){
@@ -150,7 +160,7 @@ function setup(){
   }
   // }}}
   
-  var drawHyther = setupGraph();
+  world.drawHyther = setupGraph();
   world.colorpicker = new ColorPicker();
   // setup cities (click to draw){{{
   function handleGraph(e){
@@ -158,7 +168,7 @@ function setup(){
     if (!e.target.checked){
       // user unchecked. hide.
       document.getElementById(
-        "graph " + cityname + ":mean"
+        "graph " + cityname + ":" + world.year
       ).style.display = "none";
       return;
     }
@@ -168,12 +178,12 @@ function setup(){
         // this graph is already in the nodes.
         // let's just have it re-appear.
         document.getElementById(
-          "graph " + cityname + ":mean"
+          "graph " + cityname + ":" + world.year
         ).style.display = "initial";
       }
       else {
         e.target.hasDrawn = true;
-        drawHyther(cityname,"mean", world.colorpicker.pick());
+        world.drawHyther(cityname,world.year, world.colorpicker.pick());
       }
     }
   }
@@ -187,9 +197,12 @@ function setup(){
     };
   }
   // }}}
-}
+} //}}}
 
-function formType(tempConv, rainConv){
+
+// helper functions {{{
+
+function formType(tempConv, rainConv){ //{{{
   return function(d){
     d.rainfall = +d.rainfall;
     d.temperature = +d.temperature;
@@ -198,8 +211,9 @@ function formType(tempConv, rainConv){
     return d;
   }
 }
+// }}}
 
-function ColorPicker(){
+function ColorPicker(){ //{{{
   this.hueIndex = 0;
   this.hues = [0, 120, 240, 40, 160, 280, 80, 320, 200];
   this.lights = [50,25];
@@ -224,8 +238,9 @@ ColorPicker.prototype.reset = function(){
   this.lights = [50,25];
   this.lightIndex = 0;
 };
+// }}}
 
-function resetAll(){
+function resetAll(){ // {{{
   // reset city checkboxes
   var cities = document.getElementsByName("city");
   for (var i=0; i<cities.length; i++){
@@ -234,10 +249,39 @@ function resetAll(){
     city.checked = false;
   }
   world.colorpicker.reset();
-  // reset svg
-  var svg = document.getElementById('chart');
-  var graphs = document.getElementsByClassName('cityGraph');
-  while(graphs.length != 0){
-    svg.removeChild(graphs[0]);
+  clearGraph();
+}
+//}}}
+
+function changeYear(e){ //{{{
+  var year = e.target.value;
+  world.year = (year === "平年" ? "mean" : year.slice(0,4));
+  colors = clearGraph();
+  for (city in colors){
+    var checked = document.getElementById(city).checked;
+    if (checked){
+      // show it
+      world.drawHyther(city, world.year, colors[city])
+    }
+    else {
+      // draw background
+      world.drawHyther(city, world.year, colors[city], true)
+    }
   }
 }
+// }}}
+
+function clearGraph(){
+  var svg = document.getElementById('chart');
+  var graphs = document.getElementsByClassName('cityGraph');
+  var colors = {};
+  while(graphs.length != 0){
+    var graph = graphs[0];
+    colors[graph.attributes.city.value] =
+      graph.getElementsByClassName('hytherLine')[0].style.stroke;
+    svg.removeChild(graphs[0]);
+  }
+  console.log(colors);
+  return colors;
+}
+// }}}

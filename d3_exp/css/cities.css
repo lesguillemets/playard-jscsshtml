@@ -64,7 +64,7 @@ svg {
 }
 
 .button{
-    display: inline-box;
+    display: inline-block;
     width: 70px;
     text-align: center;
     background-color: rgba(200,200,200,0.7);
