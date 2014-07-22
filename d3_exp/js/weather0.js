@@ -11,7 +11,7 @@ function main(){
   var width= sqS * 60;
   var height = sqS * 7;
   
-  var x = d3.scale.linear().range([100,20]);
+  var x = d3.scale.linear().range([90,20]);
   
   var chart = d3.select(".chart")
       .attr("width", width)
@@ -31,6 +31,9 @@ function main(){
     
     grid.append("rect")
       .attr('width', gridSize).attr('height', gridSize)
+      .attr('title', function(d){
+        return d.date + "\n" + d.rain + " mm";
+      })
       .style('fill', function(d){
         if(d.rain > 0){
           return 'hsl(240,100%,' + x(d.rain) + '%)';
