@@ -29,12 +29,13 @@ function setupGraph(){ // {{{
                        ]);
   
   var type = formType(tempConverter, rainConverter);
-  var chart = d3.select("body").append("svg")
+  var chart = d3.select("div#container").append("svg")
       .attr("width", width+2*xmargin)
       .attr("height",height+2*ymargin)
       .attr("class", 'chart')
       .attr('id', "chart")
       .style("overflow", "visible");
+  var legend = d3.select("ul#legend");
   // }}}
   
   function drawHyther(cityname, year, color, hidden){ // {{{
@@ -42,6 +43,7 @@ function setupGraph(){ // {{{
     d3.csv(
       dataFileName, type,
       function(error,data){
+        var yearStr = (year === 'mean' ? '平年' : year + '年');
         var city = chart.append("g")
           .attr('id',"graph " +  cityname + ':' + year)
           .attr('class', "cityGraph")
@@ -73,7 +75,6 @@ function setupGraph(){ // {{{
         .attr('dx', 5)
         .attr('dy', -5)
         .attr('title', function(d,i){
-          var yearStr = (year === 'mean' ? '平年' : year + '年');
           var label = cityname + ", " + yearStr + " " + (i+1) + '月\n';
           label += d.rainfall + " mm, " + d.temperature + " ℃";
           return label;
@@ -90,12 +91,17 @@ function setupGraph(){ // {{{
         .attr('cy', function(d){ return d.tempLoc; })
         .attr('r',3)
         .attr('title', function(d,i){
-          var yearStr = (year === 'mean' ? '平年' : year + '年');
           var label = cityname + ", " + yearStr + " " + (i+1) + '月\n';
           label += d.rainfall + " mm, " + d.temperature + " ℃";
           return label;
         })
         .style('fill', 'rgba(30,30,30,0.5)');
+        
+        var l = legend.append('li')
+          .attr("id", "legend " +  cityname + ":" + year)
+          .attr("class", "legendcity")
+          .style("background-color", color)
+          .text(cityname + " : " + yearStr);
       }
     );
   } //}}}
@@ -172,6 +178,9 @@ function setup(){ //{{{
       document.getElementById(
         "graph " + cityname + ":" + world.year
       ).style.display = "none";
+      document.getElementById(
+        "legend " + cityname + ":" + world.year
+      ).style.display = "none";
       return;
     }
     else {
@@ -181,6 +190,9 @@ function setup(){ //{{{
         // let's just have it re-appear.
         document.getElementById(
           "graph " + cityname + ":" + world.year
+        ).style.display = "initial";
+        document.getElementById(
+          "legend " + cityname + ":" + world.year
         ).style.display = "initial";
       }
       else {
@@ -282,6 +294,10 @@ function clearGraph(){ //{{{
     colors[graph.attributes.city.value] =
       graph.getElementsByClassName('hytherLine')[0].style.stroke;
     svg.removeChild(graphs[0]);
+  }
+  var legends = document.getElementById("legend");
+  while(legends.firstChild){
+    legends.removeChild(legends.firstChild);
   }
   console.log(colors);
   return colors;
