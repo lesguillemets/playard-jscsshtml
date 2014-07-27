@@ -100,7 +100,7 @@ function setupGraph(){ // {{{
         var l = legend.append('li')
           .attr("id", "legend " +  cityname + ":" + year)
           .attr("class", "legendcity")
-          .style("background-color", color)
+          .style("background-color", color.replace(/0\.\d+\)/, '0.2)'))
           .text(cityname + " : " + yearStr);
       }
     );
