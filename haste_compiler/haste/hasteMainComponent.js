@@ -1,3 +1,5 @@
+// Main component produced by haste-compiler.
+// see also : ./haste_license
 // This object will hold all exports.
 var Haste = {};
 
