@@ -3,8 +3,8 @@ import Haste
 
 main = withElems ["inText", "outText"] reverserWords
 
-reverserWords [infield, outfield] = do
-    onEvent infield OnKeyUp $ \_ -> update
+reverserWords [infield, outfield] =
+    onEvent infield OnKeyUp $ const update
     where
         update = do
             intext <- getValue infield
