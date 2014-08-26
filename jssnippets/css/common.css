@@ -4,9 +4,10 @@
 
 .button {
     text-align:center;
-    font-family: "Anonymous Pro", "Ubuntu Mono", "Monaco", monospace;
+    font-family:"Ubuntu Mono", "Monaco", "Anonymous Pro", monospace;
     background-color: rgba(100,100,100,0.4);
     border-radius: 8px;
+    width:15em;
     padding:4px;
     margin-top:3px;
     margin-bottom:3px;
