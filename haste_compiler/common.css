@@ -5,3 +5,22 @@ canvas {
     display:block;
     box-shadow: 10px 10px 10px 10px rgba(200,200,220,30);
 }
+
+.button {
+    display: inline-box;
+    width: 100px;
+    text-align: center;
+    background-color: rgba(200,200,200,0.7);
+    border-radius: 4px;
+    margin:10px;
+    user-select: none;
+    -o-user-select:none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgba(150,150,140,0.7);
+}
