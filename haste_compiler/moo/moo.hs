@@ -1,13 +1,14 @@
--- import System.Random
 import qualified Haste
 import qualified Haste.DOM as DOM
+import Data.List (nub)
 
 digits = 5
 
 main = do
-    -- gen <- getStdGen
-    -- let answer = take digits (randomRs ('0','9') gen)
-    let answer = "52380"
+    gen <- Haste.newSeed
+    let
+        answer = makeAnswer gen digits
+    Haste.writeLog answer
     Haste.withElems ["input", "submit", "results"] (playmoo answer)
 
 playmoo answer [inp, subm, results] = do
@@ -21,6 +22,9 @@ playmoo answer [inp, subm, results] = do
 
 removeInvalid :: String -> String
 removeInvalid = filter ((`elem` ['0'..'9']))
+
+makeAnswer :: Haste.Seed -> Int -> String
+makeAnswer seed n = concat . map show . take n . nub $ ((Haste.randomRs (0,9) seed) ::[Int])
 
 tryWith:: String -> String -> (String,Int,Int)
 tryWith ans inp = (inp,hits,balls)
