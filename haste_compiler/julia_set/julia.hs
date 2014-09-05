@@ -2,8 +2,8 @@ import qualified Haste
 import qualified Haste.Graphics.Canvas as Cnv
 import Data.Complex
 
-width = 500 :: Int
-height = 500 :: Int
+width = 100 :: Int
+height = 100 :: Int
 xmin = -5 :: Double
 xmax = 5 :: Double
 ymin = -5 :: Double
