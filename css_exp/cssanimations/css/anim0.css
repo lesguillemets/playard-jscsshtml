@@ -1,0 +1,81 @@
+/* anim0 {{{ */
+.anim0{
+    position:relative;
+    animation: an0 5s 10;
+    -webkit-animation: an0 5s 10;
+}
+
+@keyframes an0 {
+    0%   {left:0px; top:0px;}
+    50%  {left:500px; top:0px;}
+    100% {left:0px; top:0px;}
+}
+
+@-webkit-keyframes an0 {
+    0%   {left:0px; top:0px;}
+    50%  {left:500px; top:0px;}
+    100% {left:0px; top:0px;}
+}
+/* }}} */
+
+/* anim1 {{{ */
+.anim1{
+    position:relative;
+    animation: an1 5s 10;
+    -webkit-animation: an1 5s 10;
+}
+
+@keyframes an1 {
+    0%   {left:0px; top:0px;}
+    50%  {left:500px; top:0px; border-radius:50%;}
+    100% {left:0px; top:0px;}
+}
+
+@-webkit-keyframes an1 {
+    0%   {left:0px; top:0px;}
+    50%  {left:500px; top:0px; border-radius:50%;}
+    100% {left:0px; top:0px;}
+}
+/* }}} */
+
+/* anim2 {{{ */
+.anim2{
+    position:relative;
+    animation: an2 5s 10;
+    -webkit-animation: an2 5s 10;
+}
+
+@keyframes an2 {
+    0%   {left:0px; top:0px;}
+    50%  {left:500px; top:0px; box-shadow:10px 10px 4px #333;}
+    100% {left:0px; top:0px;}
+}
+
+@-webkit-keyframes an2 {
+    0%   {left:0px; top:0px;}
+    50%  {left:500px; top:0px; box-shadow:10px 10px 4px #333;}
+    100% {left:0px; top:0px;}
+}
+/* }}} */
+
+/* anim3 {{{ */
+.anim3{
+    position:relative;
+    animation: an3 5s 10;
+    -webkit-animation: an3 5s 10;
+}
+
+@keyframes an3 {
+    0%   {left:0px; top:0px;}
+    50%  {left:500px; top:0px; transform:rotate(360deg);}
+    100% {left:0px; top:0px;}
+}
+
+@-webkit-keyframes an3 {
+    0%   {left:0px; top:0px;}
+    50%  {left:500px; top:0px; transform:rotate(360deg);}
+    100% {left:0px; top:0px;}
+}
+/* }}} */
+
+/* how can we combine several keyframes (with different easings, e.g.)? */

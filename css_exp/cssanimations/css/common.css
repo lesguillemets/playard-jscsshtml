@@ -1,0 +1,78 @@
+/* common css */
+
+/* shapes {{{ */
+.block{
+    width:80px;
+    height:80px;
+    line-height:80px;
+    text-align:center;
+}
+
+.circle{
+    border-radius:50%;
+}
+/* }}} */
+
+/* colors {{{ */
+.red{
+    background-color:red;
+    color:white;
+}
+
+.yellow{
+    background-color:yellow;
+}
+
+.green{
+    background-color:green;
+}
+
+.blue{
+    background-color:blue;
+    color:white;
+}
+
+.brown{
+    background-color:brown;
+    color:white;
+}
+
+.black{
+    background-color:black;
+    color:white;
+}
+
+.grey{
+    background-color:grey;
+}
+
+.purple{
+    background-color:purple;
+    color:white;
+}
+
+/* }}} */
+
+/* margins {{{*/
+.mar{
+    margin:10px;
+}
+
+.centre{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.right{
+    margin-left:auto;
+}
+
+/* }}} */
+
+/* interactions {{{ */
+.noselect{
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+/* }}} */
