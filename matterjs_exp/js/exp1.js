@@ -72,10 +72,10 @@ function createWalls(w, offset){ //{{{
   }
   
   Matter.World.add(w.engine.world,[
-      Matter.Bodies.rectangle(400, -offset, 800.5 + 2 * offset, 50.5, { isStatic: true, friction:0.01 }),
-      Matter.Bodies.rectangle(400, 600 + offset, 800.5 + 2 * offset, 50.5, { isStatic: true, friction:0.01 }),
-      Matter.Bodies.rectangle(800 + offset, 300, 50.5, 600.5 + 2 * offset, { isStatic: true, friction:0.01 }),
-      Matter.Bodies.rectangle(-offset, 300, 50.5, 600.5 + 2 * offset, { isStatic: true, friction:0.01 })
+      Matter.Bodies.rectangle(400, -offset, 800.5 + 2 * offset, 50.5, { isStatic: true, friction:0.01 , restitution:1}),
+      Matter.Bodies.rectangle(400, 600 + offset, 800.5 + 2 * offset, 50.5, { isStatic: true, friction:0.01, restitution:1 }),
+      Matter.Bodies.rectangle(800 + offset, 300, 50.5, 600.5 + 2 * offset, { isStatic: true, friction:0.01, restitution:1 }),
+      Matter.Bodies.rectangle(-offset, 300, 50.5, 600.5 + 2 * offset, { isStatic: true, friction:0.01, restitution:1 })
   ]);
 } // }}}
 
