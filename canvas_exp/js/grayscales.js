@@ -77,7 +77,7 @@
         toData[i-1] = 255;
       }
     }
-    toCtx.putImageData(toImgData,10,20);
+    toCtx.putImageData(toImgData,0,0);
     toCtx.drawImage(toCtx.canvas,0,0);
   }
   
