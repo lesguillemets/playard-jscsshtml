@@ -16,12 +16,15 @@
     var inputs = rgbVs.getElementsByTagName('input');
     if (document.getElementById('isNum').checked){
       var newType = 'number';
+      var newStep = 0.025;
     }
     else {
       var newType = 'range';
+      var newStep = 'any';
     }
     for (var i=0; inputs.length; i++){
       inputs[i].type = newType;
+      inputs[i].step = newStep;
     }
   }
   
