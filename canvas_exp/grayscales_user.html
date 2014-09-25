@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="./js/grayscales_user.js"></script>
+  <style>
+    .values{
+      font-family:"Ubuntu mono", "Monaco", "Fantasque sans mono" monospace;
+    }
+  </style>
+</head>
+<body>
+  <form action="">
+    <input id="fileinput" type="file">
+    <input type="button" id="submit" value="Load">
+  </form>
+  <div>
+    <p>
+      ↓元画像
+    </p>
+    <canvas id="canv"></canvas>
+  </div>
+  <div id="resultbox">
+    <p>
+      <input type="checkbox" value="isNum" id="isNum"> 数字で入力
+      <form action="" id="rgbValues">
+        <div id="r" class="values">
+         <input type="range" min='0' max='1' value='1' step="any" id="rvi">
+          *R + 
+          <pre id="rv"></pre>
+        </div>
+        <div id="g" class="values">
+          <input type="range" min='0' max='1' value='1' step="any" id="gvi">
+          *G + 
+          <pre id="gv"></pre>
+        </div>
+        <div id="b" class="values">
+          <input type="range" min='0' max='1' value='1' step="any" id="bvi">
+          *B
+          <pre id="bv"></pre><br />
+        </div>
+      </form>
+      <pre id="sumup"></pre>
+    </p>
+    <canvas id="result"></canvas>
+  </div>
+</body>
+</html>
