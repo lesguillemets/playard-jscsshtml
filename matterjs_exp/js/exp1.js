@@ -59,6 +59,8 @@ function setRenderOptions(w){ //{{{
   renderOptions.wireframes = false;
   renderOptions.showVelocity = true;
   renderOptions.showPositions = true;
+  renderOptions.showDebug = true;
+  renderOptions.showAngleIndicator = true;
   renderOptions.background = '#aaa';
   renderOptions.width = 800;
   renderOptions.height = 600; // not working?
