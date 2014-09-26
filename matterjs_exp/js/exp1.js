@@ -45,10 +45,10 @@ function addCircle(w){
     }
   )
   circle.render.fillStyle =
-    "rgb(" + 0 + circle.density*500*256
-  + circle.restitution/0.9*256;
+    "rgb(" + 0 + ',' +  Math.floor(circle.density*500*256)
+  + ',' + Math.floor(circle.restitution/0.9*256) + ")";
   circle.render.lineWidth=3;
-  console.log(circle);
+  console.log(circle.render.fillStyle);
   Matter.World.add(w.engine.world, circle);
 }
 
