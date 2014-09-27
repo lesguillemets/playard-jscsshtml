@@ -34,7 +34,7 @@
   
   function createPendulum(w){
     var circ = Matter.Bodies.circle(
-      500, 500, 10,// x, y, r,
+      600, 500, 10,// x, y, r,
       {
         density: 4,
         frictionAir: 0.001
