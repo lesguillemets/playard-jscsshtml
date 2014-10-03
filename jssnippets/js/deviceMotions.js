@@ -24,18 +24,18 @@ function init(){
       function(e){
         var acc = e.acceleration;
         var acc_g = e.accelerationIncludingGravity;
-        var x,y,z = [acc.x,acc.y,acc.z].map(
+        var xyz = [acc.x,acc.y,acc.z].map(
           function(i){
             return (i + '').slice(0,8);
         });
-        var gx,gy,gz = [acc_g.x,acc_g.y,acc_g.z].map(
+        var gxyz = [acc_g.x,acc_g.y,acc_g.z].map(
           function(i){
             return (i + '').slice(0,8);
         });
         motionbox.innerHTML =
-          'x: ' + x + '<br>' + 'y: ' + y + '<br>' + 'z: ' + z + '<br>\n'
+          'x: ' + xyz[0] + '<br>' + 'y: ' + xyz[1] + '<br>' + 'z: ' + xyz[2] + '<br>\n'
             + "gravity_________<br>\n"+
-          'gx: ' + gx + '<br>' + 'gy: ' + gy + '<br>' + 'gz: ' + gz + '<br>\n'
+          'gx: ' + gxyz[0] + '<br>' + 'gy: ' + gxyz[1] + '<br>' + 'gz: ' + gxyz[2] + '<br>\n'
         motionbox.innerHTML += "<br>";
       }
     );
