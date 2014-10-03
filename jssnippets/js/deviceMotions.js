@@ -18,29 +18,25 @@ function init(){
   if (window.DeviceMotionEvent !== undefined){
     document.getElementById('motion_issupported').innerHTML =
       "DeviceMotionEvent Supported.";
-    var motionbox = document.getElementById('motion_inner');
+    var orientbox = document.getElementById('motion_inner');
     window.addEventListener(
       "devicemotion",
       function(e){
         var acc = e.acceleration;
         var acc_g = e.accelerationIncludingGravity;
-//         var x,y,z = [acc.x,acc.y,acc.z].map(
-//           function(i){
-//             (i + '').slice(0,8);
-//         });
-//         var gx,gy,gz = [acc_g.x,acc_g.y,acc_g.z].map(
-//           function(i){
-//             (i + '').slice(0,8);
-//         });
-//         orientbox.innerHTML =
-//           x + '\n' + y + '\n' + z + '\n'
-//             + "gravity_________\n"+
-//           gx + '\n' + gy + '\n' + gz;
-//         orientbox.innerHTML += "<br>";
-        var k = Object.keys(e);
-        for (var i=0; i<k.length; k++){
-          orientbox.innerHTML += (e[k[i]] + '').slice(0,8);
-        }
+        var x,y,z = [acc.x,acc.y,acc.z].map(
+          function(i){
+            (i + '').slice(0,8);
+        });
+        var gx,gy,gz = [acc_g.x,acc_g.y,acc_g.z].map(
+          function(i){
+            (i + '').slice(0,8);
+        });
+        orientbox.innerHTML =
+          x + '\n' + y + '\n' + z + '\n'
+            + "gravity_________\n"+
+          gx + '\n' + gy + '\n' + gz;
+        orientbox.innerHTML += "<br>";
       }
     );
   }
