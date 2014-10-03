@@ -36,6 +36,8 @@ function init(){
           x + '\n' + y + '\n' + z + '\n'
             + "gravity_________\n"+
           gx + '\n' + gy + '\n' + gz;
+        orientbox.innerHTML += "<br>";
+        orientbox.innerHTML += Object.keys(e);
       }
     );
   }
