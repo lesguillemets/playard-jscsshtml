@@ -33,9 +33,9 @@ function init(){
             return (i + '').slice(0,8);
         });
         motionbox.innerHTML =
-          x + '\n' + y + '\n' + z + '<br>\n'
+          'x: ' + x + '<br>' + 'y: ' + y + '<br>' + 'z: ' + z + '<br>\n'
             + "gravity_________<br>\n"+
-          gx + '\n' + gy + '\n' + gz;
+          'gx: ' + gx + '<br>' + 'gy: ' + gy + '<br>' + 'gz: ' + gz + '<br>\n'
         motionbox.innerHTML += "<br>";
       }
     );
