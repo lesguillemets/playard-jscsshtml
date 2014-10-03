@@ -26,11 +26,11 @@ function init(){
         var acc_g = e.accelerationIncludingGravity;
         var x,y,z = [acc.x,acc.y,acc.z].map(
           function(i){
-            (i + '').slice(0,8);
+            return (i + '').slice(0,8);
         });
         var gx,gy,gz = [acc_g.x,acc_g.y,acc_g.z].map(
           function(i){
-            (i + '').slice(0,8);
+            return (i + '').slice(0,8);
         });
         motionbox.innerHTML =
           x + '\n' + y + '\n' + z + '<br>\n'
