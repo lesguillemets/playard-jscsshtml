@@ -18,7 +18,7 @@ function init(){
   if (window.DeviceMotionEvent !== undefined){
     document.getElementById('motion_issupported').innerHTML =
       "DeviceMotionEvent Supported.";
-    var orientbox = document.getElementById('motion_inner');
+    var motionbox = document.getElementById('motion_inner');
     window.addEventListener(
       "devicemotion",
       function(e){
@@ -32,11 +32,11 @@ function init(){
           function(i){
             (i + '').slice(0,8);
         });
-        orientbox.innerHTML =
-          x + '\n' + y + '\n' + z + '\n'
-            + "gravity_________\n"+
+        motionbox.innerHTML =
+          x + '\n' + y + '\n' + z + '<br>\n'
+            + "gravity_________<br>\n"+
           gx + '\n' + gy + '\n' + gz;
-        orientbox.innerHTML += "<br>";
+        motionbox.innerHTML += "<br>";
       }
     );
   }
