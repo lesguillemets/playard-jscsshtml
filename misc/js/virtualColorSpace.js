@@ -33,7 +33,7 @@
     }
     if (v >= 0.5 && currentColor === 'white'){
       document.body.style.color = "black";
-      currentColor = black;
+      currentColor = "black";
     }
   }
   
