@@ -29,7 +29,7 @@
       show_abg(e) + show_hvs(h,v,s) + show_rgb(rgb);
     if (v < 0.5 && currentColor === 'black'){
       document.body.style.color = "white";
-      currentColor = white;
+      currentColor = "white";
     }
     if (v >= 0.5 && currentColor === 'white'){
       document.body.style.color = "black";
