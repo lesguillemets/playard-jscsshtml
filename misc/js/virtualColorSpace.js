@@ -37,8 +37,8 @@
   
   function show_abg(e){
     var a = ('' + e.alpha).slice(0,5);
-    var b = ((e.beta<0? '-': ' ') + Math.abs(e.beta)).slice(0,5);
-    var g = ((e.gamma<0? '-': ' ') + Math.abs(e.gamma)).slice(0,5);
+    var b = ((e.beta<0? '-': '&nbsp;') + Math.abs(e.beta)).slice(0,5);
+    var g = ((e.gamma<0? '-': '&nbsp;') + Math.abs(e.gamma)).slice(0,5);
     return (
       "alpha: " + a + "<br>" +
       "beta:  " + b + "<br>" +
