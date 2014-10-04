@@ -16,6 +16,8 @@
     document.body.style.backgroundColor = 'rgb('+r+','+g+','+b+')';
   }
   
+  var currentColor = 'black';
+  
   function update(e){
     var h = Math.floor(e.alpha); // 0 <= h <= 360
     var v = betaToValue(e.beta);
@@ -25,8 +27,13 @@
     
     document.body.innerHTML = 
       show_abg(e) + show_hvs(h,v,s) + show_rgb(rgb);
-    if (v < 0.5){
+    if (v < 0.5 && currentColor === 'black'){
       document.body.style.color = "white";
+      currentColor = white;
+    }
+    if (v >= 0.5 && currentColor === 'white'){
+      document.body.style.color = "black";
+      currentColor = black;
     }
   }
   
@@ -40,8 +47,8 @@
   
   function show_abg(e){
     var a = ('' + e.alpha).slice(0,5);
-    var b = (e.beta<0? '-': '&nbsp;') + (''+Math.abs(e.beta)).slice(0,3);
-    var g = (e.gamma<0? '-': '&nbsp;') + (''+Math.abs(e.gamma)).slice(0,3);
+    var b = (e.beta<0? '-': '&nbsp;') + (''+Math.abs(e.beta)).slice(0,5);
+    var g = (e.gamma<0? '-': '&nbsp;') + (''+Math.abs(e.gamma)).slice(0,5);
     return (
       "alpha: " + a + "<br>" +
       "beta:  " + b + "<br>" +
