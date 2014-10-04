@@ -24,6 +24,8 @@ function init(){
       function(e){
         var acc = e.acceleration;
         var acc_g = e.accelerationIncludingGravity;
+        // acc { x:x, y:y, z:z}, same for acc_g
+        // truncate to 8 digits
         var xyz = [acc.x,acc.y,acc.z].map(
           function(i){
             return (i + '').slice(0,8);
@@ -32,6 +34,7 @@ function init(){
           function(i){
             return (i + '').slice(0,8);
         });
+        // update
         motionbox.innerHTML =
           'x: ' + xyz[0] + '<br>' + 'y: ' + xyz[1] + '<br>' + 'z: ' + xyz[2] + '<br>\n'
             + "gravity_________<br>\n"+
