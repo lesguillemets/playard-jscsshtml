@@ -25,6 +25,9 @@
     
     document.body.innerHTML = 
       show_abg(e) + show_hvs(h,v,s) + show_rgb(rgb);
+    if (v < 0.5){
+      document.body.style.color = "white";
+    }
   }
   
   function betaToValue(b){
@@ -37,8 +40,8 @@
   
   function show_abg(e){
     var a = ('' + e.alpha).slice(0,5);
-    var b = ((e.beta<0? '-': '&nbsp;') + Math.abs(e.beta)).slice(0,5);
-    var g = ((e.gamma<0? '-': '&nbsp;') + Math.abs(e.gamma)).slice(0,5);
+    var b = (e.beta<0? '-': '&nbsp;') + (''+Math.abs(e.beta)).slice(0,3);
+    var g = (e.gamma<0? '-': '&nbsp;') + (''+Math.abs(e.gamma)).slice(0,3);
     return (
       "alpha: " + a + "<br>" +
       "beta:  " + b + "<br>" +
