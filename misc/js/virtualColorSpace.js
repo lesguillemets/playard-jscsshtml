@@ -28,7 +28,7 @@
   }
   
   function betaToValue(b){
-    return ((Math.floor(Math.abs(b-90)))%90) / 90;
+    return Math.abs(Math.abs(b)-90)/90;
   }
   
   function gammaToSat(g){
