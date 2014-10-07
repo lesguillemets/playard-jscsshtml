@@ -1,7 +1,7 @@
 var scene, camera, renderer;
 var geometry, material, line;
 var plane;
-var pmat
+var pmat;
 
 window.onload = main;
 
@@ -21,7 +21,7 @@ function init(){
   camera.position.set(100,50,100);
   camera.lookAt(new THREE.Vector3(0,0,0));
   
-  scene = new THREE.Scene;
+  scene = new THREE.Scene();
   
   material = new THREE.LineBasicMaterial(
     { color: 0x0000ff }
@@ -47,7 +47,7 @@ function init(){
   line = new THREE.Line(geometry, material);
   scene.add(line);
   material = new THREE.MeshBasicMaterial({color:0x00ffff});
-  mesher = new THREE.Mesh(geometry,material)
+  mesher = new THREE.Mesh(geometry,material);
   scene.add(mesher);
   
   var pgeo = new THREE.PlaneGeometry( 100, 100, 50,50);
