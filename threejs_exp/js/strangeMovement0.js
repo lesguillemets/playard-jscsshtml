@@ -53,6 +53,8 @@
     if (r===undefined){ r = 10;} // radius
     if (m===undefined){
       m = new THREE.MeshLambertMaterial( {
+        transparent:true,
+        opacity:0.7
       });
     } // material
     var spheregeo = new THREE.SphereGeometry(r, 32,32);
