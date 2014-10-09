@@ -20,7 +20,7 @@
       35, window.innerWidth/window.innerHeight, 1, 4000
     );
     camera.position.set(50,100,50);
-    camera.up = new THREE.Vector3(0,1,0);
+    camera.up = new THREE.Vector3(0,0,1);
     camera.lookAt(O);
   }
   
@@ -47,7 +47,7 @@
     });
     
     var plane = new THREE.Mesh(geo,material);
-    plane.position.set(0,-10,0);
+    plane.position.set(0,0,0);
     scene.add(plane);
   } //}}}
   
