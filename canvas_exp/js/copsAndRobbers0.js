@@ -3,92 +3,112 @@
     document.getElementById('button').addEventListener('click',main);
   });
   
-  var spf = 1000/60;
-  var prevTimeStamp = 0;
-  var currentsCanv, currentsCtx, lociCanv, lociCtx;
-  var width,height;
-  var numberOfCops = 85;
-  var numberOfRobbers = 100;
-  var cops = [], robbers = [];
-  var colors = {
-    cops: {
-      currents : 'rgb(0,100,255)',
-      loci : 'rgba(0,70,200,0.7)'
-    },
-    robbers: {
-      currents : 'rgb(255,100,0)',
-      loci : 'rgba(200,70,0,0.7)'
-    }
-  };
-  var circleRadius = 3;
-  var strokeWidth = 1;
-  // pxcels per msec.
-  // 10 sec for 600 px.
-  var copsMaxSpeed = 0.03;
-  var robbersMaxSpeed = 0.031;
+  var world = { //{{{
+    options: { //{{{
+      spf : 1000/60, // (milli)secs per frame
+      numberOfCops : 85,
+      numberOfRobbers : 100,
+      colors : {
+        cops: {
+          currents : 'rgb(0,100,255)',
+          loci : 'rgba(0,70,200,0.7)'
+        },
+        robbers: {
+          currents : 'rgb(255,100,0)',
+          loci : 'rgba(200,70,0,0.7)'
+        }
+      },
+      circleRadius : 3,
+      strokeWidth: 1,
+      copsMaxSpeed : 0.03,
+      robbersMaxSpeed : 0.031
+    }, //}}}
+    
+    actors : { //{{{
+      cops : [],
+      robbers : []
+    }, //}}}
+    
+    vars : { //{{{
+      prevTimeStamp : 0,
+      width : null,
+      height: null
+    }, //}}}
+    
+    canvas : { //{{{
+      currentsCanv: null,
+      currentsCtx: null,
+      lociCanv: null,
+      lociCtx: null
+    } //}}}
+  }; //}}}
   
   function main(){
-    setup();
-    mainLoop();
+    setup(world);
+    mainLooper(world)();
   }
   
-  function setup(){
+  function setup(w){
     // get doms
-    currentsCanv = document.getElementById('currents');
-    currentsCtx = currentsCanv.getContext('2d');
-    lociCanv = document.getElementById('loci');
-    lociCtx = lociCanv.getContext('2d');
-    lociCtx.lineWidth = strokeWidth;
+    w.canvas.currentsCanv = document.getElementById('currents');
+    w.canvas.currentsCtx = w.canvas.currentsCanv.getContext('2d');
+    w.canvas.lociCanv = document.getElementById('loci');
+    w.canvas.lociCtx = w.canvas.lociCanv.getContext('2d');
+    w.canvas.lociCtx.lineWidth = w.options.strokeWidth;
     // world width and height
-    width = lociCanv.width;
-    height = lociCanv.height;
+    w.vars.width = w.canvas.lociCanv.width;
+    w.vars.height = w.canvas.lociCanv.height;
     // players, get ready!
-    _scatterCops();
-    _scatterRobbers();
+    _scatterCops(w);
+    _scatterRobbers(w);
   }
   
 // functions under setup {{{
-  function _scatterCops(){//{{{
-    for (var i=0; i<numberOfCops; i++){
+  function _scatterCops(w){//{{{
+    var cops = w.actors.cops;
+    for (var i=0; i<w.options.numberOfCops; i++){
       cops.push({
         position: new Vector(
-          width*3/8 + Math.random()*width/4,
-          height*3/8 + Math.random()*height/4
+          w.vars.width*3/8 + Math.random()*w.vars.width/4,
+          w.vars.height*3/8 + Math.random()*w.vars.height/4
         ),
-        v: copsMaxSpeed
+        v: w.options.copsMaxSpeed
       });
     }
   }//}}}
   
-  function _scatterRobbers(){//{{{
-    for (var i=0; i<numberOfRobbers; i++){
+  function _scatterRobbers(w){//{{{
+    var robbers = w.actors.robbers;
+    for (var i=0; i<w.options.numberOfRobbers; i++){
       robbers.push({
         position: new Vector(
-          width*3/8 + Math.random()*width/4,
-          height*3/8 + Math.random()*height/4
+          w.vars.width*3/8 + Math.random()*w.vars.width/4,
+          w.vars.height*3/8 + Math.random()*w.vars.height/4
         ),
-        v: robbersMaxSpeed
+        v: w.options.robbersMaxSpeed
       });
     }
   }//}}}
 // }}}
   
-  function update(dt){
-    clearCurrents();
-    moveRobbers(dt);
-    moveCops(dt);
+  function update(w,dt){
+    clearCurrents(w);
+    moveRobbers(w,dt);
+    moveCops(w,dt);
   }
   
-  function clearCurrents(){
-    currentsCanv.width = currentsCanv.width;
+  function clearCurrents(w){
+    w.canvas.currentsCanv.width = w.canvas.currentsCanv.width;
   }
   
-  function moveRobbers(dt){ // {{{
-    if (isNaN(dt)) {console.log("NAN"); dt=spf; }
+  function moveRobbers(w,dt){ // {{{
+    if (isNaN(dt)) {console.log("NAN"); dt=w.options.spf; }
+    var cops = w.actors.cops;
+    var robbers = w.actors.robbers;
     var globalCopperCenter = findCenter(cops);
-    currentsCtx.fillStyle = colors.robbers.currents;
-    lociCtx.strokeStyle = colors.robbers.loci;
-    lociCtx.beginPath();
+    w.canvas.currentsCtx.fillStyle = w.options.colors.robbers.currents;
+    w.canvas.lociCtx.strokeStyle = w.options.colors.robbers.loci;
+    w.canvas.lociCtx.beginPath();
     for (var i=0; i<robbers.length; i++){
       var robber = robbers[i];
       var direction =
@@ -98,29 +118,31 @@
       );
       
       // draw on canvas
-      lociCtx.moveTo(robber.position.x, robber.position.y);
-      lociCtx.lineTo(
+      w.canvas.lociCtx.moveTo(robber.position.x, robber.position.y);
+      w.canvas.lociCtx.lineTo(
         robber.position.x + movement.x,
         robber.position.y + movement.y
       );
       
       robber.position.addInPlace(movement);
-      currentsCtx.beginPath();
-      currentsCtx.arc(
+      w.canvas.currentsCtx.beginPath();
+      w.canvas.currentsCtx.arc(
         robber.position.x, robber.position.y,
-        circleRadius,0, 2*Math.PI
+        w.options.circleRadius,0, 2*Math.PI
       );
-      currentsCtx.fill();
+      w.canvas.currentsCtx.fill();
     }
-    lociCtx.stroke();
+    w.canvas.lociCtx.stroke();
   } //}}}
   
-  function moveCops(dt){ // {{{
-    if (isNaN(dt)) {console.log("NAN"); dt=spf; }
+  function moveCops(w,dt){ // {{{
+    if (isNaN(dt)) {console.log("NAN"); dt=w.options.spf; }
+    var cops = w.actors.cops;
+    var robbers = w.actors.robbers;
     var globalRobberCenter = findCenter(robbers);
-    currentsCtx.fillStyle = colors.cops.currents;
-    lociCtx.strokeStyle = colors.cops.loci;
-    lociCtx.beginPath();
+    w.canvas.currentsCtx.fillStyle = w.options.colors.cops.currents;
+    w.canvas.lociCtx.strokeStyle = w.options.colors.cops.loci;
+    w.canvas.lociCtx.beginPath();
     for (var i=0; i<cops.length; i++){
       var cop = cops[i];
       // find the nearest robber
@@ -143,21 +165,21 @@
       );
       
       // draw on canvas
-      lociCtx.moveTo(cop.position.x, cop.position.y);
-      lociCtx.lineTo(
+      w.canvas.lociCtx.moveTo(cop.position.x, cop.position.y);
+      w.canvas.lociCtx.lineTo(
         cop.position.x + movement.x,
         cop.position.y + movement.y
       );
       
       cop.position.addInPlace(movement);
-      currentsCtx.beginPath();
-      currentsCtx.arc(
+      w.canvas.currentsCtx.beginPath();
+      w.canvas.currentsCtx.arc(
         cop.position.x, cop.position.y,
-        circleRadius,0, 2*Math.PI
+        w.options.circleRadius,0, 2*Math.PI
       );
-      currentsCtx.fill();
+      w.canvas.currentsCtx.fill();
     }
-    lociCtx.stroke();
+    w.canvas.lociCtx.stroke();
   }
   
   function findCenter(people){
@@ -171,18 +193,21 @@
   }
   //}}}
   
-  function mainLoop(timestamp){ //{{{
-    var dt = timestamp - prevTimeStamp;
-    if (dt < spf){
-      // do nothing, wait a little longer.
-    }
-    else {
-      // update and go next frame.
-      update(dt);
-      prevTimeStamp = timestamp;
-    }
-    // next iteration
-    requestAnimationFrame(mainLoop);
+  function mainLooper(w){ //{{{
+    mainLoop = function(timestamp){
+      var dt = timestamp - w.prevTimeStamp;
+      if (dt < w.options.spf){
+        // do nothing, wait a little longer.
+      }
+      else {
+        // update and go next frame.
+        update(w,dt);
+        w.prevTimeStamp = timestamp;
+      }
+      // next iteration
+      requestAnimationFrame(mainLoop);
+    };
+    return mainLoop;
   } //}}}
   
   // Vector {{{
