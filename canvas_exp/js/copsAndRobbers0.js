@@ -1,12 +1,14 @@
 (function(){
-  window.addEventListener('load', main);
+  window.addEventListener('load', function(){
+    document.getElementById('button').addEventListener('click',main);
+  });
   
   var spf = 1000/60;
   var prevTimeStamp = 0;
   var currentsCanv, currentsCtx, lociCanv, lociCtx;
   var width,height;
-  var numberOfCops = 20;
-  var numberOfRobbers = 5;
+  var numberOfCops = 85;
+  var numberOfRobbers = 100;
   var cops = [], robbers = [];
   var colors = {
     cops: {
@@ -18,12 +20,12 @@
       loci : 'rgba(200,70,0,0.7)'
     }
   };
-  var circleRadius = 5;
-  var strokeWidth = 2;
+  var circleRadius = 3;
+  var strokeWidth = 1;
   // pxcels per msec.
   // 10 sec for 600 px.
-  var copsMaxSpeed = 0.06;
-  var robbersMaxSpeed = 0.06;
+  var copsMaxSpeed = 0.03;
+  var robbersMaxSpeed = 0.031;
   
   function main(){
     setup();
@@ -50,8 +52,8 @@
     for (var i=0; i<numberOfCops; i++){
       cops.push({
         position: new Vector(
-          width/4 + Math.random()*width/2,
-          height/4 + Math.random()*height/2
+          width*3/8 + Math.random()*width/4,
+          height*3/8 + Math.random()*height/4
         ),
         v: copsMaxSpeed
       });
@@ -62,8 +64,8 @@
     for (var i=0; i<numberOfRobbers; i++){
       robbers.push({
         position: new Vector(
-          Math.random()*width,
-          Math.random()*height
+          width*3/8 + Math.random()*width/4,
+          height*3/8 + Math.random()*height/4
         ),
         v: robbersMaxSpeed
       });
@@ -121,8 +123,21 @@
     lociCtx.beginPath();
     for (var i=0; i<cops.length; i++){
       var cop = cops[i];
+      // find the nearest robber
+      var min_distance = cop.position.subtract(
+        robbers[0].position).squareNorm();
+      var nearest = 0;
+      for (var j=1; j<robbers.length;j++){
+        var robber = robbers[j];
+        var dist = cop.position.subtract(robber.position).squareNorm();
+        if (dist < min_distance){
+          nearest = j;
+          min_distance = dist;
+        }
+      }
+      // and try to catch that guy
       var direction =
-        globalRobberCenter.subtract(cop.position).normalizeInPlace();
+        robbers[nearest].position.subtract(cop.position).normalizeInPlace();
       var movement = direction.multiplyInPlace(
         dt*cop.v
       );
@@ -217,6 +232,10 @@
     return this;
   };
   
+  Vector.prototype.squareNorm = function(){
+    return this.x*this.x + this.y*this.y;
+  };
+  
   Vector.prototype.norm = function(){
     return Math.sqrt(this.x*this.x + this.y*this.y);
   };
@@ -236,6 +255,21 @@
     else{
       return one.x*other.x + one.y*other.y;
     }
+  };
+  
+  Vector.prototype.rotate = function(theta){
+    return new Vector(
+      this.x*Math.cos(theta) - this.y*Math.sin(theta),
+      this.x*Math.sin(theta) + this.y*Math.cos(theta)
+    );
+  };
+  
+  Vector.prototype.rotateInPlace = function(theta){
+      var newX = this.x*Math.cos(theta) - this.y*Math.sin(theta);
+      var newY = this.x*Math.sin(theta) + this.y*Math.cos(theta);
+      this.x = newX;
+      this.y = newY;
+      return this;
   };
   
   // }}}
