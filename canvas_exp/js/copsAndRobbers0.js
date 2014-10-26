@@ -6,8 +6,8 @@
   var world = { //{{{
     options: { //{{{
       spf : 1000/60, // (milli)secs per frame
-      numberOfCops : 85,
-      numberOfRobbers : 100,
+      numberOfCops : 100,
+      numberOfRobbers : 50,
       colors : {
         cops: {
           currents : 'rgb(0,100,255)',
