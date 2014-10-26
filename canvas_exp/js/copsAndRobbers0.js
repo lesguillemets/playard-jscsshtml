@@ -111,8 +111,8 @@
     w.canvas.lociCtx.beginPath();
     for (var i=0; i<robbers.length; i++){
       var robber = robbers[i];
-      var direction =
-        robber.position.subtract(globalCopperCenter).normalizeInPlace();
+      var direction = coulombRepulsiveDir(robber,w.actors.cops);
+        // robber.position.subtract(globalCopperCenter).normalizeInPlace();
       var movement = direction.multiplyInPlace(
         dt*robber.v
       );
@@ -134,6 +134,19 @@
     }
     w.canvas.lociCtx.stroke();
   } //}}}
+  
+  function coulombRepulsiveDir(r,cops){
+    var sumForce = new Vector(0,0);
+    for(var i=0; i< cops.length;i++){
+      var cop = cops[i];
+      var v = r.position.subtract(cop.position);
+      sumForce.addInPlace(
+        v.normalize().multiply(1/v.squareNorm())
+      )
+    }
+    sumForce.normalizeInPlace();
+    return sumForce;
+  }
   
   function moveCops(w,dt){ // {{{
     if (isNaN(dt)) {console.log("NAN"); dt=w.options.spf; }
