@@ -1,0 +1,18 @@
+div.data-container{
+}
+
+ul.data-list li div.data-label {
+    display: inline-block;
+    width:6em;
+}
+
+ul.data-list li div.data-value {
+    display: inline-block;
+    font-family: "Ubuntu Mono", monaco, monospace;
+    font-weight: bold;
+    text-align: right;
+    width:10em;
+}
+
+div.text-name{
+}
