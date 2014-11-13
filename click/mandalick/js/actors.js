@@ -28,11 +28,11 @@ People.prototype.incrimentPopulation = function(){
   this.population += 1;
 };
 
-var people = {
+var peoples = {
   parish : new People(
     "信徒", "parish", new BaseOutput(0,5), new BaseCost(0,0),
     1, true,
-    "信徒．お賽銭を出すなどしますが，自身で徳を生み出すことはありません"
+    "信徒．お賽銭を出すなどしますが，自身で徳を生み出すことはありません．"
   ),
   
   street : new People(
