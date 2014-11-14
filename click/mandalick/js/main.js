@@ -8,9 +8,13 @@ function init(){
   for (var key in peoples){
     if (peoples.hasOwnProperty(key)){
       var people = peoples[key];
-      setTitles.people(people);
+      peopleSetUp(people);
     }
   }
+}
+
+function peopleSetUp(p){
+  setTitles.people(p);
 }
 
 var setTitles = {
