@@ -13,7 +13,7 @@ People.prototype.addToPopulation = function(n){
   this.population += n;
 };
 
-People.prototype.incrimentPopulation = function(){
+People.prototype.incrementPopulation = function(){
   this.population += 1;
 };
 

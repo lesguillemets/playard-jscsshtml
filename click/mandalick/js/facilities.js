@@ -1,5 +1,6 @@
 function Facility(){
 }
+
 var effects = {
   unlocks : {
     actors : [
@@ -10,6 +11,7 @@ var effects = {
     ],
     
     facilities: [
+      'temple'
     ]
   },
   
