@@ -1,6 +1,21 @@
 module Actors where
 import Base
 
+data Actor = Actor {
+    name :: String,
+    domid :: ID,
+    descr :: String,
+    cost :: Cost,
+    population :: Double,
+    production :: Production,
+    unlocked :: Unlocked,
+    unlocks :: Unlocks
+} deriving (Show)
+
+addToPopulation :: Actor -> Double -> Actor
+addToPopulation actor n = actor { population = current + n} where
+    current = population actor
+
 parish :: Actor
 parish = Actor {
     name = "信徒",
@@ -10,7 +25,7 @@ parish = Actor {
     population = 0,
     production = Production 0 2,
     unlocked = True,
-    unlocks = Unlocks 50 [street, mountain] []
+    unlocks = Unlocks 50 ["street", "mountain"] []
 }
 
 street :: Actor
@@ -22,7 +37,7 @@ street = Actor {
     population = 0,
     production = Production 2 1,
     unlocked = False,
-    unlocks = UnlockNone
+    unlocks = UnlocksNone
 }
 
 mountain :: Actor
@@ -34,7 +49,7 @@ mountain = Actor {
     population = 0,
     production = Production 3 0,
     unlocked = False,
-    unlocks = UnlockNone
+    unlocks = UnlocksNone
 }
 
 priest :: Actor
@@ -46,5 +61,5 @@ priest = Actor {
     population = 0,
     production = Production 20 0,
     unlocked = False,
-    unlocks = UnlockNone
+    unlocks = UnlocksNone
 }
